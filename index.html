@@ -341,7 +341,7 @@ body {
 }
 ::selection { background: var(--cream-200); color: var(--fg); }
 
-/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ Tweakable runtime tokens â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+/* ─────────── Tweakable runtime tokens ─────────── */
 :root {
   --brand-live: var(--brand);
   --gold-live: var(--gold-400);
@@ -380,7 +380,7 @@ body {
   --display-family: var(--font-sans);
 }
 
-/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ BASE â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+/* ─────────── BASE ─────────── */
 html, body { height: 100%; }
 body {
   background: var(--bg-cream);
@@ -427,7 +427,7 @@ a { color: inherit; text-decoration: none; }
 @media (min-width: 768px) { .container { padding: 0 var(--gutter-tablet); } }
 @media (min-width: 1024px) { .container { padding: 0 var(--gutter-desktop); } }
 
-/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ NAV â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+/* ─────────── NAV ─────────── */
 .nav {
   position: sticky;
   top: 0;
@@ -508,11 +508,11 @@ a { color: inherit; text-decoration: none; }
   border: 2px solid var(--cream-50);
 }
 
-/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ PAGE / FADE â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+/* ─────────── PAGE / FADE ─────────── */
 .page { animation: fade .26s var(--ease-emphasis) both; }
 @keyframes fade { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
 
-/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ BUTTONS â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+/* ─────────── BUTTONS ─────────── */
 .btn {
   min-height: 48px;
   display: inline-flex;
@@ -566,7 +566,7 @@ a { color: inherit; text-decoration: none; }
 }
 .link:hover { opacity: 0.7; }
 
-/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ INPUTS â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+/* ─────────── INPUTS ─────────── */
 .field { margin-bottom: var(--sp-4); }
 .field label.lbl {
   display: block;
@@ -621,7 +621,7 @@ a { color: inherit; text-decoration: none; }
 }
 .phone-wrap .input { border: 0; box-shadow: none; }
 
-/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ CARDS / SURFACES â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+/* ─────────── CARDS / SURFACES ─────────── */
 .card {
   background: #fff;
   border: 1px solid var(--border);
@@ -634,7 +634,7 @@ a { color: inherit; text-decoration: none; }
 .surface-cream { background: var(--bg-cream); }
 .surface-white { background: #fff; }
 
-/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ TOAST â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+/* ─────────── TOAST ─────────── */
 .toast {
   position: fixed;
   top: calc(var(--nav-h) + 16px);
@@ -650,7 +650,7 @@ a { color: inherit; text-decoration: none; }
 }
 .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 
-/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ BADGES â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+/* ─────────── BADGES ─────────── */
 .badge {
   display: inline-flex; align-items: center; gap: 5px;
   padding: 4px 10px;
@@ -673,7 +673,7 @@ a { color: inherit; text-decoration: none; }
 .badge.dark { background: var(--ink-800); color: #fff; }
 .badge.success { background: var(--success-50); color: var(--success-700); }
 
-/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ HERO â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+/* ─────────── HERO ─────────── */
 .hero {
   position: relative;
   overflow: hidden;
@@ -809,7 +809,7 @@ a { color: inherit; text-decoration: none; }
 }
 @media (min-width: 900px) { .hero.split .hero-side-img::after { display: block; } }
 
-/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ TRUST BAR â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+/* ─────────── TRUST BAR ─────────── */
 .trust-bar {
   background: var(--ink-800);
   color: rgba(255,255,255,0.86);
@@ -832,7 +832,7 @@ a { color: inherit; text-decoration: none; }
 .trust-item strong { color: #fff; font-weight: 700; letter-spacing: 0.02em; }
 .trust-item .gold-tick { color: var(--gold-300); margin-right: 6px; opacity: var(--gold-opacity); }
 
-/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ SECTION â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+/* ─────────── SECTION ─────────── */
 .section { padding: var(--sp-16) 0; }
 .section.tight { padding: var(--sp-12) 0; }
 .section.cream { background: var(--cream-100); }
@@ -856,7 +856,7 @@ a { color: inherit; text-decoration: none; }
 .section-head p { color: var(--fg-muted); max-width: 520px; }
 .section.dark .section-head p { color: rgba(255,255,255,0.7); }
 
-/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ FAVOURITES STRIP â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+/* ─────────── FAVOURITES STRIP ─────────── */
 .fav-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -868,7 +868,7 @@ a { color: inherit; text-decoration: none; }
 .fav-item:hover { transform: translateY(-4px); }
 .fav-art {
   aspect-ratio: 1;
-  background: #F7F4F0;
+  background: transparent;
   border: 1px solid var(--border);
   border-radius: var(--r-lg);
   overflow: hidden;
@@ -877,7 +877,7 @@ a { color: inherit; text-decoration: none; }
   margin-bottom: var(--sp-3);
   transition: box-shadow var(--dur-base);
 }
-.fav-art img { width: 100%; height: 100%; object-fit: cover; }
+.fav-art img { width: 85%; height: 85%; object-fit: contain; }
 .fav-item:hover .fav-art { box-shadow: var(--shadow-md); }
 .fav-item h4 {
   font-family: var(--font-sans);
@@ -887,7 +887,7 @@ a { color: inherit; text-decoration: none; }
 }
 .fav-item .price-mini { font-size: 12px; color: var(--fg-muted); margin-top: 2px; }
 
-/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ LOYALTY VARIANTS â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+/* ─────────── LOYALTY VARIANTS ─────────── */
 .loyalty-section { padding: var(--sp-16) 0; }
 .loyalty-card {
   border-radius: var(--r-xl);
@@ -989,7 +989,7 @@ a { color: inherit; text-decoration: none; }
 .loy-redeem span { display: block; margin-top: 6px; font-size: 13px; color: var(--fg-muted); }
 .loy-actions { margin-top: var(--sp-5); display: grid; gap: var(--sp-3); }
 
-/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ FOOTER â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+/* ─────────── FOOTER ─────────── */
 .footer {
   background: var(--ink-800);
   color: rgba(255,255,255,0.6);
@@ -1031,7 +1031,7 @@ a { color: inherit; text-decoration: none; }
   color: rgba(255,255,255,0.5);
 }
 
-/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ MODE / BANNER â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+/* ─────────── MODE / BANNER ─────────── */
 .banner {
   background: var(--ink-800);
   color: #fff;
@@ -1111,7 +1111,7 @@ a { color: inherit; text-decoration: none; }
   border-radius: var(--r-pill);
 }
 
-/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ OUTLET LIST â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+/* ─────────── OUTLET LIST ─────────── */
 .outlet-search {
   position: sticky; top: var(--nav-h); z-index: 40;
   background: var(--cream-100);
@@ -1192,7 +1192,7 @@ a { color: inherit; text-decoration: none; }
 }
 .outlet-row:hover .arrow { color: var(--brand-live); transform: translateX(2px); }
 
-/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ DELIVERY ADDRESS â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+/* ─────────── DELIVERY ADDRESS ─────────── */
 .delivery-search-bar {
   position: sticky; top: var(--nav-h); z-index: 40;
   padding: var(--sp-5) 0 var(--sp-4);
@@ -1292,7 +1292,7 @@ a { color: inherit; text-decoration: none; }
 .matched-outlet p { font-size: 13px; color: var(--ink-600); margin-top: 2px; }
 .matched-outlet .switch { color: var(--brand-live); font-size: 12px; font-weight: 600; margin-top: 6px; display: inline-block; }
 
-/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ MENU â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+/* ─────────── MENU ─────────── */
 .menu-context {
   position: sticky; top: var(--nav-h); z-index: 38;
   background: rgba(255, 251, 247, 0.95);
@@ -1382,12 +1382,12 @@ a { color: inherit; text-decoration: none; }
 .product-art {
   position: relative;
   aspect-ratio: 1;
-  background: #F7F4F0;
+  background: transparent;
   overflow: hidden;
   display: grid; place-items: center;
 }
 .product-art img {
-  width: 100%; height: 100%; object-fit: cover;
+  width: 80%; height: 80%; object-fit: contain;
   transition: transform var(--dur-slow) var(--ease-out);
 }
 .product-card:hover .product-art img { transform: scale(1.04); }
@@ -1449,7 +1449,7 @@ a { color: inherit; text-decoration: none; }
   font-variant-numeric: tabular-nums;
 }
 
-/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ VIEW CART FLOATING â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+/* ─────────── VIEW CART FLOATING ─────────── */
 .view-cart {
   position: fixed;
   left: 50%; transform: translateX(-50%);
@@ -1484,7 +1484,7 @@ a { color: inherit; text-decoration: none; }
   flex-shrink: 0;
 }
 
-/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ PRODUCT MODAL â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+/* ─────────── PRODUCT MODAL ─────────── */
 .modal-backdrop {
   position: fixed; inset: 0; z-index: var(--z-modal);
   background: rgba(25,25,25,0.4);
@@ -1598,7 +1598,7 @@ a { color: inherit; text-decoration: none; }
 .modal-foot .qty-modal button:hover { border-color: var(--brand-live); }
 .modal-foot .qty-modal strong { min-width: 24px; text-align: center; font-variant-numeric: tabular-nums; }
 
-/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ CHECKOUT â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+/* ─────────── CHECKOUT ─────────── */
 .checkout-grid {
   display: grid;
   grid-template-columns: 1fr;
@@ -1688,7 +1688,7 @@ a { color: inherit; text-decoration: none; }
 .radio-row h5 { font-size: 14px; font-weight: 600; color: var(--ink-800); }
 .radio-row p { font-size: 12px; color: var(--fg-muted); margin-top: 2px; }
 
-/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ CONFIRMATION â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+/* ─────────── CONFIRMATION ─────────── */
 .confirm-wrap {
   max-width: 720px;
   margin: 0 auto;
@@ -1725,7 +1725,7 @@ a { color: inherit; text-decoration: none; }
 .confirm-actions { display: grid; gap: var(--sp-3); margin-top: var(--sp-6); grid-template-columns: 1fr; }
 @media (min-width: 600px) { .confirm-actions { grid-template-columns: 1fr 1fr; } }
 
-/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ ORDER TRACKING â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+/* ─────────── ORDER TRACKING ─────────── */
 .tracking-card {
   background: #fff;
   border: 1px solid var(--border);
@@ -1787,7 +1787,7 @@ a { color: inherit; text-decoration: none; }
 .timeline-row p { font-size: 13px; color: var(--fg-muted); margin-top: 2px; }
 .timeline-row.upcoming h4 { color: var(--ink-400); }
 
-/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ LOYALTY DASHBOARD â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+/* ─────────── LOYALTY DASHBOARD ─────────── */
 .dash-hero {
   position: relative;
   border-radius: var(--r-xl);
@@ -1901,7 +1901,7 @@ a { color: inherit; text-decoration: none; }
 .history-row.redeem .pts { color: var(--brand-live); }
 .history-row.earn .pts::before { content: "+"; }
 
-/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ TWEAKS ”” small overrides â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+/* ─────────── TWEAKS ”” small overrides ─────────── */
 [data-tweaks-open="true"] .view-cart { display: none; }
 
 /* responsive utility */
@@ -2315,7 +2315,7 @@ window.LP_Nav = Nav;
 window.LP_Footer = Footer;
 window.LP_Toast = Toast;
 
-/* â”€â”€ ProductImg ”” renders image with category-coloured SVG fallback â”€â”€ */
+/* ── ProductImg ”” renders image with category-coloured SVG fallback ── */
 const CAT_PALETTE = {
   hot:        ['#F7F4F0', '#7A5C3A'],
   cold:       ['#F7F4F0', '#3A5C7A'],
@@ -2459,11 +2459,11 @@ const LoyaltyModal = ({ open, onClose, onSubmit, prefill }) => {
   );
 };
 
-/* â”€â”€â”€ Loyalty Dashboard â”€â”€â”€ */
+/* ─── Loyalty Dashboard ─── */
 const LoyaltyDashboard = ({ account, onBack, onOrder }) => {
   const tiers = window.LP_DATA.LOYALTY_TIERS;
   const lifetime = account.lifetimePoints;
-  // current tier ”” last tier whose min â‰¤ lifetime
+  // current tier ”” last tier whose min ≤ lifetime
   let curIdx = 0;
   for (let i = 0; i < tiers.length; i++) if (lifetime >= tiers[i].min) curIdx = i;
   const cur = tiers[curIdx];
@@ -2519,7 +2519,7 @@ const LoyaltyDashboard = ({ account, onBack, onOrder }) => {
             <div className="dash-card">
               <h4>Points balance</h4>
               <div className="big tabular">{account.points.toLocaleString()}</div>
-              <div className="sm">â‰ˆ {fmt(Math.floor(account.points))} value</div>
+              <div className="sm">≈ {fmt(Math.floor(account.points))} value</div>
             </div>
             <div className="dash-card">
               <h4>Lifetime points</h4>
@@ -2537,7 +2537,7 @@ const LoyaltyDashboard = ({ account, onBack, onOrder }) => {
         <div className="dash-section">
           <div className="row between" style={{ marginBottom: "var(--sp-5)" }}>
             <h3 className="serif" style={{ margin: 0 }}>Recent activity</h3>
-            <button className="btn ghost" type="button">See all â†’</button>
+            <button className="btn ghost" type="button">See all →</button>
           </div>
           <div className="history-list">
             {account.history.map(h => (
@@ -2674,7 +2674,7 @@ const FavouritesStrip = ({ products, onOrder }) => {
                 What everyone's <em style={{ fontStyle: "italic", color: "var(--brand-live)" }}>ordering today</em>
               </h2>
             </div>
-            <button className="btn secondary" onClick={onOrder}>See full menu â†’</button>
+            <button className="btn secondary" onClick={onOrder}>See full menu →</button>
           </div>
         </div>
         <div className="fav-grid">
@@ -2691,7 +2691,7 @@ const FavouritesStrip = ({ products, onOrder }) => {
   );
 };
 
-/* â”€â”€â”€ LOYALTY VARIANTS â”€â”€â”€ */
+/* ─── LOYALTY VARIANTS ─── */
 const LoyaltyBenefitRow = ({ children }) => (
   <li className="loy-benefit-row">
     <Icon name="check" size={20} />
@@ -2710,7 +2710,7 @@ const LoyaltyContent = ({ onSignup, account, onDash }) => (
       <ul className="loy-benefits">
         <LoyaltyBenefitRow><b>Sign up free</b> ”” name and phone number, that's all.</LoyaltyBenefitRow>
         <LoyaltyBenefitRow>Every purchase earns <b>5% back</b> as points.</LoyaltyBenefitRow>
-        <LoyaltyBenefitRow>Reach 5,000 â†’ <b>redeem UGX 5,000</b> off any order.</LoyaltyBenefitRow>
+        <LoyaltyBenefitRow>Reach 5,000 → <b>redeem UGX 5,000</b> off any order.</LoyaltyBenefitRow>
         <LoyaltyBenefitRow><b>Climb tiers</b> for priority pickup, birthday treats and more.</LoyaltyBenefitRow>
       </ul>
       <div>
@@ -2719,7 +2719,7 @@ const LoyaltyContent = ({ onSignup, account, onDash }) => (
             <strong>UGX 10K</strong>
             <span>You spend</span>
           </div>
-          <div className="loy-arrow">â†’</div>
+          <div className="loy-arrow">→</div>
           <div className="loy-step">
             <strong>500 pts</strong>
             <span>You earn</span>
@@ -2847,7 +2847,7 @@ const ModeChoice = ({ onBack, onPick }) => (
   </div>
 );
 
-/* â”€â”€â”€ OUTLET PICKER â”€â”€â”€ */
+/* ─── OUTLET PICKER ─── */
 const OutletPicker = ({ outlets, onBack, onPick }) => {
   const [q, setQ] = useState("");
   const [area, setArea] = useState("All");
@@ -2948,7 +2948,7 @@ const OutletPicker = ({ outlets, onBack, onPick }) => {
   );
 };
 
-/* â”€â”€â”€ DELIVERY ADDRESS â”€â”€â”€ */
+/* ─── DELIVERY ADDRESS ─── */
 
 // Infer zone from free-text address
 const inferZone = (addr) => {
@@ -2960,7 +2960,7 @@ const inferZone = (addr) => {
   return zones.find(z => addr.toLowerCase().includes(z.toLowerCase())) || "";
 };
 
-// Zone â†’ ordered outlet IDs (nearest first within that zone)
+// Zone → ordered outlet IDs (nearest first within that zone)
 const ZONE_OUTLETS = {
   Kololo:    ["o-kololo","o-forest","o-wampewo"],
   Nakasero:  ["o-nakasero","o-kololo","o-ihk"],
@@ -3190,7 +3190,7 @@ const Menu = ({ context, onBack, onChangeContext, cart, onAddCart, onOpenCart })
   const [openProduct, setOpenProduct] = useState(null);
   const sectionRefs = useRef({});
 
-  // Quick-add: builds default selections (required groups â†’ first option),
+  // Quick-add: builds default selections (required groups → first option),
   // adds to cart immediately, then opens cart view.
   const quickAdd = (p, e) => {
     e.stopPropagation();
@@ -3572,7 +3572,7 @@ const Checkout = ({ context, cart, account, onBack, onUpdateQty, onRemove, onCon
                     style={{ width: "100%", marginTop: 12, accentColor: "var(--brand-live)" }}/>
                   <div className="row between" style={{ fontSize: 12, marginTop: 4, color: "var(--fg-muted)" }}>
                     <span>0 pts</span>
-                    <strong style={{ color: "var(--brand-live)" }}>âˆ’{fmt(redeemPts)}</strong>
+                    <strong style={{ color: "var(--brand-live)" }}>−{fmt(redeemPts)}</strong>
                     <span>{maxRedeem.toLocaleString()} pts</span>
                   </div>
                 </div>
@@ -3581,7 +3581,7 @@ const Checkout = ({ context, cart, account, onBack, onUpdateQty, onRemove, onCon
               <div className="totals">
                 <div className="totals-row"><span>Subtotal</span><span className="tabular">{fmt(subtotal)}</span></div>
                 {deliveryFee > 0 && <div className="totals-row"><span>Delivery</span><span className="tabular">{fmt(deliveryFee)}</span></div>}
-                {discount > 0 && <div className="totals-row discount"><span>Points redeemed</span><span className="tabular">âˆ’{fmt(discount)}</span></div>}
+                {discount > 0 && <div className="totals-row discount"><span>Points redeemed</span><span className="tabular">−{fmt(discount)}</span></div>}
                 <div className="totals-row grand"><span>Total</span><span className="tabular">{fmt(total)}</span></div>
               </div>
 
@@ -3591,7 +3591,7 @@ const Checkout = ({ context, cart, account, onBack, onUpdateQty, onRemove, onCon
 
               {account && earn > 0 && (
                 <p style={{ fontSize: 12, textAlign: "center", marginTop: 12, color: "var(--gold-500)", letterSpacing: "0.04em" }}>
-                  âœ¦ You'll earn {earn.toLocaleString()} points on this order
+                  ✦ You'll earn {earn.toLocaleString()} points on this order
                 </p>
               )}
             </div>
@@ -3631,7 +3631,7 @@ const Confirmation = ({ order, context, onTrack, onHome }) => {
             <div style={{ paddingTop: 16 }}>
               {(order.items || []).map((i, idx) => (
                 <div key={idx} className="row between" style={{ padding: "8px 0", fontSize: 14 }}>
-                  <span>{i.qty} Ã— {i.name}</span>
+                  <span>{i.qty} × {i.name}</span>
                   <span className="tabular">{fmt(i.unitPrice * i.qty)}</span>
                 </div>
               ))}
@@ -3640,7 +3640,7 @@ const Confirmation = ({ order, context, onTrack, onHome }) => {
               <div className="totals-row grand"><span>Total paid</span><span className="tabular">{fmt(order.total)}</span></div>
               {order.earn > 0 && (
                 <p style={{ fontSize: 13, textAlign: "right", marginTop: 8, color: "var(--gold-500)" }}>
-                  +{order.earn.toLocaleString()} points earned âœ¦
+                  +{order.earn.toLocaleString()} points earned ✦
                 </p>
               )}
             </div>
@@ -3786,7 +3786,7 @@ window.LP_Tracking = Tracking;
 //     );
 //   }
 //
-// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─────────────────────────────────────────────────────────────────────────────
 
 const __TWEAKS_STYLE = `
   .twk-panel{position:fixed;right:16px;bottom:16px;z-index:2147483646;width:280px;
@@ -3898,9 +3898,9 @@ const __TWEAKS_STYLE = `
     filter:drop-shadow(0 1px 1px rgba(0,0,0,.3))}
 `;
 
-// â”€â”€ useTweaks â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ── useTweaks ───────────────────────────────────────────────────────────────
 // Single source of truth for tweak values. setTweak persists via the host
-// (__edit_mode_set_keys â†’ host rewrites the EDITMODE block on disk).
+// (__edit_mode_set_keys → host rewrites the EDITMODE block on disk).
 function useTweaks(defaults) {
   const [values, setValues] = React.useState(defaults);
   // Accepts either setTweak('key', value) or setTweak({ key: value, ... }) so a
@@ -3918,7 +3918,7 @@ function useTweaks(defaults) {
   return [values, setTweak];
 }
 
-// â”€â”€ TweaksPanel â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ── TweaksPanel ─────────────────────────────────────────────────────────────
 // Floating shell. Registers the protocol listener BEFORE announcing
 // availability ”” if the announce ran first, the host's activate could land
 // before our handler exists and the toolbar toggle would silently no-op.
@@ -4038,7 +4038,7 @@ function TweaksPanel({ title = 'Tweaks', noDeckControls = false, children }) {
           <b>{title}</b>
           <button className="twk-x" aria-label="Close tweaks"
                   onMouseDown={(e) => e.stopPropagation()}
-                  onClick={dismiss}>âœ•</button>
+                  onClick={dismiss}>✕</button>
         </div>
         <div className="twk-body">
           {children}
@@ -4053,7 +4053,7 @@ function TweaksPanel({ title = 'Tweaks', noDeckControls = false, children }) {
   );
 }
 
-// â”€â”€ Layout helpers â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ── Layout helpers ──────────────────────────────────────────────────────────
 
 function TweakSection({ label, children }) {
   return (
@@ -4076,7 +4076,7 @@ function TweakRow({ label, value, children, inline = false }) {
   );
 }
 
-// â”€â”€ Controls â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ── Controls ────────────────────────────────────────────────────────────────
 
 function TweakSlider({ label, value, min = 0, max = 100, step = 1, unit = '', onChange }) {
   return (
@@ -4107,7 +4107,7 @@ function TweakRadio({ label, value, options, onChange }) {
   valueRef.current = value;
 
   // Segments wrap mid-word once per-segment width runs out. The track is
-  // ~248px (280 panel âˆ’ 28 body pad âˆ’ 4 seg pad), each button loses 12px
+  // ~248px (280 panel − 28 body pad − 4 seg pad), each button loses 12px
   // to its own padding, and 11.5px system-ui averages ~6.3px/char ”” so 2
   // options fit ~16 chars each, 3 fit ~10. Past that (or >3 options), fall
   // back to a dropdown rather than wrap.
@@ -4429,7 +4429,7 @@ function App() {
     const mock = window.LP_DATA.MOCK_ACCOUNT;
     setAccount({ ...mock, name: form.name, phone: form.phone });
     setShowSignup(false);
-    showToast("Welcome to the Tribe âœ¦");
+    showToast("Welcome to the Tribe ✦");
   };
 
   // route render
