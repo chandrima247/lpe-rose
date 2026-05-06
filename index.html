@@ -450,7 +450,7 @@ a { color: inherit; text-decoration: none; }
   align-items: center;
   gap: var(--sp-3);
 }
-.nav-brand img { height: 64px; width: 64px; object-fit: contain; }
+.nav-brand img { height: 88px; width: 88px; object-fit: contain; }
 .nav-brand .wm {
   display: none;
   font-family: var(--display-family);
@@ -858,16 +858,16 @@ a { color: inherit; text-decoration: none; }
 .fav-item:hover { transform: translateY(-4px); }
 .fav-art {
   aspect-ratio: 1;
-  background: #fff;
+  background: #F7F4F0;
   border: 1px solid var(--border);
-  border-radius: var(--r-pill);
+  border-radius: var(--r-lg);
+  overflow: hidden;
   overflow: hidden;
   display: grid; place-items: center;
   margin-bottom: var(--sp-3);
-  padding: 12%;
   transition: box-shadow var(--dur-base);
 }
-.fav-art img { width: 100%; height: 100%; object-fit: contain; }
+.fav-art img { width: 100%; height: 100%; object-fit: cover; }
 .fav-item:hover .fav-art { box-shadow: var(--shadow-md); }
 .fav-item h4 {
   font-family: var(--font-sans);
@@ -1372,12 +1372,12 @@ a { color: inherit; text-decoration: none; }
 .product-art {
   position: relative;
   aspect-ratio: 1;
-  background: var(--cream-50);
-  padding: 12%;
+  background: #F7F4F0;
+  overflow: hidden;
   display: grid; place-items: center;
 }
 .product-art img {
-  width: 100%; height: 100%; object-fit: contain;
+  width: 100%; height: 100%; object-fit: cover;
   transition: transform var(--dur-slow) var(--ease-out);
 }
 .product-card:hover .product-art img { transform: scale(1.04); }
@@ -2308,14 +2308,14 @@ window.LP_Toast = Toast;
 
 /* ── ProductImg — renders image with category-coloured SVG fallback ── */
 const CAT_PALETTE = {
-  hot:        ['#F8DEDE', '#9E0B0F'],
-  cold:       ['#DCE8F5', '#2B5C8E'],
-  frappes:    ['#EDE0F5', '#7B4EA0'],
-  breakfast:  ['#FFF3DC', '#A06820'],
-  sandwiches: ['#DCF0E4', '#3A7A50'],
-  burgers:    ['#F5E8DC', '#8B4020'],
-  meals:      ['#EDE8DC', '#6B5030'],
-  signature:  ['#F5F0DC', '#8C6E2B'],
+  hot:        ['#F7F4F0', '#7A5C3A'],
+  cold:       ['#F7F4F0', '#3A5C7A'],
+  frappes:    ['#F7F4F0', '#5C3A7A'],
+  breakfast:  ['#F7F4F0', '#7A5C3A'],
+  sandwiches: ['#F7F4F0', '#3A7A5C'],
+  burgers:    ['#F7F4F0', '#7A4A3A'],
+  meals:      ['#F7F4F0', '#5C4A2A'],
+  signature:  ['#F7F4F0', '#7A5C2A'],
 };
 const ProductImg = ({ src, alt, name, category, style, ...rest }) => {
   const [err, setErr] = useState(false);
@@ -2652,7 +2652,7 @@ const TrustBar = () => (
 );
 
 const FavouritesStrip = ({ products, onOrder }) => {
-  const FAVS = ["p-african-coffee", "p-african-tea", "p-americano", "p-steak-eggs", "p-almond-cookies", "p-bbq-wings"];
+  const FAVS = ["p-african-coffee", "p-cold-brew", "p-mocha-frappe", "p-steak-eggs", "p-bbq-wings", "p-almond-cookies"];
   const items = FAVS.map(id => products.find(p => p.id === id)).filter(Boolean);
   return (
     <section className="section">
