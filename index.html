@@ -4337,7 +4337,7 @@ function App() {
 
   // route + state
   const [route, setRoute] = useState({ name: "landing" });
-  const go = (name, params = {}) => { setRoute({ name, ...params }); window.scrollTo({ top: 0, behavior: "smooth" }); };
+  const go = (name, params = {}) => { setRoute({ name, ...params }); window.scrollTo({ top: 0, behavior: "instant" }); };
 
   const [account, setAccount] = useState(null); // null until signup
   const [showSignup, setShowSignup] = useState(false);
