@@ -450,7 +450,7 @@ a { color: inherit; text-decoration: none; }
   align-items: center;
   gap: var(--sp-3);
 }
-.nav-brand img { height: 44px; width: 44px; object-fit: contain; }
+.nav-brand img { height: 64px; width: 64px; object-fit: contain; }
 .nav-brand .wm {
   display: none;
   font-family: var(--display-family);
@@ -2237,16 +2237,12 @@ const Nav = ({ current, cartCount, onNav, onCart, onLoyalty, account, onAccount 
       <div className="container nav-inner">
         <button className="nav-brand" onClick={() => onNav("landing")} aria-label="La Patisserie home">
           <img src="ds/assets/logo.png" alt="La Patisserie Express" />
-          <div className="wm">
-            La&nbsp;Patisserie
-            <small>EST · KAMPALA</small>
-          </div>
         </button>
         <div className="nav-links">
           <button className={current === "menu" || current === "mode" ? "active" : ""} onClick={() => onNav("mode")}>Order</button>
           <button className={current === "loyalty-dash" ? "active" : ""} onClick={onLoyalty}>Loyalty</button>
           <button onClick={() => onNav("outlet")}>Outlets</button>
-          <button onClick={() => onNav("landing")}>Our story</button>
+          <button onClick={() => onNav("mode")}>Menu</button>
         </div>
         <div className="nav-actions">
           <button className="nav-icon-btn" aria-label="Search"><Icon name="search" /></button>
@@ -2656,7 +2652,7 @@ const TrustBar = () => (
 );
 
 const FavouritesStrip = ({ products, onOrder }) => {
-  const FAVS = ["p-cappuccino", "p-iced-latte", "p-full-english", "p-classic-burger", "p-almond-cookies", "p-bbq-wings"];
+  const FAVS = ["p-african-coffee", "p-african-tea", "p-americano", "p-steak-eggs", "p-almond-cookies", "p-bbq-wings"];
   const items = FAVS.map(id => products.find(p => p.id === id)).filter(Boolean);
   return (
     <section className="section">
@@ -2675,7 +2671,7 @@ const FavouritesStrip = ({ products, onOrder }) => {
         <div className="fav-grid">
           {items.map(p => (
             <button key={p.id} className="fav-item" onClick={onOrder} type="button">
-              <span className="fav-art"><ProductImg src={p.img} alt={p.name} name={p.name} category={p.category} style={{ width: '100%', height: '100%', objectFit: 'contain' }} /></span>
+              <span className="fav-art"><ProductImg src={p.img} alt={p.name} name={p.name} category={p.category} style={{ width: '100%', height: '100%', objectFit: 'cover' }} /></span>
               <h4>{p.name}</h4>
               <div className="price-mini">{window.LP_DATA.formatUGX(p.price)}</div>
             </button>
@@ -4326,10 +4322,9 @@ const LOY_OPTIONS = [
   { label: "Gold",  value: "gold" },
 ];
 const BRAND_PALETTES = [
-  ["#9E0B0F", "#7A0709"], // by-the-book deep red
-  ["#C8102E", "#9E0B0F"], // brighter scarlet
-  ["#5B0E12", "#3F0A0D"], // mahogany
-  ["#1F2937", "#0F172A"], // ink
+  ["#C4546A", "#A33858"], // light rose
+  ["#9E0B0F", "#7A0709"], // wine red (current)
+  ["#7B0012", "#5C000D"], // deep maroon (logo)
 ];
 
 function App() {
