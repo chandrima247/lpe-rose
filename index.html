@@ -484,7 +484,7 @@ a { color: inherit; text-decoration: none; }
 .nav-links button:hover { color: var(--brand-live); }
 .nav-links button.active { color: var(--brand-live); }
 .nav-links button.active::after {
-  content: –; position: absolute; left: 0; right: 0; bottom: -6px; height: 1px;
+  content: ""; position: absolute; left: 0; right: 0; bottom: -6px; height: 1px;
   background: var(--gold-live); opacity: var(--gold-opacity);
 }
 .nav-actions { display: flex; align-items: center; gap: var(--sp-2); }
@@ -686,7 +686,7 @@ a { color: inherit; text-decoration: none; }
   width: 100%; height: 100%; object-fit: cover;
 }
 .hero-photo::after {
-  content: –;
+  content: "";
   position: absolute; inset: 0;
   background: linear-gradient(180deg, rgba(14,4,4,0.05) 0%, rgba(14,4,4,0.25) 40%, rgba(14,4,4,0.85) 100%);
 }
@@ -711,7 +711,7 @@ a { color: inherit; text-decoration: none; }
   margin-bottom: var(--sp-4);
 }
 .hero-eyebrow::before, .hero-eyebrow::after {
-  content: –; width: 24px; height: 1px; background: var(--gold-300); opacity: var(--gold-opacity);
+  content: ""; width: 24px; height: 1px; background: var(--gold-300); opacity: var(--gold-opacity);
 }
 .hero h1 {
   font-family: var(--display-family);
@@ -802,7 +802,7 @@ a { color: inherit; text-decoration: none; }
   background-size: cover; background-position: center;
 }
 .hero.split .hero-side-img::after {
-  content: –;
+  content: "";
   position: absolute; inset: 0;
   background: linear-gradient(90deg, var(--ink-800) 0%, transparent 24%);
   display: none;
@@ -1682,7 +1682,7 @@ a { color: inherit; text-decoration: none; }
 }
 .radio-row.selected .ring { border-color: var(--brand-live); }
 .radio-row.selected .ring::after {
-  content: –; width: 10px; height: 10px;
+  content: ""; width: 10px; height: 10px;
   background: var(--brand-live); border-radius: var(--r-pill);
 }
 .radio-row h5 { font-size: 14px; font-weight: 600; color: var(--ink-800); }
@@ -1758,7 +1758,7 @@ a { color: inherit; text-decoration: none; }
   position: relative;
 }
 .timeline-row::before {
-  content: –;
+  content: "";
   position: absolute;
   left: 17px; top: 36px; bottom: -12px;
   width: 1px;
@@ -1800,7 +1800,7 @@ a { color: inherit; text-decoration: none; }
   border: 1px solid var(--gold-400);
 }
 .dash-hero::before {
-  content: –;
+  content: "";
   position: absolute; right: -20px; top: -20px;
   width: 160px; height: 160px; border-radius: var(--r-pill);
   background: rgba(182,145,62,0.15);
@@ -2249,7 +2249,7 @@ const Nav = ({ current, cartCount, onNav, onCart, onLoyalty, account, onAccount 
           <img src="https://patexpressug.com/cdn/shop/files/La_Patisserie_Logo_NO_BG.png?height=126&v=1764577680" alt="La Patisserie Express" />
         </button>
         <div className="nav-links">
-          <button className={current === "loyalty-dash" ? "active" : –} onClick={onLoyalty}>Loyalty</button>
+          <button className={current === "loyalty-dash" ? "active" : ""} onClick={onLoyalty}>Loyalty</button>
           <button onClick={() => onNav("outlet")}>Outlets</button>
           <button onClick={() => onNav("mode")}>Menu</button>
         </div>
@@ -2308,7 +2308,7 @@ const Footer = () => (
 );
 
 const Toast = ({ msg }) => (
-  <div className={"toast " + (msg ? "show" : –)}>{msg || –}</div>
+  <div className={"toast " + (msg ? "show" : "")}>{msg || ""}</div>
 );
 
 window.LP_Nav = Nav;
@@ -2348,9 +2348,9 @@ window.ProductImg = ProductImg;
 /* Loyalty signup modal + dashboard */
 
 const LoyaltyModal = ({ open, onClose, onSubmit, prefill }) => {
-  const [name, setName] = useState(prefill?.name || –);
-  const [phone, setPhone] = useState(prefill?.phone || –);
-  const [email, setEmail] = useState(–);
+  const [name, setName] = useState(prefill?.name || "");
+  const [phone, setPhone] = useState(prefill?.phone || "");
+  const [email, setEmail] = useState("");
   const [errs, setErrs] = useState({});
 
   useEffect(() => { if (open) setErrs({}); }, [open]);
@@ -2359,7 +2359,7 @@ const LoyaltyModal = ({ open, onClose, onSubmit, prefill }) => {
     e.preventDefault();
     const err = {};
     if (!name.trim() || name.trim().length < 2) err.name = "Please enter your full name.";
-    const cleanPhone = phone.replace(/\D/g, –);
+    const cleanPhone = phone.replace(/\D/g, "");
     if (cleanPhone.length !== 9) err.phone = "Enter 9 digits, without the leading zero.";
     if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) err.email = "That email looks off.";
     setErrs(err);
@@ -2404,7 +2404,7 @@ const LoyaltyModal = ({ open, onClose, onSubmit, prefill }) => {
             <label className="lbl" htmlFor="loy-name">Full name</label>
             <input
               id="loy-name"
-              className={"input " + (errs.name ? "invalid" : –)}
+              className={"input " + (errs.name ? "invalid" : "")}
               placeholder="e.g. Akello Nantongo"
               value={name}
               onChange={(e) => setName(e.target.value)}
@@ -2416,7 +2416,7 @@ const LoyaltyModal = ({ open, onClose, onSubmit, prefill }) => {
 
           <div className="field">
             <label className="lbl" htmlFor="loy-phone">Phone number</label>
-            <div className={"phone-wrap " + (errs.phone ? "invalid" : –)} style={errs.phone ? { borderColor: "var(--error-500)", background: "#FFF5F5" } : null}>
+            <div className={"phone-wrap " + (errs.phone ? "invalid" : "")} style={errs.phone ? { borderColor: "var(--error-500)", background: "#FFF5F5" } : null}>
               <span className="phone-prefix">ðŸ‡ºðŸ‡¬ +256</span>
               <input
                 id="loy-phone"
@@ -2425,7 +2425,7 @@ const LoyaltyModal = ({ open, onClose, onSubmit, prefill }) => {
                 maxLength={9}
                 placeholder="703 631 215"
                 value={phone}
-                onChange={(e) => setPhone(e.target.value.replace(/\D/g, –).slice(0, 9))}
+                onChange={(e) => setPhone(e.target.value.replace(/\D/g, "").slice(0, 9))}
                 autoComplete="tel"
                 required
               />
@@ -2439,7 +2439,7 @@ const LoyaltyModal = ({ open, onClose, onSubmit, prefill }) => {
             <label className="lbl" htmlFor="loy-email">Email <span className="muted" style={{ textTransform: "none", letterSpacing: 0, fontWeight: 500 }}>(optional)</span></label>
             <input
               id="loy-email"
-              className={"input " + (errs.email ? "invalid" : –)}
+              className={"input " + (errs.email ? "invalid" : "")}
               type="email"
               placeholder="jane@example.com"
               value={email}
@@ -2500,7 +2500,7 @@ const LoyaltyDashboard = ({ account, onBack, onOrder }) => {
 
           <div className="dash-tier-row">
             {tiers.map((t, i) => (
-              <div key={t.id} className={"tier-cell " + (i === curIdx ? "cur" : –)}>
+              <div key={t.id} className={"tier-cell " + (i === curIdx ? "cur" : "")}>
                 <strong>{t.name}</strong>
                 <span>{t.min === 0 ? "Start" : `${t.min.toLocaleString()}+`} · {Math.round(t.mult * 100)}% back</span>
               </div>
@@ -2849,7 +2849,7 @@ const ModeChoice = ({ onBack, onPick }) => (
 
 /* â”€â”€â”€ OUTLET PICKER â”€â”€â”€ */
 const OutletPicker = ({ outlets, onBack, onPick }) => {
-  const [q, setQ] = useState(–);
+  const [q, setQ] = useState("");
   const [area, setArea] = useState("All");
 
   const areas = useMemo(() => ["All", ...Array.from(new Set(outlets.map(o => o.area)))], [outlets]);
@@ -2890,14 +2890,14 @@ const OutletPicker = ({ outlets, onBack, onPick }) => {
             <Icon name="search" size={18}/>
             <input
               className="input"
-              placeholder="Search outlets”¦"
+              placeholder="Search outlets..."
               value={q}
               onChange={(e) => setQ(e.target.value)}
             />
           </div>
           <div className="area-row">
             {areas.map(a => (
-              <button key={a} className={"area-pill " + (area === a ? "active" : –)} onClick={() => setArea(a)} style={{ background: area === a ? "var(--brand-live)" : "transparent", borderColor: area === a ? "var(--brand-live)" : "var(--ink-200)", color: area === a ? "#fff" : "var(--ink-600)" }}>{a}</button>
+              <button key={a} className={"area-pill " + (area === a ? "active" : "")} onClick={() => setArea(a)} style={{ background: area === a ? "var(--brand-live)" : "transparent", borderColor: area === a ? "var(--brand-live)" : "var(--ink-200)", color: area === a ? "#fff" : "var(--ink-600)" }}>{a}</button>
             ))}
           </div>
         </div>
@@ -2914,14 +2914,14 @@ const OutletPicker = ({ outlets, onBack, onPick }) => {
           <div key={areaName}>
             <div className="outlet-area-head">
               <h3>{areaName}</h3>
-              <span className="count">{list.length} OUTLET{list.length === 1 ? – : "S"}</span>
+              <span className="count">{list.length} OUTLET{list.length === 1 ? "" : "S"}</span>
               <hr className="gold-rule" style={{ flex: 1, height: 1, margin: 0, background: "var(--gold-300)", border: 0 }}/>
             </div>
             {list.map((o, i) => (
               <button
                 key={o.id}
                 type="button"
-                className={"outlet-row " + (i === 0 && areaName === Object.keys(grouped)[0] ? "nearest" : –)}
+                className={"outlet-row " + (i === 0 && areaName === Object.keys(grouped)[0] ? "nearest" : "")}
                 onClick={() => onPick(o)}
               >
                 <span className="pin"><Icon name="pin" size={20}/></span>
@@ -2957,7 +2957,7 @@ const inferZone = (addr) => {
     "Wandegeya","Bukoto","Kabalagala","Mukono","Entebbe",
     "Mbuya","Kisementi","Kira","Naguru","Lubowa","Kireka",
   ];
-  return zones.find(z => addr.toLowerCase().includes(z.toLowerCase())) || –;
+  return zones.find(z => addr.toLowerCase().includes(z.toLowerCase())) || "";
 };
 
 // Zone â†’ ordered outlet IDs (nearest first within that zone)
@@ -2982,9 +2982,9 @@ const ZONE_OUTLETS = {
 };
 
 const DeliveryAddress = ({ outlets, onBack, onConfirm }) => {
-  const [q, setQ] = useState(–);
+  const [q, setQ] = useState("");
   const [selectedOutlet, setSelectedOutlet] = useState(null);
-  const [details, setDetails] = useState({ apt: –, instructions: – });
+  const [details, setDetails] = useState({ apt: "", instructions: "" });
 
   const zone = inferZone(q);
   const nearestIds = zone ? (ZONE_OUTLETS[zone] || []) : [];
@@ -3021,13 +3021,13 @@ const DeliveryAddress = ({ outlets, onBack, onConfirm }) => {
             <Icon name="pin" size={20}/>
             <input
               type="text"
-              placeholder="Enter your neighbourhood or street”¦"
+              placeholder="Enter your neighbourhood or street..."
               value={q}
               onChange={(e) => { setQ(e.target.value); setSelectedOutlet(null); }}
               autoFocus
             />
             {q && (
-              <button className="clr" onClick={() => { setQ(–); setSelectedOutlet(null); }} aria-label="Clear">
+              <button className="clr" onClick={() => { setQ(""); setSelectedOutlet(null); }} aria-label="Clear">
                 <Icon name="close" size={16}/>
               </button>
             )}
@@ -3046,7 +3046,7 @@ const DeliveryAddress = ({ outlets, onBack, onConfirm }) => {
           {sortedOutlets.map(o => (
             <button
               key={o.id}
-              className={`outlet-row${o.isNearest ? " nearest" : –}`}
+              className={`outlet-row${o.isNearest ? " nearest" : ""}`}
               type="button"
               onClick={() => setSelectedOutlet(o)}
               style={{ width: "100%", textAlign: "left", background: "none", border: "none", borderBottom: "1px solid var(--border)" }}
@@ -3260,7 +3260,7 @@ const Menu = ({ context, onBack, onChangeContext, cart, onAddCart, onOpenCart })
           <div className="menu-tabs-inner">
             {CATEGORIES.map(c => (
               <button key={c.id}
-                className={"tab-btn " + (activeCat === c.id ? "active" : –)}
+                className={"tab-btn " + (activeCat === c.id ? "active" : "")}
                 onClick={() => scrollToCat(c.id)}
               >{c.name}</button>
             ))}
@@ -3318,7 +3318,7 @@ const Menu = ({ context, onBack, onChangeContext, cart, onAddCart, onOpenCart })
         <button className="view-cart" onClick={onOpenCart}>
           <div className="vc-meta">
             <span className="vc-label">Your basket</span>
-            <span className="vc-text">{cartCount} item{cartCount > 1 ? "s" : –} · {formatUGX(cartTotal)}</span>
+            <span className="vc-text">{cartCount} item{cartCount > 1 ? "s" : ""} · {formatUGX(cartTotal)}</span>
           </div>
           <span className="vc-cta">View cart <Icon name="arrow-right" size={14}/></span>
         </button>
@@ -3402,7 +3402,7 @@ const ProductModal = ({ product, onClose, onAdd }) => {
                 {g.options.map(o => (
                   <button
                     key={o.id}
-                    className={"option-card " + (sel[g.id] === o.id ? "selected" : –)}
+                    className={"option-card " + (sel[g.id] === o.id ? "selected" : "")}
                     type="button"
                     onClick={() => setSel(s => ({ ...s, [g.id]: s[g.id] === o.id ? (g.required ? o.id : null) : o.id }))}
                   >
@@ -3441,7 +3441,7 @@ const PAYMENT_METHODS = [
 const Checkout = ({ context, cart, account, onBack, onUpdateQty, onRemove, onConfirm, redeemPts, setRedeemPts }) => {
   const fmt = window.LP_DATA.formatUGX;
   const [pay, setPay] = useState("mtn");
-  const [phone, setPhone] = useState(account?.phone || –);
+  const [phone, setPhone] = useState(account?.phone || "");
 
   const subtotal = cart.reduce((s, i) => s + i.unitPrice * i.qty, 0);
   const deliveryFee = context.mode === "delivery" ? 5000 : 0;
@@ -3527,7 +3527,7 @@ const Checkout = ({ context, cart, account, onBack, onUpdateQty, onRemove, onCon
               <div className="radio-grid">
                 {PAYMENT_METHODS.map(m => (
                   <button key={m.id}
-                    className={"radio-row " + (pay === m.id ? "selected" : –)}
+                    className={"radio-row " + (pay === m.id ? "selected" : "")}
                     onClick={() => setPay(m.id)}
                     type="button"
                   >
@@ -3546,7 +3546,7 @@ const Checkout = ({ context, cart, account, onBack, onUpdateQty, onRemove, onCon
                   <div className="phone-wrap">
                     <span className="phone-prefix">ðŸ‡ºðŸ‡¬ +256</span>
                     <input className="input" inputMode="numeric" maxLength={9} value={phone}
-                      onChange={(e) => setPhone(e.target.value.replace(/\D/g, –).slice(0, 9))}
+                      onChange={(e) => setPhone(e.target.value.replace(/\D/g, "").slice(0, 9))}
                       placeholder="703 631 215"/>
                   </div>
                 </div>
@@ -4032,7 +4032,7 @@ function TweaksPanel({ title = 'Tweaks', noDeckControls = false, children }) {
   return (
     <>
       <style>{__TWEAKS_STYLE}</style>
-      <div ref={dragRef} className="twk-panel" data-noncommentable=–
+      <div ref={dragRef} className="twk-panel" data-noncommentable=""
            style={{ right: offsetRef.current.x, bottom: offsetRef.current.y }}>
         <div className="twk-hd" onMouseDown={onDragStart}>
           <b>{title}</b>
@@ -4350,11 +4350,11 @@ function App() {
   const [cart, setCart] = useState([]);
   const [redeemPts, setRedeemPts] = useState(0);
   const [order, setOrder] = useState(null);
-  const [toast, setToast] = useState(–);
+  const [toast, setToast] = useState("");
 
   const showToast = (msg) => {
     setToast(msg);
-    setTimeout(() => setToast(–), 2400);
+    setTimeout(() => setToast(""), 2400);
   };
 
   // apply tweaks to <html>
@@ -4370,7 +4370,7 @@ function App() {
       const r = Math.max(0, parseInt(m[1], 16) - 30);
       const g = Math.max(0, parseInt(m[2], 16) - 6);
       const b = Math.max(0, parseInt(m[3], 16) - 6);
-      return "#" + [r, g, b].map(n => n.toString(16).padStart(2, "0")).join(–);
+      return "#" + [r, g, b].map(n => n.toString(16).padStart(2, "0")).join("");
     })();
     root.style.setProperty("--brand-live", t.brand);
     root.style.setProperty("--red-700", dark);
