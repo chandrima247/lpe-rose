@@ -1,24 +1,24 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>La Patisserie Express — Order</title>
+  <title>La Patisserie Express â€” Order</title>
   <style>
 /* ============================================================
-   La Patisserie — Colors & Type
-   Premium café + food e-commerce. Warm luxury, editorial.
+   La Patisserie â€” Colors & Type
+   Premium cafÃ© + food e-commerce. Warm luxury, editorial.
    ============================================================ */
 
 @import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Manrope:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap");
 
 :root {
   /* ---------- BRAND ---------- */
-  /* Primary deep wine red — sourced from the logo (#9E0B0F).
+  /* Primary deep wine red â€” sourced from the logo (#9E0B0F).
      The user's spec called for #8B0000; we kept the actual brand
      red as `--brand` and expose --brand-classic for spec parity. */
-  --brand: #9E0B0F;
-  --brand-classic: #8B0000;
+  --brand: #C4546A;
+  --brand-classic: #A33858;
 
   /* Wine / red scale */
   --red-50:  #FCF1F1;
@@ -34,8 +34,8 @@
 
   /* Cream / warm neutral scale (the "soft cream" surface) */
   --cream-50:  #FFFBF7;
-  --cream-100: #FFF5F5;   /* spec: secondary cream */
-  --cream-200: #FAEFE6;
+  --cream-100: #FFF0F3;   /* spec: secondary cream */
+  --cream-200: #FAE6EC;
   --cream-300: #F2E4D3;
   --cream-400: #E6D2B8;
   --cream-500: #D4B896;
@@ -53,7 +53,7 @@
   --ink-800: #191919;     /* spec: text */
   --ink-900: #0E0E0E;
 
-  /* Subtle gold — accents, dividers, premium markers */
+  /* Subtle gold â€” accents, dividers, premium markers */
   --gold-50:  #FBF6EC;
   --gold-100: #F2E6C7;
   --gold-200: #E6D097;
@@ -62,7 +62,7 @@
   --gold-500: #8C6E2B;
   --gold-600: #5E4A1C;
 
-  /* Semantic — muted, never neon */
+  /* Semantic â€” muted, never neon */
   --success-50:  #ECF3EE;
   --success-500: #4F8C6B;
   --success-700: #356048;
@@ -114,19 +114,19 @@
   --font-display: var(--font-serif);
   --font-mono:    "SF Mono", "JetBrains Mono", ui-monospace, monospace;
 
-  /* Type scale — modular ~1.25, optimized for editorial pages */
-  --fs-12: 0.75rem;     /* 12 — micro / caption */
-  --fs-13: 0.8125rem;   /* 13 — small */
-  --fs-14: 0.875rem;    /* 14 — meta / labels */
-  --fs-16: 1rem;        /* 16 — body */
-  --fs-18: 1.125rem;    /* 18 — body-lg */
-  --fs-20: 1.25rem;     /* 20 — h6 / lead */
-  --fs-24: 1.5rem;      /* 24 — h5 */
-  --fs-30: 1.875rem;    /* 30 — h4 */
-  --fs-36: 2.25rem;     /* 36 — h3 */
-  --fs-48: 3rem;        /* 48 — h2 */
-  --fs-64: 4rem;        /* 64 — h1 / display */
-  --fs-80: 5rem;        /* 80 — hero display */
+  /* Type scale â€” modular ~1.25, optimized for editorial pages */
+  --fs-12: 0.75rem;     /* 12 â€” micro / caption */
+  --fs-13: 0.8125rem;   /* 13 â€” small */
+  --fs-14: 0.875rem;    /* 14 â€” meta / labels */
+  --fs-16: 1rem;        /* 16 â€” body */
+  --fs-18: 1.125rem;    /* 18 â€” body-lg */
+  --fs-20: 1.25rem;     /* 20 â€” h6 / lead */
+  --fs-24: 1.5rem;      /* 24 â€” h5 */
+  --fs-30: 1.875rem;    /* 30 â€” h4 */
+  --fs-36: 2.25rem;     /* 36 â€” h3 */
+  --fs-48: 3rem;        /* 48 â€” h2 */
+  --fs-64: 4rem;        /* 64 â€” h1 / display */
+  --fs-80: 5rem;        /* 80 â€” hero display */
 
   --lh-tight:  1.05;
   --lh-snug:   1.2;
@@ -341,7 +341,7 @@ body {
 }
 ::selection { background: var(--cream-200); color: var(--fg); }
 
-/* ─────────── Tweakable runtime tokens ─────────── */
+/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ Tweakable runtime tokens â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 :root {
   --brand-live: var(--brand);
   --gold-live: var(--gold-400);
@@ -380,7 +380,7 @@ body {
   --display-family: var(--font-sans);
 }
 
-/* ─────────── BASE ─────────── */
+/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ BASE â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 html, body { height: 100%; }
 body {
   background: var(--bg-cream);
@@ -427,7 +427,7 @@ a { color: inherit; text-decoration: none; }
 @media (min-width: 768px) { .container { padding: 0 var(--gutter-tablet); } }
 @media (min-width: 1024px) { .container { padding: 0 var(--gutter-desktop); } }
 
-/* ─────────── NAV ─────────── */
+/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ NAV â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .nav {
   position: sticky;
   top: 0;
@@ -508,11 +508,11 @@ a { color: inherit; text-decoration: none; }
   border: 2px solid var(--cream-50);
 }
 
-/* ─────────── PAGE / FADE ─────────── */
+/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ PAGE / FADE â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .page { animation: fade .26s var(--ease-emphasis) both; }
 @keyframes fade { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
 
-/* ─────────── BUTTONS ─────────── */
+/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ BUTTONS â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .btn {
   min-height: 48px;
   display: inline-flex;
@@ -566,7 +566,7 @@ a { color: inherit; text-decoration: none; }
 }
 .link:hover { opacity: 0.7; }
 
-/* ─────────── INPUTS ─────────── */
+/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ INPUTS â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .field { margin-bottom: var(--sp-4); }
 .field label.lbl {
   display: block;
@@ -621,7 +621,7 @@ a { color: inherit; text-decoration: none; }
 }
 .phone-wrap .input { border: 0; box-shadow: none; }
 
-/* ─────────── CARDS / SURFACES ─────────── */
+/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ CARDS / SURFACES â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .card {
   background: #fff;
   border: 1px solid var(--border);
@@ -634,7 +634,7 @@ a { color: inherit; text-decoration: none; }
 .surface-cream { background: var(--bg-cream); }
 .surface-white { background: #fff; }
 
-/* ─────────── TOAST ─────────── */
+/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ TOAST â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .toast {
   position: fixed;
   top: calc(var(--nav-h) + 16px);
@@ -650,7 +650,7 @@ a { color: inherit; text-decoration: none; }
 }
 .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 
-/* ─────────── BADGES ─────────── */
+/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ BADGES â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .badge {
   display: inline-flex; align-items: center; gap: 5px;
   padding: 4px 10px;
@@ -673,7 +673,7 @@ a { color: inherit; text-decoration: none; }
 .badge.dark { background: var(--ink-800); color: #fff; }
 .badge.success { background: var(--success-50); color: var(--success-700); }
 
-/* ─────────── HERO ─────────── */
+/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ HERO â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .hero {
   position: relative;
   overflow: hidden;
@@ -809,7 +809,7 @@ a { color: inherit; text-decoration: none; }
 }
 @media (min-width: 900px) { .hero.split .hero-side-img::after { display: block; } }
 
-/* ─────────── TRUST BAR ─────────── */
+/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ TRUST BAR â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .trust-bar {
   background: var(--ink-800);
   color: rgba(255,255,255,0.86);
@@ -832,7 +832,7 @@ a { color: inherit; text-decoration: none; }
 .trust-item strong { color: #fff; font-weight: 700; letter-spacing: 0.02em; }
 .trust-item .gold-tick { color: var(--gold-300); margin-right: 6px; opacity: var(--gold-opacity); }
 
-/* ─────────── SECTION ─────────── */
+/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ SECTION â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .section { padding: var(--sp-16) 0; }
 .section.tight { padding: var(--sp-12) 0; }
 .section.cream { background: var(--cream-100); }
@@ -856,7 +856,7 @@ a { color: inherit; text-decoration: none; }
 .section-head p { color: var(--fg-muted); max-width: 520px; }
 .section.dark .section-head p { color: rgba(255,255,255,0.7); }
 
-/* ─────────── FAVOURITES STRIP ─────────── */
+/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ FAVOURITES STRIP â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .fav-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -887,7 +887,7 @@ a { color: inherit; text-decoration: none; }
 }
 .fav-item .price-mini { font-size: 12px; color: var(--fg-muted); margin-top: 2px; }
 
-/* ─────────── LOYALTY VARIANTS ─────────── */
+/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ LOYALTY VARIANTS â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .loyalty-section { padding: var(--sp-16) 0; }
 .loyalty-card {
   border-radius: var(--r-xl);
@@ -989,7 +989,7 @@ a { color: inherit; text-decoration: none; }
 .loy-redeem span { display: block; margin-top: 6px; font-size: 13px; color: var(--fg-muted); }
 .loy-actions { margin-top: var(--sp-5); display: grid; gap: var(--sp-3); }
 
-/* ─────────── FOOTER ─────────── */
+/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ FOOTER â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .footer {
   background: var(--ink-800);
   color: rgba(255,255,255,0.6);
@@ -1031,7 +1031,7 @@ a { color: inherit; text-decoration: none; }
   color: rgba(255,255,255,0.5);
 }
 
-/* ─────────── MODE / BANNER ─────────── */
+/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ MODE / BANNER â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .banner {
   background: var(--ink-800);
   color: #fff;
@@ -1111,7 +1111,7 @@ a { color: inherit; text-decoration: none; }
   border-radius: var(--r-pill);
 }
 
-/* ─────────── OUTLET LIST ─────────── */
+/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ OUTLET LIST â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .outlet-search {
   position: sticky; top: var(--nav-h); z-index: 40;
   background: var(--cream-100);
@@ -1184,7 +1184,7 @@ a { color: inherit; text-decoration: none; }
   font-size: 13px; color: var(--fg-muted);
   display: flex; gap: 6px; flex-wrap: wrap;
 }
-.outlet-row .info .meta span:not(:last-child)::after { content: " · "; color: var(--ink-300); }
+.outlet-row .info .meta span:not(:last-child)::after { content: " Â· "; color: var(--ink-300); }
 .outlet-row .info .tags { display: flex; gap: 6px; margin-top: 6px; flex-wrap: wrap; }
 .outlet-row .arrow {
   color: var(--ink-300);
@@ -1192,7 +1192,7 @@ a { color: inherit; text-decoration: none; }
 }
 .outlet-row:hover .arrow { color: var(--brand-live); transform: translateX(2px); }
 
-/* ─────────── DELIVERY ADDRESS ─────────── */
+/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ DELIVERY ADDRESS â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .delivery-search-bar {
   position: sticky; top: var(--nav-h); z-index: 40;
   padding: var(--sp-5) 0 var(--sp-4);
@@ -1292,7 +1292,7 @@ a { color: inherit; text-decoration: none; }
 .matched-outlet p { font-size: 13px; color: var(--ink-600); margin-top: 2px; }
 .matched-outlet .switch { color: var(--brand-live); font-size: 12px; font-weight: 600; margin-top: 6px; display: inline-block; }
 
-/* ─────────── MENU ─────────── */
+/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ MENU â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .menu-context {
   position: sticky; top: var(--nav-h); z-index: 38;
   background: rgba(255, 251, 247, 0.95);
@@ -1449,7 +1449,7 @@ a { color: inherit; text-decoration: none; }
   font-variant-numeric: tabular-nums;
 }
 
-/* ─────────── VIEW CART FLOATING ─────────── */
+/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ VIEW CART FLOATING â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .view-cart {
   position: fixed;
   left: 50%; transform: translateX(-50%);
@@ -1484,7 +1484,7 @@ a { color: inherit; text-decoration: none; }
   flex-shrink: 0;
 }
 
-/* ─────────── PRODUCT MODAL ─────────── */
+/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ PRODUCT MODAL â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .modal-backdrop {
   position: fixed; inset: 0; z-index: var(--z-modal);
   background: rgba(25,25,25,0.4);
@@ -1598,7 +1598,7 @@ a { color: inherit; text-decoration: none; }
 .modal-foot .qty-modal button:hover { border-color: var(--brand-live); }
 .modal-foot .qty-modal strong { min-width: 24px; text-align: center; font-variant-numeric: tabular-nums; }
 
-/* ─────────── CHECKOUT ─────────── */
+/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ CHECKOUT â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .checkout-grid {
   display: grid;
   grid-template-columns: 1fr;
@@ -1688,7 +1688,7 @@ a { color: inherit; text-decoration: none; }
 .radio-row h5 { font-size: 14px; font-weight: 600; color: var(--ink-800); }
 .radio-row p { font-size: 12px; color: var(--fg-muted); margin-top: 2px; }
 
-/* ─────────── CONFIRMATION ─────────── */
+/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ CONFIRMATION â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .confirm-wrap {
   max-width: 720px;
   margin: 0 auto;
@@ -1725,7 +1725,7 @@ a { color: inherit; text-decoration: none; }
 .confirm-actions { display: grid; gap: var(--sp-3); margin-top: var(--sp-6); grid-template-columns: 1fr; }
 @media (min-width: 600px) { .confirm-actions { grid-template-columns: 1fr 1fr; } }
 
-/* ─────────── ORDER TRACKING ─────────── */
+/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ ORDER TRACKING â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .tracking-card {
   background: #fff;
   border: 1px solid var(--border);
@@ -1787,7 +1787,7 @@ a { color: inherit; text-decoration: none; }
 .timeline-row p { font-size: 13px; color: var(--fg-muted); margin-top: 2px; }
 .timeline-row.upcoming h4 { color: var(--ink-400); }
 
-/* ─────────── LOYALTY DASHBOARD ─────────── */
+/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ LOYALTY DASHBOARD â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .dash-hero {
   position: relative;
   border-radius: var(--r-xl);
@@ -1901,7 +1901,7 @@ a { color: inherit; text-decoration: none; }
 .history-row.redeem .pts { color: var(--brand-live); }
 .history-row.earn .pts::before { content: "+"; }
 
-/* ─────────── TWEAKS — small overrides ─────────── */
+/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ TWEAKS â€” small overrides â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 [data-tweaks-open="true"] .view-cart { display: none; }
 
 /* responsive utility */
@@ -1919,7 +1919,7 @@ a { color: inherit; text-decoration: none; }
   <div id="root"></div>
 
   <script>
-/* La Patisserie Express — catalog & domain data */
+/* La Patisserie Express â€” catalog & domain data */
 
 const ASSET = "ds/assets";
 
@@ -1936,51 +1936,51 @@ const CATEGORIES = [
 
 const PRODUCTS = [
   // Hot
-  { id: "p-african-coffee", name: "African coffee",  category: "hot", meta: "Single-origin · medium roast", price: 8500, img: `${ASSET}/products/african-coffee.png`, tag: "Signature", desc: "A medium-roasted single-origin from the slopes of Mt. Elgon. Notes of cocoa, brown sugar, and a long, syrupy finish.", drink: true },
-  { id: "p-americano",      name: "Americano",       category: "hot", meta: "Double shot · 8oz", price: 7000, img: `${ASSET}/products/americano.png`, desc: "Two shots of espresso lengthened with hot water. Clean, dark, unpretentious.", drink: true },
-  { id: "p-african-tea",    name: "African tea",     category: "hot", meta: "Loose leaf · spiced", price: 6000, img: `${ASSET}/products/african-tea.png`, desc: "Black tea simmered with whole spices and a touch of milk. Traditional, comforting.", drink: true },
-  { id: "p-cappuccino",     name: "Cappuccino",      category: "hot", meta: "Espresso · steamed milk · foam", price: 12000, img: `${ASSET}/products/americano.png`, desc: "A classic espresso topped with velvety steamed milk and a dome of foam.", drink: true },
-  { id: "p-latte",          name: "Café latte",      category: "hot", meta: "Espresso · steamed milk", price: 13000, img: `${ASSET}/products/americano.png`, desc: "Smooth, milky, comforting. Our house blend pulled long and steamed silky.", drink: true },
-  { id: "p-mocha",          name: "Mocha",           category: "hot", meta: "Espresso · cocoa · milk", price: 14000, img: `${ASSET}/products/african-coffee.png`, desc: "Espresso with house cocoa, steamed milk, and a swirl of cream.", drink: true },
+  { id: "p-african-coffee", name: "African coffee",  category: "hot", meta: "Single-origin Â· medium roast", price: 8500, img: `${ASSET}/products/african-coffee.png`, tag: "Signature", desc: "A medium-roasted single-origin from the slopes of Mt. Elgon. Notes of cocoa, brown sugar, and a long, syrupy finish.", drink: true },
+  { id: "p-americano",      name: "Americano",       category: "hot", meta: "Double shot Â· 8oz", price: 7000, img: `${ASSET}/products/americano.png`, desc: "Two shots of espresso lengthened with hot water. Clean, dark, unpretentious.", drink: true },
+  { id: "p-african-tea",    name: "African tea",     category: "hot", meta: "Loose leaf Â· spiced", price: 6000, img: `${ASSET}/products/african-tea.png`, desc: "Black tea simmered with whole spices and a touch of milk. Traditional, comforting.", drink: true },
+  { id: "p-cappuccino",     name: "Cappuccino",      category: "hot", meta: "Espresso Â· steamed milk Â· foam", price: 12000, img: `${ASSET}/products/americano.png`, desc: "A classic espresso topped with velvety steamed milk and a dome of foam.", drink: true },
+  { id: "p-latte",          name: "CafÃ© latte",      category: "hot", meta: "Espresso Â· steamed milk", price: 13000, img: `${ASSET}/products/americano.png`, desc: "Smooth, milky, comforting. Our house blend pulled long and steamed silky.", drink: true },
+  { id: "p-mocha",          name: "Mocha",           category: "hot", meta: "Espresso Â· cocoa Â· milk", price: 14000, img: `${ASSET}/products/african-coffee.png`, desc: "Espresso with house cocoa, steamed milk, and a swirl of cream.", drink: true },
 
   // Cold
-  { id: "p-iced-latte",     name: "Iced latte",      category: "cold", meta: "Double shot · cold milk · ice", price: 14000, img: `${ASSET}/products/americano.png`, desc: "Two shots of espresso poured over cold milk and ice.", drink: true },
-  { id: "p-iced-am",        name: "Iced americano",  category: "cold", meta: "Double shot · cold water · ice", price: 11000, img: `${ASSET}/products/americano.png`, desc: "Espresso lengthened with cold water and plenty of ice.", drink: true },
-  { id: "p-cold-brew",      name: "Cold brew",       category: "cold", meta: "Steeped 18hrs · low acid", price: 15000, img: `${ASSET}/products/african-coffee.png`, tag: "Signature", desc: "Coarse-ground beans steeped overnight. Smooth, low-acid, naturally sweet.", drink: true },
+  { id: "p-iced-latte",     name: "Iced latte",      category: "cold", meta: "Double shot Â· cold milk Â· ice", price: 14000, img: `${ASSET}/products/americano.png`, desc: "Two shots of espresso poured over cold milk and ice.", drink: true },
+  { id: "p-iced-am",        name: "Iced americano",  category: "cold", meta: "Double shot Â· cold water Â· ice", price: 11000, img: `${ASSET}/products/americano.png`, desc: "Espresso lengthened with cold water and plenty of ice.", drink: true },
+  { id: "p-cold-brew",      name: "Cold brew",       category: "cold", meta: "Steeped 18hrs Â· low acid", price: 15000, img: `${ASSET}/products/african-coffee.png`, tag: "Signature", desc: "Coarse-ground beans steeped overnight. Smooth, low-acid, naturally sweet.", drink: true },
 
   // Frappes
-  { id: "p-vanilla-frappe", name: "Vanilla frappe",  category: "frappes", meta: "Blended · vanilla bean", price: 17000, img: `${ASSET}/products/americano.png`, desc: "Vanilla bean blended with espresso, milk and ice. Topped with cream.", drink: true },
-  { id: "p-mocha-frappe",   name: "Mocha frappe",    category: "frappes", meta: "Blended · cocoa", price: 18000, img: `${ASSET}/products/african-coffee.png`, desc: "Cocoa, espresso, milk and ice — blended thick.", drink: true },
+  { id: "p-vanilla-frappe", name: "Vanilla frappe",  category: "frappes", meta: "Blended Â· vanilla bean", price: 17000, img: `${ASSET}/products/americano.png`, desc: "Vanilla bean blended with espresso, milk and ice. Topped with cream.", drink: true },
+  { id: "p-mocha-frappe",   name: "Mocha frappe",    category: "frappes", meta: "Blended Â· cocoa", price: 18000, img: `${ASSET}/products/african-coffee.png`, desc: "Cocoa, espresso, milk and ice â€” blended thick.", drink: true },
 
   // Breakfast
-  { id: "p-steak-eggs",     name: "American steak & eggs", category: "breakfast", meta: "Sirloin · 2 eggs · toast", price: 38000, img: `${ASSET}/products/steak-eggs.png`, desc: "Pan-seared sirloin with two eggs your way and buttered sourdough toast." },
-  { id: "p-full-english",   name: "Full English breakfast", category: "breakfast", meta: "Eggs · sausage · beans · toast", price: 32000, img: `${ASSET}/products/steak-eggs.png`, desc: "Two eggs, beef sausage, baked beans, grilled tomato, and buttered toast." },
-  { id: "p-pancakes",       name: "Buttermilk pancakes",   category: "breakfast", meta: "Stack of 3 · maple syrup", price: 22000, img: `${ASSET}/products/pastries.jpg`, desc: "Three fluffy buttermilk pancakes with maple syrup and butter." },
+  { id: "p-steak-eggs",     name: "American steak & eggs", category: "breakfast", meta: "Sirloin Â· 2 eggs Â· toast", price: 38000, img: `${ASSET}/products/steak-eggs.png`, desc: "Pan-seared sirloin with two eggs your way and buttered sourdough toast." },
+  { id: "p-full-english",   name: "Full English breakfast", category: "breakfast", meta: "Eggs Â· sausage Â· beans Â· toast", price: 32000, img: `${ASSET}/products/steak-eggs.png`, desc: "Two eggs, beef sausage, baked beans, grilled tomato, and buttered toast." },
+  { id: "p-pancakes",       name: "Buttermilk pancakes",   category: "breakfast", meta: "Stack of 3 Â· maple syrup", price: 22000, img: `${ASSET}/products/pastries.jpg`, desc: "Three fluffy buttermilk pancakes with maple syrup and butter." },
 
   // Sandwiches
-  { id: "p-club",           name: "Patisserie club",  category: "sandwiches", meta: "Chicken · bacon · egg · tomato", price: 26000, img: `${ASSET}/products/snacks.jpg`, desc: "Triple-decker with grilled chicken, smoked bacon, sliced egg, and lettuce." },
-  { id: "p-veggie-wrap",    name: "Roasted veggie wrap", category: "sandwiches", meta: "Hummus · roasted veg", price: 18000, img: `${ASSET}/products/snacks.jpg`, desc: "Hummus, roasted aubergine, peppers, and rocket in a warm wrap." },
+  { id: "p-club",           name: "Patisserie club",  category: "sandwiches", meta: "Chicken Â· bacon Â· egg Â· tomato", price: 26000, img: `${ASSET}/products/snacks.jpg`, desc: "Triple-decker with grilled chicken, smoked bacon, sliced egg, and lettuce." },
+  { id: "p-veggie-wrap",    name: "Roasted veggie wrap", category: "sandwiches", meta: "Hummus Â· roasted veg", price: 18000, img: `${ASSET}/products/snacks.jpg`, desc: "Hummus, roasted aubergine, peppers, and rocket in a warm wrap." },
 
   // Burgers
-  { id: "p-classic-burger", name: "Classic beef burger", category: "burgers", meta: "Aged beef · cheddar · brioche", price: 32000, img: `${ASSET}/products/snacks.jpg`, desc: "Aged beef patty with mature cheddar, lettuce, tomato, and house sauce on a brioche bun." },
-  { id: "p-chicken-burger", name: "Crispy chicken burger", category: "burgers", meta: "Buttermilk chicken · slaw", price: 28000, img: `${ASSET}/products/snacks.jpg`, desc: "Buttermilk-fried chicken with cabbage slaw and pickles on a brioche bun." },
+  { id: "p-classic-burger", name: "Classic beef burger", category: "burgers", meta: "Aged beef Â· cheddar Â· brioche", price: 32000, img: `${ASSET}/products/snacks.jpg`, desc: "Aged beef patty with mature cheddar, lettuce, tomato, and house sauce on a brioche bun." },
+  { id: "p-chicken-burger", name: "Crispy chicken burger", category: "burgers", meta: "Buttermilk chicken Â· slaw", price: 28000, img: `${ASSET}/products/snacks.jpg`, desc: "Buttermilk-fried chicken with cabbage slaw and pickles on a brioche bun." },
 
   // Meals (BBQ)
-  { id: "p-bbq-wings",      name: "BBQ chicken wings",   category: "meals", meta: "Smoky · serves 1–2", price: 24000, img: `${ASSET}/products/bbq-chicken-wings.png`, tag: "New", desc: "Slow-smoked chicken wings glazed in our house BBQ sauce. Comes with a side of slaw." },
-  { id: "p-bbq-beef",       name: "BBQ beef sausage",    category: "meals", meta: "House blend · 200g", price: 18000, img: `${ASSET}/products/bbq-beef-sausage.png`, desc: "Coarse-ground beef sausage, slow-grilled until the casing snaps." },
+  { id: "p-bbq-wings",      name: "BBQ chicken wings",   category: "meals", meta: "Smoky Â· serves 1â€“2", price: 24000, img: `${ASSET}/products/bbq-chicken-wings.png`, tag: "New", desc: "Slow-smoked chicken wings glazed in our house BBQ sauce. Comes with a side of slaw." },
+  { id: "p-bbq-beef",       name: "BBQ beef sausage",    category: "meals", meta: "House blend Â· 200g", price: 18000, img: `${ASSET}/products/bbq-beef-sausage.png`, desc: "Coarse-ground beef sausage, slow-grilled until the casing snaps." },
   { id: "p-bbq-chicken-s",  name: "BBQ chicken sausages", category: "meals", meta: "Pack of 4", price: 16000, img: `${ASSET}/products/bbq-chicken-sausages.png`, desc: "Lean chicken sausages with a smoky, peppery finish." },
 
   // Signature
-  { id: "p-almond-cookies", name: "Almond cookies",       category: "signature", meta: "Pack of 6 · hand-shaped", price: 12000, img: `${ASSET}/products/almond-cookies.png`, tag: "Signature", desc: "Lightly toasted almond cookies, baked in small batches every morning. Crisp edges, soft centres." },
+  { id: "p-almond-cookies", name: "Almond cookies",       category: "signature", meta: "Pack of 6 Â· hand-shaped", price: 12000, img: `${ASSET}/products/almond-cookies.png`, tag: "Signature", desc: "Lightly toasted almond cookies, baked in small batches every morning. Crisp edges, soft centres." },
 ];
 
 const OUTLETS = [
-  { id: "o-forest",   name: "Forest Mall, Lugogo",       area: "Kampala",  type: "Flagship",      hours: "7:00 — 22:00", distance: 1.2 },
-  { id: "o-kololo",   name: "Kololo Hill",                area: "Kampala",  type: "Standard",      hours: "7:00 — 21:00", distance: 2.4 },
-  { id: "o-nakasero", name: "Nakasero",                   area: "Kampala",  type: "Standard",      hours: "7:00 — 22:00", distance: 3.1 },
-  { id: "o-bugolobi", name: "Bugolobi",                   area: "Kampala",  type: "Standard",      hours: "7:00 — 22:00", distance: 3.8 },
-  { id: "o-muyenga",  name: "Muyenga",                    area: "Kampala",  type: "Standard",      hours: "7:00 — 21:00", distance: 4.6 },
-  { id: "o-kabalagala",name:"Kabalagala",                 area: "Kampala",  type: "Standard",      hours: "8:00 — 22:00", distance: 5.0 },
+  { id: "o-forest",   name: "Forest Mall, Lugogo",       area: "Kampala",  type: "Flagship",      hours: "7:00 â€” 22:00", distance: 1.2 },
+  { id: "o-kololo",   name: "Kololo Hill",                area: "Kampala",  type: "Standard",      hours: "7:00 â€” 21:00", distance: 2.4 },
+  { id: "o-nakasero", name: "Nakasero",                   area: "Kampala",  type: "Standard",      hours: "7:00 â€” 22:00", distance: 3.1 },
+  { id: "o-bugolobi", name: "Bugolobi",                   area: "Kampala",  type: "Standard",      hours: "7:00 â€” 22:00", distance: 3.8 },
+  { id: "o-muyenga",  name: "Muyenga",                    area: "Kampala",  type: "Standard",      hours: "7:00 â€” 21:00", distance: 4.6 },
+  { id: "o-kabalagala",name:"Kabalagala",                 area: "Kampala",  type: "Standard",      hours: "8:00 â€” 22:00", distance: 5.0 },
   { id: "o-bukoto",   name: "TotalEnergies Bukoto",       area: "Kampala",  type: "TotalEnergies", hours: "24 hours",     distance: 2.0 },
   { id: "o-ntinda",   name: "TotalEnergies Ntinda",       area: "Kampala",  type: "TotalEnergies", hours: "24 hours",     distance: 4.2 },
   { id: "o-wampewo",  name: "TotalEnergies Wampewo",      area: "Kampala",  type: "TotalEnergies", hours: "24 hours",     distance: 5.5 },
@@ -1989,12 +1989,12 @@ const OUTLETS = [
   { id: "o-entebbe",  name: "TotalEnergies Entebbe",      area: "Entebbe",  type: "TotalEnergies", hours: "24 hours",     distance: 28.0 },
   { id: "o-buliisa",  name: "TotalEnergies Buliisa",      area: "Buliisa",  type: "TotalEnergies", hours: "24 hours",     distance: 240.0 },
   { id: "o-kigumba",  name: "TotalEnergies Kigumba",      area: "Kiryandongo", type: "TotalEnergies", hours: "24 hours",  distance: 220.0 },
-  { id: "o-ihk",      name: "IHK Hospital",               area: "Kampala",  type: "Hospital",      hours: "8:00 — 18:00", distance: 6.0 },
-  { id: "o-rosewell", name: "Rosewell Hospital",          area: "Kampala",  type: "Hospital",      hours: "8:00 — 18:00", distance: 9.0 },
-  { id: "o-isu",      name: "International School of Uganda", area: "Kampala", type: "School",     hours: "7:30 — 16:00", distance: 8.0 },
-  { id: "o-galaxy",   name: "Galaxy International School", area: "Kampala", type: "School",        hours: "7:30 — 16:00", distance: 10.0 },
-  { id: "o-lubowa",   name: "Lubowa Karting",              area: "Wakiso",   type: "Standard",      hours: "10:00 — 22:00", distance: 14.0 },
-  { id: "o-mukono",   name: "Mukono",                      area: "Mukono",   type: "Standard",      hours: "8:00 — 21:00", distance: 18.0 },
+  { id: "o-ihk",      name: "IHK Hospital",               area: "Kampala",  type: "Hospital",      hours: "8:00 â€” 18:00", distance: 6.0 },
+  { id: "o-rosewell", name: "Rosewell Hospital",          area: "Kampala",  type: "Hospital",      hours: "8:00 â€” 18:00", distance: 9.0 },
+  { id: "o-isu",      name: "International School of Uganda", area: "Kampala", type: "School",     hours: "7:30 â€” 16:00", distance: 8.0 },
+  { id: "o-galaxy",   name: "Galaxy International School", area: "Kampala", type: "School",        hours: "7:30 â€” 16:00", distance: 10.0 },
+  { id: "o-lubowa",   name: "Lubowa Karting",              area: "Wakiso",   type: "Standard",      hours: "10:00 â€” 22:00", distance: 14.0 },
+  { id: "o-mukono",   name: "Mukono",                      area: "Mukono",   type: "Standard",      hours: "8:00 â€” 21:00", distance: 18.0 },
 ];
 
 // Address autocomplete suggestions (fake)
@@ -2013,7 +2013,7 @@ const ADDRESS_SUGGESTIONS = [
   "Kisementi, Cooper Road",
 ];
 
-// Loyalty mock account — used when user is logged in
+// Loyalty mock account â€” used when user is logged in
 const MOCK_ACCOUNT = {
   name: "Akello Nantongo",
   phone: "703 631 215",
@@ -2032,9 +2032,9 @@ const MOCK_ACCOUNT = {
 
 const LOYALTY_TIERS = [
   { id: "guest",    name: "Guest",    min: 0,     mult: 0.05, perk: "5% back on every order" },
-  { id: "regular",  name: "Regular",  min: 5000,  mult: 0.06, perk: "6% back · early access to specials" },
-  { id: "patron",   name: "Patron",   min: 15000, mult: 0.07, perk: "7% back · birthday treat · priority pickup" },
-  { id: "tribe",    name: "Tribe",    min: 40000, mult: 0.08, perk: "8% back · monthly free pastry · concierge" },
+  { id: "regular",  name: "Regular",  min: 5000,  mult: 0.06, perk: "6% back Â· early access to specials" },
+  { id: "patron",   name: "Patron",   min: 15000, mult: 0.07, perk: "7% back Â· birthday treat Â· priority pickup" },
+  { id: "tribe",    name: "Tribe",    min: 40000, mult: 0.08, perk: "8% back Â· monthly free pastry Â· concierge" },
 ];
 
 window.LP_DATA = {
@@ -2044,7 +2044,7 @@ window.LP_DATA = {
   </script>
 
   <script type="text/babel">
-/* Tiny icon set — inline SVG, stroke-based, 1.75 stroke. */
+/* Tiny icon set â€” inline SVG, stroke-based, 1.75 stroke. */
 const Icon = ({ name, size = 20, ...rest }) => {
   const props = {
     width: size, height: size,
@@ -2272,7 +2272,7 @@ const Footer = () => (
       <div className="footer-grid">
         <div>
           <div className="brandwm">La Patisserie</div>
-          <p className="brand-tag">Great food. Premium coffee. Twenty outlets across Kampala, Entebbe, and Mukono — and a delivery scooter never far away.</p>
+          <p className="brand-tag">Great food. Premium coffee. Twenty outlets across Kampala, Entebbe, and Mukono â€” and a delivery scooter never far away.</p>
         </div>
         <div>
           <h5>Visit</h5>
@@ -2300,8 +2300,8 @@ const Footer = () => (
         </div>
       </div>
       <div className="footer-bottom">
-        <span>© 2026 La Patisserie Express · Kampala, Uganda</span>
-        <span>Privacy · Terms · Accessibility</span>
+        <span>Â© 2026 La Patisserie Express Â· Kampala, Uganda</span>
+        <span>Privacy Â· Terms Â· Accessibility</span>
       </div>
     </div>
   </footer>
@@ -2315,7 +2315,7 @@ window.LP_Nav = Nav;
 window.LP_Footer = Footer;
 window.LP_Toast = Toast;
 
-/* ── ProductImg — renders image with category-coloured SVG fallback ── */
+/* â”€â”€ ProductImg â€” renders image with category-coloured SVG fallback â”€â”€ */
 const CAT_PALETTE = {
   hot:        ['#F7F4F0', '#7A5C3A'],
   cold:       ['#F7F4F0', '#3A5C7A'],
@@ -2391,7 +2391,7 @@ const LoyaltyModal = ({ open, onClose, onSubmit, prefill }) => {
               Join in <em style={{ fontStyle: "italic", color: "var(--brand-live)" }}>30 seconds</em>.
             </h2>
             <p className="muted" style={{ marginTop: 8, fontSize: 14 }}>
-              We just need your name and phone — start earning from your next order.
+              We just need your name and phone â€” start earning from your next order.
             </p>
           </div>
           <button className="modal-close" onClick={onClose} style={{ position: "static" }} aria-label="Close">
@@ -2417,7 +2417,7 @@ const LoyaltyModal = ({ open, onClose, onSubmit, prefill }) => {
           <div className="field">
             <label className="lbl" htmlFor="loy-phone">Phone number</label>
             <div className={"phone-wrap " + (errs.phone ? "invalid" : "")} style={errs.phone ? { borderColor: "var(--error-500)", background: "#FFF5F5" } : null}>
-              <span className="phone-prefix">🇺🇬 +256</span>
+              <span className="phone-prefix">ðŸ‡ºðŸ‡¬ +256</span>
               <input
                 id="loy-phone"
                 className="input"
@@ -2459,11 +2459,11 @@ const LoyaltyModal = ({ open, onClose, onSubmit, prefill }) => {
   );
 };
 
-/* ─── Loyalty Dashboard ─── */
+/* â”€â”€â”€ Loyalty Dashboard â”€â”€â”€ */
 const LoyaltyDashboard = ({ account, onBack, onOrder }) => {
   const tiers = window.LP_DATA.LOYALTY_TIERS;
   const lifetime = account.lifetimePoints;
-  // current tier — last tier whose min ≤ lifetime
+  // current tier â€” last tier whose min â‰¤ lifetime
   let curIdx = 0;
   for (let i = 0; i < tiers.length; i++) if (lifetime >= tiers[i].min) curIdx = i;
   const cur = tiers[curIdx];
@@ -2484,14 +2484,14 @@ const LoyaltyDashboard = ({ account, onBack, onOrder }) => {
         <div className="dash-hero">
           <div className="eyebrow">Welcome back, {account.name.split(" ")[0]}</div>
           <h1 className="tabular">{Number(account.points).toLocaleString()}</h1>
-          <div className="pts-label">points available · {fmt(Math.floor(account.points))} value</div>
+          <div className="pts-label">points available Â· {fmt(Math.floor(account.points))} value</div>
 
           <div className="progress">
             <div className="progress-bar">
               <div className="progress-fill" style={{ width: pct + "%" }}/>
             </div>
             <div className="prog-row">
-              <span><strong>{cur.name}</strong> · {cur.perk}</span>
+              <span><strong>{cur.name}</strong> Â· {cur.perk}</span>
               {next
                 ? <span>{(next.min - lifetime).toLocaleString()} pts to <strong>{next.name}</strong></span>
                 : <span>Top tier achieved</span>}
@@ -2502,7 +2502,7 @@ const LoyaltyDashboard = ({ account, onBack, onOrder }) => {
             {tiers.map((t, i) => (
               <div key={t.id} className={"tier-cell " + (i === curIdx ? "cur" : "")}>
                 <strong>{t.name}</strong>
-                <span>{t.min === 0 ? "Start" : `${t.min.toLocaleString()}+`} · {Math.round(t.mult * 100)}% back</span>
+                <span>{t.min === 0 ? "Start" : `${t.min.toLocaleString()}+`} Â· {Math.round(t.mult * 100)}% back</span>
               </div>
             ))}
           </div>
@@ -2519,7 +2519,7 @@ const LoyaltyDashboard = ({ account, onBack, onOrder }) => {
             <div className="dash-card">
               <h4>Points balance</h4>
               <div className="big tabular">{account.points.toLocaleString()}</div>
-              <div className="sm">≈ {fmt(Math.floor(account.points))} value</div>
+              <div className="sm">â‰ˆ {fmt(Math.floor(account.points))} value</div>
             </div>
             <div className="dash-card">
               <h4>Lifetime points</h4>
@@ -2537,14 +2537,14 @@ const LoyaltyDashboard = ({ account, onBack, onOrder }) => {
         <div className="dash-section">
           <div className="row between" style={{ marginBottom: "var(--sp-5)" }}>
             <h3 className="serif" style={{ margin: 0 }}>Recent activity</h3>
-            <button className="btn ghost" type="button">See all →</button>
+            <button className="btn ghost" type="button">See all â†’</button>
           </div>
           <div className="history-list">
             {account.history.map(h => (
               <div key={h.id} className={"history-row " + h.kind}>
                 <div>
                   <h5>{h.kind === "redeem" ? "Redeemed UGX 5,000" : "Order at " + h.outlet}</h5>
-                  <p>{h.date} · {h.kind === "redeem" ? h.outlet : `Spent ${fmt(h.total)}`}</p>
+                  <p>{h.date} Â· {h.kind === "redeem" ? h.outlet : `Spent ${fmt(h.total)}`}</p>
                 </div>
                 <div className="pts">{h.points.toLocaleString()} pts</div>
               </div>
@@ -2563,7 +2563,7 @@ const LoyaltyDashboard = ({ account, onBack, onOrder }) => {
             <div className="dash-card">
               <div className="badge gold" style={{ marginBottom: 12 }}>{curIdx >= 1 ? "Active" : "Patron tier"}</div>
               <h5 style={{ fontFamily: "var(--display-family)", fontWeight: 500, fontSize: 22, color: "var(--ink-800)" }}>Birthday treat</h5>
-              <p className="muted" style={{ fontSize: 13, marginTop: 6 }}>A complimentary pastry on us — every year.</p>
+              <p className="muted" style={{ fontSize: 13, marginTop: 6 }}>A complimentary pastry on us â€” every year.</p>
             </div>
             <div className="dash-card">
               <div className="badge gold" style={{ marginBottom: 12 }}>{curIdx >= 2 ? "Active" : "Tribe tier"}</div>
@@ -2580,7 +2580,7 @@ const LoyaltyDashboard = ({ account, onBack, onOrder }) => {
 window.LP_LoyaltyModal = LoyaltyModal;
 window.LP_LoyaltyDashboard = LoyaltyDashboard;
 
-/* Landing page — hero (3 variants), favourites strip, loyalty (3 variants) */
+/* Landing page â€” hero (3 variants), favourites strip, loyalty (3 variants) */
 
 const HeroFullBleed = ({ onOrder, onLoyalty }) => (
   <section className="hero" data-comment-anchor="hero">
@@ -2589,9 +2589,9 @@ const HeroFullBleed = ({ onOrder, onLoyalty }) => (
     </div>
     <div className="container">
       <div className="hero-inner">
-        <div className="hero-eyebrow">Est · Kampala · 2018</div>
+        <div className="hero-eyebrow">Est Â· Kampala Â· 2018</div>
         <h1>Great food.<br/><em>Premium</em> coffee.</h1>
-        <p className="lead-h">Handcrafted drinks, pastries baked at dawn, and hearty meals — ready for pickup or delivery from twenty outlets across town.</p>
+        <p className="lead-h">Handcrafted drinks, pastries baked at dawn, and hearty meals â€” ready for pickup or delivery from twenty outlets across town.</p>
         <div className="hero-ctas">
           <button className="btn lg" onClick={onOrder}>Start your order</button>
           <button className="btn secondary lg" onClick={onLoyalty}>Join the tribe</button>
@@ -2607,7 +2607,7 @@ const HeroEditorial = ({ onOrder, onLoyalty }) => (
       <div className="hero-inner">
         <div className="editorial-grid">
           <div>
-            <div className="hero-eyebrow">A Patisserie · Express</div>
+            <div className="hero-eyebrow">A Patisserie Â· Express</div>
             <h1>Great food.<br/><em>Premium</em><br/>coffee.</h1>
             <p className="lead-h">A Parisian patisserie with a Kampala soul. Single-origin coffee, pastries baked at dawn, and dishes that earn the table they're set on.</p>
             <div className="hero-ctas">
@@ -2630,9 +2630,9 @@ const HeroSplit = ({ onOrder, onLoyalty }) => (
   <section className="hero split" data-comment-anchor="hero">
     <div className="hero-split-grid">
       <div className="hero-side-text">
-        <div className="hero-eyebrow" style={{ color: "var(--gold-300)" }}>The Patisserie · Kampala</div>
+        <div className="hero-eyebrow" style={{ color: "var(--gold-300)" }}>The Patisserie Â· Kampala</div>
         <h1 style={{ color: "#fff" }}>Great food.<br/><em style={{ color: "var(--gold-200)" }}>Premium</em><br/>coffee.</h1>
-        <p className="lead-h" style={{ color: "rgba(255,255,255,0.72)" }}>Twenty outlets, one obsession. Order ahead for pickup in five minutes — or have it brought to your door.</p>
+        <p className="lead-h" style={{ color: "rgba(255,255,255,0.72)" }}>Twenty outlets, one obsession. Order ahead for pickup in five minutes â€” or have it brought to your door.</p>
         <div className="hero-ctas">
           <button className="btn lg" onClick={onOrder}>Start your order</button>
           <button className="btn secondary lg" onClick={onLoyalty} style={{ color: "#fff", borderColor: "rgba(255,255,255,0.4)" }}>Join the tribe</button>
@@ -2651,10 +2651,10 @@ const TrustBar = () => (
   <div className="trust-bar">
     <div className="container">
       <div className="trust-bar-inner">
-        <div className="trust-item"><span className="gold-tick">·</span><strong>5–10 min</strong> pickup</div>
-        <div className="trust-item"><span className="gold-tick">·</span><strong>30–45 min</strong> delivery</div>
-        <div className="trust-item"><span className="gold-tick">·</span>Earn <strong>5%</strong> back</div>
-        <div className="trust-item"><span className="gold-tick">·</span><strong>20+</strong> outlets</div>
+        <div className="trust-item"><span className="gold-tick">Â·</span><strong>5â€“10 min</strong> pickup</div>
+        <div className="trust-item"><span className="gold-tick">Â·</span><strong>30â€“45 min</strong> delivery</div>
+        <div className="trust-item"><span className="gold-tick">Â·</span>Earn <strong>5%</strong> back</div>
+        <div className="trust-item"><span className="gold-tick">Â·</span><strong>20+</strong> outlets</div>
       </div>
     </div>
   </div>
@@ -2674,7 +2674,7 @@ const FavouritesStrip = ({ products, onOrder }) => {
                 What everyone's <em style={{ fontStyle: "italic", color: "var(--brand-live)" }}>ordering today</em>
               </h2>
             </div>
-            <button className="btn secondary" onClick={onOrder}>See full menu →</button>
+            <button className="btn secondary" onClick={onOrder}>See full menu â†’</button>
           </div>
         </div>
         <div className="fav-grid">
@@ -2691,7 +2691,7 @@ const FavouritesStrip = ({ products, onOrder }) => {
   );
 };
 
-/* ─── LOYALTY VARIANTS ─── */
+/* â”€â”€â”€ LOYALTY VARIANTS â”€â”€â”€ */
 const LoyaltyBenefitRow = ({ children }) => (
   <li className="loy-benefit-row">
     <Icon name="check" size={20} />
@@ -2702,15 +2702,15 @@ const LoyaltyBenefitRow = ({ children }) => (
 const LoyaltyContent = ({ onSignup, account, onDash }) => (
   <>
     <div className="loy-head">
-      <div className="eyebrow">The Patisserie Tribe · Loyalty</div>
+      <div className="eyebrow">The Patisserie Tribe Â· Loyalty</div>
       <h3 className="serif">Earn <em style={{ fontStyle: "italic", color: "var(--brand-live)" }}>5% back</em> on every order.</h3>
-      <p>Every shilling you spend earns points. Hit 5,000 points to redeem UGX 5,000 off — and unlock priority pickup and birthday treats as you climb tiers.</p>
+      <p>Every shilling you spend earns points. Hit 5,000 points to redeem UGX 5,000 off â€” and unlock priority pickup and birthday treats as you climb tiers.</p>
     </div>
     <div className="loy-body">
       <ul className="loy-benefits">
-        <LoyaltyBenefitRow><b>Sign up free</b> — name and phone number, that's all.</LoyaltyBenefitRow>
+        <LoyaltyBenefitRow><b>Sign up free</b> â€” name and phone number, that's all.</LoyaltyBenefitRow>
         <LoyaltyBenefitRow>Every purchase earns <b>5% back</b> as points.</LoyaltyBenefitRow>
-        <LoyaltyBenefitRow>Reach 5,000 → <b>redeem UGX 5,000</b> off any order.</LoyaltyBenefitRow>
+        <LoyaltyBenefitRow>Reach 5,000 â†’ <b>redeem UGX 5,000</b> off any order.</LoyaltyBenefitRow>
         <LoyaltyBenefitRow><b>Climb tiers</b> for priority pickup, birthday treats and more.</LoyaltyBenefitRow>
       </ul>
       <div>
@@ -2719,7 +2719,7 @@ const LoyaltyContent = ({ onSignup, account, onDash }) => (
             <strong>UGX 10K</strong>
             <span>You spend</span>
           </div>
-          <div className="loy-arrow">→</div>
+          <div className="loy-arrow">â†’</div>
           <div className="loy-step">
             <strong>500 pts</strong>
             <span>You earn</span>
@@ -2732,7 +2732,7 @@ const LoyaltyContent = ({ onSignup, account, onDash }) => (
         <div className="loy-actions">
           {account
             ? <button className="btn full lg" onClick={onDash}>View my points</button>
-            : <button className="btn full lg" onClick={onSignup}>Join the tribe — it's free</button>}
+            : <button className="btn full lg" onClick={onSignup}>Join the tribe â€” it's free</button>}
         </div>
       </div>
     </div>
@@ -2760,7 +2760,7 @@ const AboutStrip = () => (
         </h2>
         <hr className="gold-rule" style={{ width: 60, margin: "32px auto", height: 1 }} />
         <p className="muted" style={{ fontSize: 16, lineHeight: 1.7, maxWidth: 540, margin: "0 auto" }}>
-          La Patisserie Express began as a small bakery in Kampala. Today, twenty outlets later, the obsession is still the same — quietly excellent food, served warmly.
+          La Patisserie Express began as a small bakery in Kampala. Today, twenty outlets later, the obsession is still the same â€” quietly excellent food, served warmly.
         </p>
       </div>
     </div>
@@ -2796,9 +2796,9 @@ const ModeChoice = ({ onBack, onPick }) => (
     </div>
     <section className="banner">
       <div className="container">
-        <div className="eyebrow">Step 1 of 3 · Pickup or Delivery</div>
+        <div className="eyebrow">Step 1 of 3 Â· Pickup or Delivery</div>
         <h1>How would you<br/><em>like it?</em></h1>
-        <p>Pickup is fastest. Delivery brings it to your door — wherever your door happens to be.</p>
+        <p>Pickup is fastest. Delivery brings it to your door â€” wherever your door happens to be.</p>
       </div>
     </section>
     <div className="container">
@@ -2808,7 +2808,7 @@ const ModeChoice = ({ onBack, onPick }) => (
             <Icon name="store" size={64} style={{ color: "var(--brand-live)" }} />
           </div>
           <div>
-            <div className="eyebrow">Express · 5–10 min</div>
+            <div className="eyebrow">Express Â· 5â€“10 min</div>
             <h3 style={{ marginTop: 8 }}>Pickup</h3>
             <p style={{ marginTop: 12 }}>Order ahead and skip the queue at your favourite outlet. Walk in, grab and go.</p>
             <div className="meta-row" style={{ marginTop: 16 }}>
@@ -2828,7 +2828,7 @@ const ModeChoice = ({ onBack, onPick }) => (
             <Icon name="scooter" size={64} style={{ color: "var(--brand-live)" }} />
           </div>
           <div>
-            <div className="eyebrow">Door-to-door · 30–45 min</div>
+            <div className="eyebrow">Door-to-door Â· 30â€“45 min</div>
             <h3 style={{ marginTop: 8 }}>Delivery</h3>
             <p style={{ marginTop: 12 }}>Hot, fresh, and brought to your door by a Patisserie scooter. We match you to the closest outlet.</p>
             <div className="meta-row" style={{ marginTop: 16 }}>
@@ -2847,7 +2847,7 @@ const ModeChoice = ({ onBack, onPick }) => (
   </div>
 );
 
-/* ─── OUTLET PICKER ─── */
+/* â”€â”€â”€ OUTLET PICKER â”€â”€â”€ */
 const OutletPicker = ({ outlets, onBack, onPick }) => {
   const [q, setQ] = useState("");
   const [area, setArea] = useState("All");
@@ -2878,7 +2878,7 @@ const OutletPicker = ({ outlets, onBack, onPick }) => {
       </div>
       <section className="banner" style={{ paddingTop: "var(--sp-8)", paddingBottom: "var(--sp-8)" }}>
         <div className="container">
-          <div className="eyebrow">Step 2 of 3 · Pickup outlet</div>
+          <div className="eyebrow">Step 2 of 3 Â· Pickup outlet</div>
           <h1>Choose your <em>outlet</em></h1>
           <p>Twenty across Kampala, Entebbe, and Mukono. Sorted by closest to you.</p>
         </div>
@@ -2890,7 +2890,7 @@ const OutletPicker = ({ outlets, onBack, onPick }) => {
             <Icon name="search" size={18}/>
             <input
               className="input"
-              placeholder="Search outlets…"
+              placeholder="Search outletsâ€¦"
               value={q}
               onChange={(e) => setQ(e.target.value)}
             />
@@ -2907,7 +2907,7 @@ const OutletPicker = ({ outlets, onBack, onPick }) => {
         {Object.keys(grouped).length === 0 && (
           <div style={{ padding: 60, textAlign: "center", color: "var(--fg-muted)" }}>
             <Icon name="search" size={32}/>
-            <p style={{ marginTop: 12 }}>No outlets match — try a broader filter.</p>
+            <p style={{ marginTop: 12 }}>No outlets match â€” try a broader filter.</p>
           </div>
         )}
         {Object.entries(grouped).map(([areaName, list]) => (
@@ -2948,7 +2948,7 @@ const OutletPicker = ({ outlets, onBack, onPick }) => {
   );
 };
 
-/* ─── DELIVERY ADDRESS ─── */
+/* â”€â”€â”€ DELIVERY ADDRESS â”€â”€â”€ */
 
 // Infer zone from free-text address
 const inferZone = (addr) => {
@@ -2960,7 +2960,7 @@ const inferZone = (addr) => {
   return zones.find(z => addr.toLowerCase().includes(z.toLowerCase())) || "";
 };
 
-// Zone → ordered outlet IDs (nearest first within that zone)
+// Zone â†’ ordered outlet IDs (nearest first within that zone)
 const ZONE_OUTLETS = {
   Kololo:    ["o-kololo","o-forest","o-wampewo"],
   Nakasero:  ["o-nakasero","o-kololo","o-ihk"],
@@ -3015,13 +3015,13 @@ const DeliveryAddress = ({ outlets, onBack, onConfirm }) => {
             <Icon name="arrow-left" size={16}/> {selectedOutlet ? "Back to outlets" : "Back"}
           </button>
           <div className="eyebrow" style={{ color: "var(--gold-300)", marginBottom: 12 }}>
-            {selectedOutlet ? "Confirm delivery details" : "Step 2 of 3 · Delivery address"}
+            {selectedOutlet ? "Confirm delivery details" : "Step 2 of 3 Â· Delivery address"}
           </div>
           <div className="delivery-input-wrap">
             <Icon name="pin" size={20}/>
             <input
               type="text"
-              placeholder="Enter your neighbourhood or street…"
+              placeholder="Enter your neighbourhood or streetâ€¦"
               value={q}
               onChange={(e) => { setQ(e.target.value); setSelectedOutlet(null); }}
               autoFocus
@@ -3035,12 +3035,12 @@ const DeliveryAddress = ({ outlets, onBack, onConfirm }) => {
         </div>
       </div>
 
-      {/* Stage 1 — outlet list */}
+      {/* Stage 1 â€” outlet list */}
       {!selectedOutlet && (
         <div>
           {!q && (
             <p style={{ padding: "20px 20px 8px", fontSize: 13, color: "var(--fg-muted)", textAlign: "center" }}>
-              Type your area above — nearest outlets float to the top.
+              Type your area above â€” nearest outlets float to the top.
             </p>
           )}
           {sortedOutlets.map(o => (
@@ -3087,7 +3087,7 @@ const DeliveryAddress = ({ outlets, onBack, onConfirm }) => {
         </div>
       )}
 
-      {/* Stage 2 — confirm details */}
+      {/* Stage 2 â€” confirm details */}
       {selectedOutlet && (
         <div className="container" style={{ paddingTop: "var(--sp-6)", paddingBottom: "var(--sp-16)" }}>
           <div className="delivery-confirm-panel">
@@ -3095,7 +3095,7 @@ const DeliveryAddress = ({ outlets, onBack, onConfirm }) => {
               <Icon name="check-circle" size={20}/>
               <div>
                 <h5>{selectedOutlet.name}</h5>
-                <p>{selectedOutlet.distance} km · ~{estMins(selectedOutlet.distance)} min delivery · UGX 5,000 fee</p>
+                <p>{selectedOutlet.distance} km Â· ~{estMins(selectedOutlet.distance)} min delivery Â· UGX 5,000 fee</p>
               </div>
             </div>
 
@@ -3190,7 +3190,7 @@ const Menu = ({ context, onBack, onChangeContext, cart, onAddCart, onOpenCart })
   const [openProduct, setOpenProduct] = useState(null);
   const sectionRefs = useRef({});
 
-  // Quick-add: builds default selections (required groups → first option),
+  // Quick-add: builds default selections (required groups â†’ first option),
   // adds to cart immediately, then opens cart view.
   const quickAdd = (p, e) => {
     e.stopPropagation();
@@ -3211,7 +3211,7 @@ const Menu = ({ context, onBack, onChangeContext, cart, onAddCart, onOpenCart })
       meta: p.meta,
       qty: 1,
       unitPrice: p.price + extra,
-      modifiers: labels.join(" · "),
+      modifiers: labels.join(" Â· "),
     });
     onOpenCart();
   };
@@ -3246,7 +3246,7 @@ const Menu = ({ context, onBack, onChangeContext, cart, onAddCart, onOpenCart })
             <Icon name={context.mode === "delivery" ? "scooter" : "store"} size={14}/>
             {context.mode === "delivery" ? "Delivery to " : "Pickup from "}
             <strong style={{ color: "var(--ink-800)", marginLeft: 4 }}>
-              {context.mode === "delivery" ? (context.address || "—") : (context.outlet?.name || "—")}
+              {context.mode === "delivery" ? (context.address || "â€”") : (context.outlet?.name || "â€”")}
             </strong>
           </span>
           <button className="context-pill changeable" onClick={onChangeContext}>
@@ -3318,7 +3318,7 @@ const Menu = ({ context, onBack, onChangeContext, cart, onAddCart, onOpenCart })
         <button className="view-cart" onClick={onOpenCart}>
           <div className="vc-meta">
             <span className="vc-label">Your basket</span>
-            <span className="vc-text">{cartCount} item{cartCount > 1 ? "s" : ""} · {formatUGX(cartTotal)}</span>
+            <span className="vc-text">{cartCount} item{cartCount > 1 ? "s" : ""} Â· {formatUGX(cartTotal)}</span>
           </div>
           <span className="vc-cta">View cart <Icon name="arrow-right" size={14}/></span>
         </button>
@@ -3371,7 +3371,7 @@ const ProductModal = ({ product, onClose, onAdd }) => {
       modifiers: Object.entries(sel).map(([gid, oid]) => {
         const g = groups.find(x => x.id === gid);
         return g.options.find(o => o.id === oid)?.label;
-      }).filter(Boolean).join(" · "),
+      }).filter(Boolean).join(" Â· "),
     }, goCart);
   };
 
@@ -3420,7 +3420,7 @@ const ProductModal = ({ product, onClose, onAdd }) => {
             <strong>{qty}</strong>
             <button onClick={() => setQty(q => q + 1)} aria-label="More"><Icon name="plus" size={14}/></button>
           </div>
-          <button className="btn full" onClick={() => submit(true)}>Add to cart · {fmt(totalPrice)}</button>
+          <button className="btn full" onClick={() => submit(true)}>Add to cart Â· {fmt(totalPrice)}</button>
         </div>
       </article>
     </div>
@@ -3435,7 +3435,7 @@ const PAYMENT_METHODS = [
   { id: "mtn",   label: "MTN Mobile Money", desc: "Pay with your registered MTN line", icon: "phone" },
   { id: "airtel",label: "Airtel Money",     desc: "Pay with your registered Airtel line", icon: "phone" },
   { id: "card",  label: "Visa / Mastercard", desc: "Stripe-secured card payment", icon: "card" },
-  { id: "cash",  label: "Cash on collection", desc: "Pay at pickup — cash or card",  icon: "wallet" },
+  { id: "cash",  label: "Cash on collection", desc: "Pay at pickup â€” cash or card",  icon: "wallet" },
 ];
 
 const Checkout = ({ context, cart, account, onBack, onUpdateQty, onRemove, onConfirm, redeemPts, setRedeemPts }) => {
@@ -3517,8 +3517,8 @@ const Checkout = ({ context, cart, account, onBack, onUpdateQty, onRemove, onCon
               </p>
               <p className="muted" style={{ fontSize: 13, marginTop: 4 }}>
                 {context.mode === "delivery"
-                  ? `${context.outlet?.name} · ETA 30–45 min`
-                  : `${context.outlet?.area} · ${context.outlet?.hours}`}
+                  ? `${context.outlet?.name} Â· ETA 30â€“45 min`
+                  : `${context.outlet?.area} Â· ${context.outlet?.hours}`}
               </p>
             </div>
 
@@ -3544,7 +3544,7 @@ const Checkout = ({ context, cart, account, onBack, onUpdateQty, onRemove, onCon
                 <div className="field" style={{ marginTop: 16 }}>
                   <label className="lbl">Mobile money number</label>
                   <div className="phone-wrap">
-                    <span className="phone-prefix">🇺🇬 +256</span>
+                    <span className="phone-prefix">ðŸ‡ºðŸ‡¬ +256</span>
                     <input className="input" inputMode="numeric" maxLength={9} value={phone}
                       onChange={(e) => setPhone(e.target.value.replace(/\D/g, "").slice(0, 9))}
                       placeholder="703 631 215"/>
@@ -3572,7 +3572,7 @@ const Checkout = ({ context, cart, account, onBack, onUpdateQty, onRemove, onCon
                     style={{ width: "100%", marginTop: 12, accentColor: "var(--brand-live)" }}/>
                   <div className="row between" style={{ fontSize: 12, marginTop: 4, color: "var(--fg-muted)" }}>
                     <span>0 pts</span>
-                    <strong style={{ color: "var(--brand-live)" }}>−{fmt(redeemPts)}</strong>
+                    <strong style={{ color: "var(--brand-live)" }}>âˆ’{fmt(redeemPts)}</strong>
                     <span>{maxRedeem.toLocaleString()} pts</span>
                   </div>
                 </div>
@@ -3581,17 +3581,17 @@ const Checkout = ({ context, cart, account, onBack, onUpdateQty, onRemove, onCon
               <div className="totals">
                 <div className="totals-row"><span>Subtotal</span><span className="tabular">{fmt(subtotal)}</span></div>
                 {deliveryFee > 0 && <div className="totals-row"><span>Delivery</span><span className="tabular">{fmt(deliveryFee)}</span></div>}
-                {discount > 0 && <div className="totals-row discount"><span>Points redeemed</span><span className="tabular">−{fmt(discount)}</span></div>}
+                {discount > 0 && <div className="totals-row discount"><span>Points redeemed</span><span className="tabular">âˆ’{fmt(discount)}</span></div>}
                 <div className="totals-row grand"><span>Total</span><span className="tabular">{fmt(total)}</span></div>
               </div>
 
               <button className="btn full lg" onClick={place} style={{ marginTop: 16 }}>
-                Place order · {fmt(total)}
+                Place order Â· {fmt(total)}
               </button>
 
               {account && earn > 0 && (
                 <p style={{ fontSize: 12, textAlign: "center", marginTop: 12, color: "var(--gold-500)", letterSpacing: "0.04em" }}>
-                  ✦ You'll earn {earn.toLocaleString()} points on this order
+                  âœ¦ You'll earn {earn.toLocaleString()} points on this order
                 </p>
               )}
             </div>
@@ -3626,12 +3626,12 @@ const Confirmation = ({ order, context, onTrack, onHome }) => {
                   {context.mode === "delivery" ? context.address : context.outlet?.name}
                 </h4>
               </div>
-              <span className="badge gold">{context.mode === "delivery" ? "30–45 MIN" : "5–10 MIN"}</span>
+              <span className="badge gold">{context.mode === "delivery" ? "30â€“45 MIN" : "5â€“10 MIN"}</span>
             </div>
             <div style={{ paddingTop: 16 }}>
               {(order.items || []).map((i, idx) => (
                 <div key={idx} className="row between" style={{ padding: "8px 0", fontSize: 14 }}>
-                  <span>{i.qty} × {i.name}</span>
+                  <span>{i.qty} Ã— {i.name}</span>
                   <span className="tabular">{fmt(i.unitPrice * i.qty)}</span>
                 </div>
               ))}
@@ -3640,7 +3640,7 @@ const Confirmation = ({ order, context, onTrack, onHome }) => {
               <div className="totals-row grand"><span>Total paid</span><span className="tabular">{fmt(order.total)}</span></div>
               {order.earn > 0 && (
                 <p style={{ fontSize: 13, textAlign: "right", marginTop: 8, color: "var(--gold-500)" }}>
-                  +{order.earn.toLocaleString()} points earned ✦
+                  +{order.earn.toLocaleString()} points earned âœ¦
                 </p>
               )}
             </div>
@@ -3667,7 +3667,7 @@ const TRACK_STAGES = {
     { key: "received",   title: "Order received",  desc: "Confirmed and routed to the nearest kitchen." },
     { key: "preparing",  title: "Preparing",       desc: "Hot off the grill. Just for you." },
     { key: "dispatched", title: "On the way",      desc: "A scooter is on its way. ETA 30 min." },
-    { key: "delivered",  title: "Delivered",       desc: "Bon appétit." },
+    { key: "delivered",  title: "Delivered",       desc: "Bon appÃ©tit." },
   ],
 };
 
@@ -3693,7 +3693,7 @@ const Tracking = ({ order, context, onHome }) => {
                   {idx === stages.length - 1 ? "All done." : (context.mode === "delivery" ? <>On its <em>way</em>.</> : <>Almost <em>ready</em>.</>)}
                 </h2>
                 <p className="eta">
-                  {idx === stages.length - 1 ? "Order complete" : (context.mode === "delivery" ? "ETA 30–45 minutes" : "Ready in 5–10 minutes")}
+                  {idx === stages.length - 1 ? "Order complete" : (context.mode === "delivery" ? "ETA 30â€“45 minutes" : "Ready in 5â€“10 minutes")}
                 </p>
               </div>
               <span className="badge">{stages[idx].title.toUpperCase()}</span>
@@ -3723,7 +3723,7 @@ const Tracking = ({ order, context, onHome }) => {
             <div>
               <div className="eyebrow">Need a hand?</div>
               <h5 style={{ fontSize: 15, fontWeight: 600, marginTop: 4, color: "var(--ink-800)" }}>
-                Call your outlet — {context.outlet?.name}
+                Call your outlet â€” {context.outlet?.name}
               </h5>
             </div>
             <button className="btn secondary"><Icon name="phone" size={14}/> Call</button>
@@ -3786,7 +3786,7 @@ window.LP_Tracking = Tracking;
 //     );
 //   }
 //
-// ─────────────────────────────────────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 const __TWEAKS_STYLE = `
   .twk-panel{position:fixed;right:16px;bottom:16px;z-index:2147483646;width:280px;
@@ -3898,9 +3898,9 @@ const __TWEAKS_STYLE = `
     filter:drop-shadow(0 1px 1px rgba(0,0,0,.3))}
 `;
 
-// ── useTweaks ───────────────────────────────────────────────────────────────
+// â”€â”€ useTweaks â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 // Single source of truth for tweak values. setTweak persists via the host
-// (__edit_mode_set_keys → host rewrites the EDITMODE block on disk).
+// (__edit_mode_set_keys â†’ host rewrites the EDITMODE block on disk).
 function useTweaks(defaults) {
   const [values, setValues] = React.useState(defaults);
   // Accepts either setTweak('key', value) or setTweak({ key: value, ... }) so a
@@ -3912,15 +3912,15 @@ function useTweaks(defaults) {
     setValues((prev) => ({ ...prev, ...edits }));
     window.parent.postMessage({ type: '__edit_mode_set_keys', edits }, '*');
     // Same-window signal so in-page listeners (deck-stage rail thumbnails)
-    // can react — the parent message only reaches the host, not peers.
+    // can react â€” the parent message only reaches the host, not peers.
     window.dispatchEvent(new CustomEvent('tweakchange', { detail: edits }));
   }, []);
   return [values, setTweak];
 }
 
-// ── TweaksPanel ─────────────────────────────────────────────────────────────
+// â”€â”€ TweaksPanel â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 // Floating shell. Registers the protocol listener BEFORE announcing
-// availability — if the announce ran first, the host's activate could land
+// availability â€” if the announce ran first, the host's activate could land
 // before our handler exists and the toolbar toggle would silently no-op.
 // The close button posts __edit_mode_dismissed so the host's toolbar toggle
 // flips off in lockstep; the host echoes __deactivate_edit_mode back which
@@ -3932,7 +3932,7 @@ function TweaksPanel({ title = 'Tweaks', noDeckControls = false, children }) {
   // toggle drives the deck's per-viewer _railVisible via window message;
   // state is mirrored from the same localStorage key the deck reads so
   // the control reflects reality across reloads. The mechanism is the
-  // message — authors who want custom placement can post it directly
+  // message â€” authors who want custom placement can post it directly
   // and pass noDeckControls to suppress this one.
   const hasDeckStage = React.useMemo(
     () => typeof document !== 'undefined' && !!document.querySelector('deck-stage'),
@@ -4038,7 +4038,7 @@ function TweaksPanel({ title = 'Tweaks', noDeckControls = false, children }) {
           <b>{title}</b>
           <button className="twk-x" aria-label="Close tweaks"
                   onMouseDown={(e) => e.stopPropagation()}
-                  onClick={dismiss}>✕</button>
+                  onClick={dismiss}>âœ•</button>
         </div>
         <div className="twk-body">
           {children}
@@ -4053,7 +4053,7 @@ function TweaksPanel({ title = 'Tweaks', noDeckControls = false, children }) {
   );
 }
 
-// ── Layout helpers ──────────────────────────────────────────────────────────
+// â”€â”€ Layout helpers â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 function TweakSection({ label, children }) {
   return (
@@ -4076,7 +4076,7 @@ function TweakRow({ label, value, children, inline = false }) {
   );
 }
 
-// ── Controls ────────────────────────────────────────────────────────────────
+// â”€â”€ Controls â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 function TweakSlider({ label, value, min = 0, max = 100, step = 1, unit = '', onChange }) {
   return (
@@ -4102,20 +4102,20 @@ function TweakRadio({ label, value, options, onChange }) {
   const trackRef = React.useRef(null);
   const [dragging, setDragging] = React.useState(false);
   // The active value is read by pointer-move handlers attached for the lifetime
-  // of a drag — ref it so a stale closure doesn't fire onChange for every move.
+  // of a drag â€” ref it so a stale closure doesn't fire onChange for every move.
   const valueRef = React.useRef(value);
   valueRef.current = value;
 
   // Segments wrap mid-word once per-segment width runs out. The track is
-  // ~248px (280 panel − 28 body pad − 4 seg pad), each button loses 12px
-  // to its own padding, and 11.5px system-ui averages ~6.3px/char — so 2
+  // ~248px (280 panel âˆ’ 28 body pad âˆ’ 4 seg pad), each button loses 12px
+  // to its own padding, and 11.5px system-ui averages ~6.3px/char â€” so 2
   // options fit ~16 chars each, 3 fit ~10. Past that (or >3 options), fall
   // back to a dropdown rather than wrap.
   const labelLen = (o) => String(typeof o === 'object' ? o.label : o).length;
   const maxLen = options.reduce((m, o) => Math.max(m, labelLen(o)), 0);
   const fitsAsSegments = maxLen <= ({ 2: 16, 3: 10 }[options.length] ?? 0);
   if (!fitsAsSegments) {
-    // <select> emits strings — map back to the original option value so the
+    // <select> emits strings â€” map back to the original option value so the
     // fallback stays type-preserving (numbers, booleans) like the segment path.
     const resolve = (s) => {
       const m = options.find((o) => String(typeof o === 'object' ? o.value : o) === s);
@@ -4227,7 +4227,7 @@ function TweakNumber({ label, value, min, max, step = 1, unit = '', onChange }) 
   );
 }
 
-// Relative-luminance contrast pick — checkmarks drawn over a swatch need to
+// Relative-luminance contrast pick â€” checkmarks drawn over a swatch need to
 // read on both #111 and #fafafa without per-option configuration. Hex input
 // only (#rgb / #rrggbb); named or rgb()/hsl() colors fall through to "light".
 function __twkIsLight(hex) {
@@ -4247,8 +4247,8 @@ const __TwkCheck = ({ light }) => (
   </svg>
 );
 
-// TweakColor — curated color/palette picker. Each option is either a single
-// hex string or an array of 1-5 hex strings; the card adapts — a lone color
+// TweakColor â€” curated color/palette picker. Each option is either a single
+// hex string or an array of 1-5 hex strings; the card adapts â€” a lone color
 // renders solid, a palette renders colors[0] as the hero (left ~2/3) with the
 // rest stacked in a sharp column on the right. onChange emits the
 // option in the shape it was passed (string stays string, array stays array).
@@ -4279,7 +4279,7 @@ function TweakColor({ label, value, options, onChange }) {
           return (
             <button key={i} type="button" className="twk-chip" role="radio"
                     aria-checked={on} data-on={on ? '1' : '0'}
-                    aria-label={colors.join(', ')} title={colors.join(' · ')}
+                    aria-label={colors.join(', ')} title={colors.join(' Â· ')}
                     style={{ background: hero }}
                     onClick={() => onChange(o)}>
               {sup.length > 0 && (
@@ -4309,13 +4309,13 @@ Object.assign(window, {
   TweakText, TweakNumber, TweakColor, TweakButton,
 });
 
-/* App — top-level state machine, Tweaks panel, and routing. */
+/* App â€” top-level state machine, Tweaks panel, and routing. */
 
 const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
   "displayFamily": "serif",
-  "brand": "#9E0B0F",
+  "brand": "#C4546A",
   "density": "regular",
-  "heroVariant": "fullbleed",
+  "heroVariant": "editorial",
   "loyaltyVariant": "light",
   "gold": true
 }/*EDITMODE-END*/;
@@ -4429,7 +4429,7 @@ function App() {
     const mock = window.LP_DATA.MOCK_ACCOUNT;
     setAccount({ ...mock, name: form.name, phone: form.phone });
     setShowSignup(false);
-    showToast("Welcome to the Tribe ✦");
+    showToast("Welcome to the Tribe âœ¦");
   };
 
   // route render
@@ -4524,7 +4524,7 @@ function App() {
         onSubmit={handleSignup}
       />
 
-      <TweaksPanel title="Tweaks · La Patisserie">
+      <TweaksPanel title="Tweaks Â· La Patisserie">
         <TweakSection label="Hero & loyalty" />
         <TweakRadio
           label="Hero"
@@ -4584,3 +4584,4 @@ root.render(<App />);
   </script>
 </body>
 </html>
+
