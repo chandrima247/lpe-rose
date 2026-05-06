@@ -1,0 +1,4582 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>La Patisserie Express — Order</title>
+  <style>
+/* ============================================================
+   La Patisserie — Colors & Type
+   Premium café + food e-commerce. Warm luxury, editorial.
+   ============================================================ */
+
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Manrope:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap");
+
+:root {
+  /* ---------- BRAND ---------- */
+  /* Primary deep wine red — sourced from the logo (#9E0B0F).
+     The user's spec called for #8B0000; we kept the actual brand
+     red as `--brand` and expose --brand-classic for spec parity. */
+  --brand: #9E0B0F;
+  --brand-classic: #8B0000;
+
+  /* Wine / red scale */
+  --red-50:  #FCF1F1;
+  --red-100: #F8DEDE;
+  --red-200: #F1B7B7;
+  --red-300: #E58787;
+  --red-400: #D24E4E;
+  --red-500: #B82026;
+  --red-600: #9E0B0F;   /* brand */
+  --red-700: #82080C;
+  --red-800: #5F0608;
+  --red-900: #3D0405;
+
+  /* Cream / warm neutral scale (the "soft cream" surface) */
+  --cream-50:  #FFFBF7;
+  --cream-100: #FFF5F5;   /* spec: secondary cream */
+  --cream-200: #FAEFE6;
+  --cream-300: #F2E4D3;
+  --cream-400: #E6D2B8;
+  --cream-500: #D4B896;
+  --cream-600: #B89472;
+
+  /* Charcoal / ink scale */
+  --ink-50:  #F7F7F7;
+  --ink-100: #EDEDED;
+  --ink-200: #D9D9D9;
+  --ink-300: #B3B3B3;
+  --ink-400: #8A8A8A;
+  --ink-500: #5C5C5C;
+  --ink-600: #3D3D3D;
+  --ink-700: #2B2B2B;
+  --ink-800: #191919;     /* spec: text */
+  --ink-900: #0E0E0E;
+
+  /* Subtle gold — accents, dividers, premium markers */
+  --gold-50:  #FBF6EC;
+  --gold-100: #F2E6C7;
+  --gold-200: #E6D097;
+  --gold-300: #D4B05E;
+  --gold-400: #B6913E;   /* primary gold */
+  --gold-500: #8C6E2B;
+  --gold-600: #5E4A1C;
+
+  /* Semantic — muted, never neon */
+  --success-50:  #ECF3EE;
+  --success-500: #4F8C6B;
+  --success-700: #356048;
+  --warning-500: #C7872A;
+  --error-500:   #B82026;
+  --info-500:    #4A6B8A;
+
+  /* ---------- SEMANTIC SURFACES ---------- */
+  --bg:            #FFFFFF;
+  --bg-cream:      var(--cream-100);
+  --bg-warm:       var(--cream-50);
+  --bg-inverse:    var(--ink-800);
+  --bg-brand:      var(--brand);
+
+  --surface:       #FFFFFF;
+  --surface-raised:#FFFFFF;
+  --surface-sunken:var(--cream-50);
+  --surface-muted: var(--ink-50);
+
+  --border:        #ECE6DE;       /* warm hairline */
+  --border-strong: var(--ink-200);
+  --border-brand:  var(--brand);
+  --divider-gold:  var(--gold-300);
+
+  /* Text */
+  --fg:            var(--ink-800);
+  --fg-muted:      var(--ink-500);
+  --fg-subtle:     var(--ink-400);
+  --fg-inverse:    #FFFFFF;
+  --fg-brand:      var(--brand);
+  --fg-gold:       var(--gold-500);
+  --fg-link:       var(--brand);
+
+  /* Interactive states */
+  --hover-overlay: rgba(25, 25, 25, 0.04);
+  --press-overlay: rgba(25, 25, 25, 0.08);
+  --focus-ring:    rgba(158, 11, 15, 0.35);
+  --selection-bg:  var(--cream-200);
+
+  /* ---------- TYPOGRAPHY ---------- */
+  /* Display / heading: editorial serif. Cormorant Garamond is
+     used as a Google Fonts substitute for the brand's premium
+     serif feel (closest free match to GTStandard-M / Times). */
+  --font-serif:   "Cormorant Garamond", "Times New Roman", Georgia, serif;
+  /* Body / UI: clean, modern grotesque. Manrope reads well on
+     long cards and dense menus; Poppins is kept for legacy
+     parity with the existing patexpressug.com tokens. */
+  --font-sans:    "Manrope", "Poppins", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+  --font-display: var(--font-serif);
+  --font-mono:    "SF Mono", "JetBrains Mono", ui-monospace, monospace;
+
+  /* Type scale — modular ~1.25, optimized for editorial pages */
+  --fs-12: 0.75rem;     /* 12 — micro / caption */
+  --fs-13: 0.8125rem;   /* 13 — small */
+  --fs-14: 0.875rem;    /* 14 — meta / labels */
+  --fs-16: 1rem;        /* 16 — body */
+  --fs-18: 1.125rem;    /* 18 — body-lg */
+  --fs-20: 1.25rem;     /* 20 — h6 / lead */
+  --fs-24: 1.5rem;      /* 24 — h5 */
+  --fs-30: 1.875rem;    /* 30 — h4 */
+  --fs-36: 2.25rem;     /* 36 — h3 */
+  --fs-48: 3rem;        /* 48 — h2 */
+  --fs-64: 4rem;        /* 64 — h1 / display */
+  --fs-80: 5rem;        /* 80 — hero display */
+
+  --lh-tight:  1.05;
+  --lh-snug:   1.2;
+  --lh-normal: 1.5;
+  --lh-relaxed:1.7;
+
+  --ls-tight:  -0.02em;
+  --ls-normal: 0;
+  --ls-wide:   0.04em;
+  --ls-wider:  0.14em;   /* eyebrows, gold all-caps */
+
+  /* ---------- SPACING (4px grid) ---------- */
+  --sp-0:   0;
+  --sp-1:   4px;     /* xs */
+  --sp-2:   8px;     /* sm */
+  --sp-3:   12px;
+  --sp-4:   16px;    /* md */
+  --sp-5:   20px;
+  --sp-6:   24px;    /* lg */
+  --sp-8:   32px;    /* xl */
+  --sp-10:  40px;
+  --sp-12:  48px;    /* 2xl */
+  --sp-16:  64px;    /* 3xl */
+  --sp-20:  80px;
+  --sp-24:  96px;
+  --sp-32:  128px;
+
+  /* ---------- RADII ---------- */
+  --r-xs:   4px;
+  --r-sm:   8px;     /* spec: small */
+  --r-md:   12px;    /* spec: medium */
+  --r-lg:   18px;    /* spec: large (cards) */
+  --r-xl:   24px;    /* spec: large (modals) */
+  --r-2xl:  32px;
+  --r-pill: 999px;
+  --r-full: 50%;
+
+  /* ---------- ELEVATION (soft, diffused) ---------- */
+  --shadow-xs:  0 1px 2px rgba(25, 25, 25, 0.04);
+  --shadow-sm:  0 2px 6px rgba(25, 25, 25, 0.05), 0 1px 2px rgba(25, 25, 25, 0.04);
+  --shadow-md:  0 8px 24px rgba(25, 25, 25, 0.06), 0 2px 6px rgba(25, 25, 25, 0.04);
+  --shadow-lg:  0 18px 40px rgba(25, 25, 25, 0.08), 0 6px 14px rgba(25, 25, 25, 0.05);
+  --shadow-xl:  0 32px 64px rgba(25, 25, 25, 0.12), 0 12px 24px rgba(25, 25, 25, 0.06);
+  --shadow-brand: 0 12px 28px rgba(158, 11, 15, 0.20);
+  --shadow-inset: inset 0 0 0 1px var(--border);
+
+  /* ---------- MOTION ---------- */
+  --dur-instant: 80ms;
+  --dur-fast:    160ms;
+  --dur-base:    220ms;
+  --dur-slow:    320ms;
+  --dur-slower:  480ms;
+
+  --ease-standard: cubic-bezier(0.2, 0.0, 0.0, 1);   /* premium swoop */
+  --ease-emphasis: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --ease-out:      cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in:       cubic-bezier(0.7, 0, 0.84, 0);
+
+  /* ---------- LAYOUT ---------- */
+  --container-sm:  640px;
+  --container-md:  768px;
+  --container-lg:  1024px;
+  --container-xl:  1280px;
+  --container-2xl: 1440px;
+  --container-max: 1440px;
+
+  --gutter-mobile:  20px;
+  --gutter-tablet:  32px;
+  --gutter-desktop: 48px;
+
+  /* z-index scale */
+  --z-base: 0;
+  --z-raised: 10;
+  --z-dropdown: 1000;
+  --z-sticky: 1100;
+  --z-modal: 1200;
+  --z-toast: 1300;
+}
+
+/* ---------- SEMANTIC TYPE STYLES ---------- */
+.h-display {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: clamp(var(--fs-48), 6vw, var(--fs-80));
+  line-height: var(--lh-tight);
+  letter-spacing: var(--ls-tight);
+  color: var(--fg);
+}
+
+.h1 {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: clamp(var(--fs-36), 4.5vw, var(--fs-64));
+  line-height: 1.08;
+  letter-spacing: var(--ls-tight);
+  color: var(--fg);
+}
+
+.h2 {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: var(--fs-48);
+  line-height: 1.12;
+  letter-spacing: -0.015em;
+  color: var(--fg);
+}
+
+.h3 {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: var(--fs-36);
+  line-height: 1.18;
+  letter-spacing: -0.01em;
+  color: var(--fg);
+}
+
+.h4 {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: var(--fs-30);
+  line-height: 1.22;
+  color: var(--fg);
+}
+
+.h5 {
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: var(--fs-20);
+  line-height: 1.3;
+  letter-spacing: -0.005em;
+  color: var(--fg);
+}
+
+.h6 {
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: var(--fs-18);
+  line-height: 1.4;
+  color: var(--fg);
+}
+
+.eyebrow {
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: var(--fs-12);
+  line-height: 1;
+  letter-spacing: var(--ls-wider);
+  text-transform: uppercase;
+  color: var(--fg-gold);
+}
+
+.lead {
+  font-family: var(--font-sans);
+  font-weight: 400;
+  font-size: var(--fs-20);
+  line-height: var(--lh-relaxed);
+  color: var(--fg-muted);
+}
+
+.p, .body {
+  font-family: var(--font-sans);
+  font-weight: 400;
+  font-size: var(--fs-16);
+  line-height: var(--lh-normal);
+  color: var(--fg);
+}
+
+.body-sm {
+  font-family: var(--font-sans);
+  font-weight: 400;
+  font-size: var(--fs-14);
+  line-height: var(--lh-normal);
+  color: var(--fg);
+}
+
+.caption {
+  font-family: var(--font-sans);
+  font-weight: 400;
+  font-size: var(--fs-12);
+  line-height: 1.4;
+  color: var(--fg-muted);
+}
+
+.label {
+  font-family: var(--font-sans);
+  font-weight: 500;
+  font-size: var(--fs-13);
+  letter-spacing: var(--ls-wide);
+  text-transform: uppercase;
+  color: var(--fg-muted);
+}
+
+.price {
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: var(--fs-18);
+  letter-spacing: -0.01em;
+  color: var(--fg);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---------- BASE RESETS ---------- */
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-sans);
+  font-size: var(--fs-16);
+  line-height: var(--lh-normal);
+}
+::selection { background: var(--cream-200); color: var(--fg); }
+
+/* ─────────── Tweakable runtime tokens ─────────── */
+:root {
+  --brand-live: var(--brand);
+  --gold-live: var(--gold-400);
+  --gold-line: rgba(182, 145, 62, 1);
+  --display-family: var(--font-serif);
+  --card-pad-y: var(--sp-5);
+  --card-pad-x: var(--sp-5);
+  --hero-mode: 0;     /* 0 = full-bleed photo, 1 = cream editorial */
+  --gold-opacity: 1;
+
+  --nav-h: 72px;
+  --footer-pad: 64px;
+}
+
+/* hide the gold accent everywhere */
+[data-gold="off"] {
+  --gold-opacity: 0;
+}
+[data-gold="off"] .eyebrow,
+[data-gold="off"] .gold-rule,
+[data-gold="off"] .badge-gold,
+[data-gold="off"] .signature-marker { opacity: 0 !important; }
+
+/* density */
+[data-density="compact"] {
+  --card-pad-y: var(--sp-4);
+  --card-pad-x: var(--sp-4);
+}
+[data-density="editorial"] {
+  --card-pad-y: var(--sp-6);
+  --card-pad-x: var(--sp-6);
+}
+
+/* display family swap */
+[data-display="sans"] {
+  --display-family: var(--font-sans);
+}
+
+/* ─────────── BASE ─────────── */
+html, body { height: 100%; }
+body {
+  background: var(--bg-cream);
+  color: var(--fg);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+button { font: inherit; cursor: pointer; background: none; border: 0; color: inherit; }
+img { max-width: 100%; display: block; }
+input, select, textarea { font: inherit; color: inherit; }
+a { color: inherit; text-decoration: none; }
+
+/* serif headers */
+.serif { font-family: var(--display-family); font-weight: 500; letter-spacing: -0.01em; }
+
+/* gold rule divider */
+.gold-rule {
+  height: 1px;
+  background: var(--gold-line);
+  opacity: var(--gold-opacity);
+  border: 0;
+  margin: var(--sp-2) 0;
+}
+
+/* eyebrow */
+.eyebrow {
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gold-500);
+  opacity: var(--gold-opacity);
+}
+
+/* containers */
+.container {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 var(--gutter-mobile);
+}
+@media (min-width: 768px) { .container { padding: 0 var(--gutter-tablet); } }
+@media (min-width: 1024px) { .container { padding: 0 var(--gutter-desktop); } }
+
+/* ─────────── NAV ─────────── */
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: var(--z-sticky);
+  height: var(--nav-h);
+  background: rgba(255, 251, 247, 0.92);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--border);
+}
+.nav-inner {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-4);
+}
+.nav-brand {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+}
+.nav-brand img { height: 44px; width: 44px; object-fit: contain; }
+.nav-brand .wm {
+  display: none;
+  font-family: var(--display-family);
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 1;
+  color: var(--brand-live);
+}
+.nav-brand .wm small { display: block; font-size: 9px; letter-spacing: 0.22em; color: var(--gold-500); margin-top: 4px; opacity: var(--gold-opacity); }
+@media (min-width: 600px) { .nav-brand .wm { display: block; } }
+.nav-links {
+  display: none;
+  align-items: center;
+  gap: var(--sp-6);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--fg);
+}
+@media (min-width: 900px) { .nav-links { display: flex; } }
+.nav-links button { transition: color var(--dur-fast); padding: 4px 0; position: relative; }
+.nav-links button:hover { color: var(--brand-live); }
+.nav-links button.active { color: var(--brand-live); }
+.nav-links button.active::after {
+  content: ""; position: absolute; left: 0; right: 0; bottom: -6px; height: 1px;
+  background: var(--gold-live); opacity: var(--gold-opacity);
+}
+.nav-actions { display: flex; align-items: center; gap: var(--sp-2); }
+.nav-icon-btn {
+  position: relative;
+  width: 44px; height: 44px;
+  display: grid; place-items: center;
+  border-radius: var(--r-pill);
+  color: var(--ink-700);
+  transition: background var(--dur-fast), color var(--dur-fast);
+}
+.nav-icon-btn:hover { background: var(--cream-100); color: var(--brand-live); }
+.nav-icon-btn[data-active="true"] { color: var(--brand-live); }
+.cart-badge {
+  position: absolute; top: 4px; right: 4px;
+  min-width: 18px; height: 18px; padding: 0 5px;
+  display: grid; place-items: center;
+  background: var(--brand-live); color: #fff;
+  font-size: 10px; font-weight: 700;
+  border-radius: var(--r-pill);
+  border: 2px solid var(--cream-50);
+}
+
+/* ─────────── PAGE / FADE ─────────── */
+.page { animation: fade .26s var(--ease-emphasis) both; }
+@keyframes fade { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+
+/* ─────────── BUTTONS ─────────── */
+.btn {
+  min-height: 48px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sp-2);
+  border-radius: var(--r-sm);
+  padding: 0 var(--sp-6);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  background: var(--brand-live);
+  color: #fff;
+  transition: transform var(--dur-fast), background var(--dur-fast), box-shadow var(--dur-fast);
+}
+.btn:hover { background: var(--red-700); }
+.btn:active { transform: scale(0.98); }
+.btn.full { width: 100%; }
+.btn.lg { min-height: 56px; font-size: 15px; padding: 0 var(--sp-8); }
+.btn.secondary {
+  background: transparent;
+  color: var(--fg);
+  border: 1px solid var(--ink-200);
+}
+.btn.secondary:hover { border-color: var(--ink-700); background: transparent; color: var(--fg); }
+.btn.ghost {
+  background: transparent;
+  color: var(--brand-live);
+  padding: 0 var(--sp-3);
+}
+.btn.ghost:hover { background: transparent; color: var(--red-700); }
+.btn.dark {
+  background: var(--ink-800);
+  color: #fff;
+}
+.btn.dark:hover { background: var(--ink-900); }
+.btn.gold {
+  background: var(--gold-400);
+  color: #fff;
+}
+.btn.gold:hover { background: var(--gold-500); }
+
+/* link */
+.link {
+  color: var(--brand-live);
+  font-weight: 500;
+  text-decoration: none;
+  border-bottom: 1px solid currentColor;
+  padding-bottom: 1px;
+  transition: opacity var(--dur-fast);
+}
+.link:hover { opacity: 0.7; }
+
+/* ─────────── INPUTS ─────────── */
+.field { margin-bottom: var(--sp-4); }
+.field label.lbl {
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--ink-500);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  margin-bottom: var(--sp-2);
+}
+.field .hint {
+  margin-top: var(--sp-1);
+  color: var(--fg-muted);
+  font-size: 12px;
+  line-height: 1.4;
+}
+.input {
+  width: 100%;
+  min-height: 52px;
+  padding: 0 var(--sp-4);
+  background: #fff;
+  border: 1px solid var(--ink-200);
+  border-radius: var(--r-sm);
+  color: var(--fg);
+  font-size: 15px;
+  transition: border-color var(--dur-fast), box-shadow var(--dur-fast);
+}
+.input:focus {
+  outline: 0;
+  border-color: var(--brand-live);
+  box-shadow: 0 0 0 3px var(--focus-ring);
+}
+.input.invalid { border-color: var(--error-500); background: #FFF5F5; }
+.input::placeholder { color: var(--ink-400); }
+
+.phone-wrap {
+  display: flex;
+  align-items: center;
+  border: 1px solid var(--ink-200);
+  border-radius: var(--r-sm);
+  background: #fff;
+  overflow: hidden;
+}
+.phone-wrap:focus-within { border-color: var(--brand-live); box-shadow: 0 0 0 3px var(--focus-ring); }
+.phone-prefix {
+  display: flex; align-items: center; gap: 6px;
+  padding: 0 var(--sp-4); height: 50px;
+  border-right: 1px solid var(--ink-100);
+  font-size: 14px; font-weight: 500; color: var(--fg-muted);
+  background: var(--cream-50);
+  flex-shrink: 0;
+}
+.phone-wrap .input { border: 0; box-shadow: none; }
+
+/* ─────────── CARDS / SURFACES ─────────── */
+.card {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  padding: var(--card-pad-y) var(--card-pad-x);
+}
+.card.shadow { border: 0; box-shadow: var(--shadow-sm); }
+.card.flat { border: 0; }
+
+.surface-cream { background: var(--bg-cream); }
+.surface-white { background: #fff; }
+
+/* ─────────── TOAST ─────────── */
+.toast {
+  position: fixed;
+  top: calc(var(--nav-h) + 16px);
+  left: 50%; transform: translateX(-50%);
+  background: var(--ink-800); color: #fff;
+  padding: 12px 20px;
+  border-radius: var(--r-pill);
+  box-shadow: var(--shadow-lg);
+  z-index: var(--z-toast);
+  font-size: 14px; font-weight: 500;
+  opacity: 0; pointer-events: none;
+  transition: opacity var(--dur-base), transform var(--dur-base);
+}
+.toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+/* ─────────── BADGES ─────────── */
+.badge {
+  display: inline-flex; align-items: center; gap: 5px;
+  padding: 4px 10px;
+  border-radius: var(--r-pill);
+  background: var(--cream-100);
+  font-size: 11px; font-weight: 600;
+  color: var(--ink-600);
+  letter-spacing: 0.02em;
+}
+.badge.brand { background: rgba(158,11,15,0.08); color: var(--brand-live); }
+.badge.gold {
+  background: transparent;
+  border: 1px solid var(--gold-300);
+  color: var(--gold-500);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-size: 10px;
+  opacity: var(--gold-opacity);
+}
+.badge.dark { background: var(--ink-800); color: #fff; }
+.badge.success { background: var(--success-50); color: var(--success-700); }
+
+/* ─────────── HERO ─────────── */
+.hero {
+  position: relative;
+  overflow: hidden;
+  min-height: 560px;
+}
+.hero-photo {
+  position: absolute; inset: 0;
+}
+.hero-photo img {
+  width: 100%; height: 100%; object-fit: cover;
+}
+.hero-photo::after {
+  content: "";
+  position: absolute; inset: 0;
+  background: linear-gradient(180deg, rgba(14,4,4,0.05) 0%, rgba(14,4,4,0.25) 40%, rgba(14,4,4,0.85) 100%);
+}
+.hero-inner {
+  position: relative;
+  z-index: 2;
+  min-height: 560px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 80px 0 64px;
+  color: #fff;
+}
+.hero-eyebrow {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: var(--font-sans);
+  font-size: 11px; font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gold-200);
+  opacity: var(--gold-opacity);
+  margin-bottom: var(--sp-4);
+}
+.hero-eyebrow::before, .hero-eyebrow::after {
+  content: ""; width: 24px; height: 1px; background: var(--gold-300); opacity: var(--gold-opacity);
+}
+.hero h1 {
+  font-family: var(--display-family);
+  font-weight: 500;
+  font-size: clamp(48px, 7vw, 92px);
+  line-height: 1.02;
+  letter-spacing: -0.02em;
+  margin-bottom: var(--sp-5);
+  color: #fff;
+  text-wrap: balance;
+}
+.hero h1 em {
+  font-style: italic;
+  color: var(--cream-200);
+  font-weight: 400;
+}
+.hero p.lead-h {
+  font-size: clamp(16px, 1.6vw, 18px);
+  line-height: 1.6;
+  max-width: 520px;
+  color: rgba(255,255,255,0.8);
+  margin-bottom: var(--sp-6);
+}
+.hero-ctas { display: flex; flex-wrap: wrap; gap: var(--sp-3); }
+.hero .btn.secondary { color: #fff; border-color: rgba(255,255,255,0.4); background: transparent; }
+.hero .btn.secondary:hover { background: rgba(255,255,255,0.08); border-color: #fff; }
+
+/* hero variant: editorial cream */
+.hero.editorial { background: var(--cream-100); min-height: auto; }
+.hero.editorial .hero-photo { display: none; }
+.hero.editorial .hero-inner { color: var(--fg); padding: 100px 0; min-height: auto; }
+.hero.editorial h1 { color: var(--ink-800); }
+.hero.editorial h1 em { color: var(--brand-live); }
+.hero.editorial .hero-eyebrow { color: var(--gold-500); }
+.hero.editorial .hero-eyebrow::before, .hero.editorial .hero-eyebrow::after { background: var(--gold-300); }
+.hero.editorial p.lead-h { color: var(--ink-500); }
+.hero.editorial .btn.secondary { color: var(--fg); border-color: var(--ink-200); }
+
+.hero.editorial .editorial-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--sp-12);
+  align-items: center;
+}
+@media (min-width: 900px) {
+  .hero.editorial .editorial-grid {
+    grid-template-columns: 1.2fr 1fr;
+  }
+}
+.hero.editorial .ed-stack {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--sp-3);
+}
+.hero.editorial .ed-stack img {
+  border-radius: var(--r-md);
+  width: 100%;
+  aspect-ratio: 3/4;
+  object-fit: cover;
+}
+.hero.editorial .ed-stack img:first-child {
+  grid-row: span 2;
+  aspect-ratio: 3/5;
+}
+
+/* hero variant: split */
+.hero.split { background: var(--ink-800); min-height: auto; padding: 0; }
+.hero.split .hero-photo { display: none; }
+.hero.split .hero-split-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  min-height: 600px;
+}
+@media (min-width: 900px) {
+  .hero.split .hero-split-grid { grid-template-columns: 1fr 1fr; }
+}
+.hero.split .hero-side-text {
+  padding: 80px var(--gutter-tablet);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: var(--ink-800);
+  color: #fff;
+}
+.hero.split .hero-side-img {
+  position: relative; min-height: 380px;
+  background-size: cover; background-position: center;
+}
+.hero.split .hero-side-img::after {
+  content: "";
+  position: absolute; inset: 0;
+  background: linear-gradient(90deg, var(--ink-800) 0%, transparent 24%);
+  display: none;
+}
+@media (min-width: 900px) { .hero.split .hero-side-img::after { display: block; } }
+
+/* ─────────── TRUST BAR ─────────── */
+.trust-bar {
+  background: var(--ink-800);
+  color: rgba(255,255,255,0.86);
+  padding: var(--sp-3) 0;
+  border-top: 1px solid rgba(182,145,62,0.4);
+  border-bottom: 1px solid rgba(182,145,62,0.4);
+}
+.trust-bar-inner {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--sp-2);
+  font-size: 12px;
+  font-weight: 500;
+  text-align: center;
+}
+@media (min-width: 700px) { .trust-bar-inner { grid-template-columns: repeat(4, 1fr); } }
+.trust-item {
+  padding: var(--sp-2) var(--sp-2);
+}
+.trust-item strong { color: #fff; font-weight: 700; letter-spacing: 0.02em; }
+.trust-item .gold-tick { color: var(--gold-300); margin-right: 6px; opacity: var(--gold-opacity); }
+
+/* ─────────── SECTION ─────────── */
+.section { padding: var(--sp-16) 0; }
+.section.tight { padding: var(--sp-12) 0; }
+.section.cream { background: var(--cream-100); }
+.section.warm { background: var(--cream-50); }
+.section.dark { background: var(--ink-800); color: #fff; }
+.section-head {
+  display: flex; flex-direction: column; gap: var(--sp-2);
+  margin-bottom: var(--sp-8);
+  text-align: center;
+  align-items: center;
+}
+.section-head h2 {
+  font-family: var(--display-family);
+  font-weight: 500;
+  font-size: clamp(32px, 4vw, 48px);
+  line-height: 1.08;
+  color: var(--fg);
+  letter-spacing: -0.015em;
+}
+.section.dark .section-head h2 { color: #fff; }
+.section-head p { color: var(--fg-muted); max-width: 520px; }
+.section.dark .section-head p { color: rgba(255,255,255,0.7); }
+
+/* ─────────── FAVOURITES STRIP ─────────── */
+.fav-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--sp-5);
+}
+@media (min-width: 600px) { .fav-grid { grid-template-columns: repeat(3, 1fr); } }
+@media (min-width: 1024px) { .fav-grid { grid-template-columns: repeat(6, 1fr); } }
+.fav-item { text-align: center; cursor: pointer; transition: transform var(--dur-base) var(--ease-out); }
+.fav-item:hover { transform: translateY(-4px); }
+.fav-art {
+  aspect-ratio: 1;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: var(--r-pill);
+  overflow: hidden;
+  display: grid; place-items: center;
+  margin-bottom: var(--sp-3);
+  padding: 12%;
+  transition: box-shadow var(--dur-base);
+}
+.fav-art img { width: 100%; height: 100%; object-fit: contain; }
+.fav-item:hover .fav-art { box-shadow: var(--shadow-md); }
+.fav-item h4 {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--fg);
+}
+.fav-item .price-mini { font-size: 12px; color: var(--fg-muted); margin-top: 2px; }
+
+/* ─────────── LOYALTY VARIANTS ─────────── */
+.loyalty-section { padding: var(--sp-16) 0; }
+.loyalty-card {
+  border-radius: var(--r-xl);
+  overflow: hidden;
+  border: 1px solid var(--border);
+  background: #fff;
+}
+
+/* light */
+.loyalty-card.light {
+  background: var(--cream-50);
+  border-color: var(--gold-200);
+}
+.loyalty-card.light .loy-head { padding: var(--sp-12) var(--sp-10); border-bottom: 1px solid var(--border); }
+.loyalty-card.light .loy-head h3 { color: var(--ink-800); font-family: var(--display-family); font-size: clamp(32px, 4vw, 48px); font-weight: 500; line-height: 1.05; letter-spacing: -0.015em; }
+.loyalty-card.light .loy-head p { color: var(--fg-muted); margin-top: var(--sp-3); max-width: 520px; }
+
+/* dark */
+.loyalty-card.dark {
+  background: var(--ink-800);
+  border-color: transparent;
+  color: #fff;
+}
+.loyalty-card.dark .loy-head { padding: var(--sp-12) var(--sp-10); border-bottom: 1px solid rgba(255,255,255,0.08); }
+.loyalty-card.dark .loy-head h3 { color: #fff; font-family: var(--display-family); font-size: clamp(32px, 4vw, 48px); font-weight: 500; line-height: 1.05; letter-spacing: -0.015em; }
+.loyalty-card.dark .loy-head h3 em { color: var(--gold-300); font-style: italic; opacity: var(--gold-opacity); }
+.loyalty-card.dark .loy-head p { color: rgba(255,255,255,0.7); margin-top: var(--sp-3); max-width: 520px; }
+.loyalty-card.dark .loy-step strong { color: #fff; }
+.loyalty-card.dark .loy-step span { color: rgba(255,255,255,0.6); }
+.loyalty-card.dark .loy-redeem { background: transparent; border-color: var(--gold-400); color: #fff; }
+.loyalty-card.dark .loy-redeem strong { color: var(--gold-300); opacity: var(--gold-opacity); }
+.loyalty-card.dark .loy-benefit-row { color: rgba(255,255,255,0.86); border-color: rgba(255,255,255,0.08); }
+.loyalty-card.dark .loy-benefit-row svg { color: var(--gold-300); opacity: var(--gold-opacity); }
+
+/* gold */
+.loyalty-card.gold {
+  background:
+    radial-gradient(80% 60% at 0% 0%, rgba(255,255,255,0.12), transparent 50%),
+    linear-gradient(135deg, var(--brand-live) 0%, var(--red-700) 60%, var(--ink-800) 100%);
+  border: 1px solid var(--gold-400);
+  color: #fff;
+}
+.loyalty-card.gold .loy-head { padding: var(--sp-12) var(--sp-10); }
+.loyalty-card.gold .loy-head h3 { color: #fff; font-family: var(--display-family); font-size: clamp(32px, 4vw, 48px); font-weight: 500; line-height: 1.05; letter-spacing: -0.015em; }
+.loyalty-card.gold .loy-head h3 em { color: var(--gold-200); font-style: italic; opacity: var(--gold-opacity); }
+.loyalty-card.gold .loy-head p { color: rgba(255,255,255,0.86); margin-top: var(--sp-3); max-width: 520px; }
+.loyalty-card.gold .loy-body { background: rgba(0,0,0,0.18); border-top: 1px solid rgba(182,145,62,0.4); }
+.loyalty-card.gold .loy-step strong { color: #fff; }
+.loyalty-card.gold .loy-step span { color: rgba(255,255,255,0.7); }
+.loyalty-card.gold .loy-redeem { background: rgba(255,255,255,0.08); border-color: var(--gold-300); color: #fff; }
+.loyalty-card.gold .loy-redeem strong { color: var(--gold-200); opacity: var(--gold-opacity); }
+.loyalty-card.gold .loy-benefit-row { color: rgba(255,255,255,0.92); border-color: rgba(255,255,255,0.1); }
+.loyalty-card.gold .loy-benefit-row svg { color: var(--gold-200); opacity: var(--gold-opacity); }
+
+/* shared loyalty body */
+.loy-body {
+  display: grid;
+  grid-template-columns: 1fr;
+  padding: var(--sp-10);
+  gap: var(--sp-8);
+}
+@media (min-width: 900px) { .loy-body { grid-template-columns: 1.1fr 0.9fr; } }
+.loy-benefits { list-style: none; padding: 0; margin: 0; display: grid; gap: 0; }
+.loy-benefit-row {
+  display: grid;
+  grid-template-columns: 32px 1fr;
+  gap: var(--sp-3);
+  padding: var(--sp-4) 0;
+  border-top: 1px solid var(--border);
+  font-size: 15px;
+  align-items: center;
+}
+.loy-benefit-row:first-child { border-top: 0; }
+.loy-benefit-row svg { color: var(--gold-500); opacity: var(--gold-opacity); }
+.loy-benefit-row b { font-weight: 600; }
+.loy-step-row {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: var(--sp-4);
+  padding: var(--sp-6);
+  border-radius: var(--r-md);
+  background: rgba(255,255,255,0.6);
+}
+.loyalty-card.dark .loy-step-row,
+.loyalty-card.gold .loy-step-row { background: rgba(255,255,255,0.05); }
+.loy-step { text-align: center; }
+.loy-step strong { display: block; font-family: var(--display-family); font-weight: 500; font-size: clamp(24px, 3vw, 32px); color: var(--ink-800); line-height: 1; }
+.loy-step span { display: block; margin-top: 6px; font-size: 12px; color: var(--fg-muted); letter-spacing: 0.04em; text-transform: uppercase; }
+.loy-arrow { color: var(--gold-500); font-size: 24px; opacity: var(--gold-opacity); }
+.loy-redeem {
+  margin-top: var(--sp-4);
+  padding: var(--sp-5);
+  border-radius: var(--r-md);
+  border: 1px solid var(--gold-300);
+  text-align: center;
+}
+.loy-redeem strong { display: block; font-family: var(--display-family); font-weight: 500; font-size: clamp(28px, 4vw, 40px); color: var(--brand-live); line-height: 1.02; }
+.loy-redeem span { display: block; margin-top: 6px; font-size: 13px; color: var(--fg-muted); }
+.loy-actions { margin-top: var(--sp-5); display: grid; gap: var(--sp-3); }
+
+/* ─────────── FOOTER ─────────── */
+.footer {
+  background: var(--ink-800);
+  color: rgba(255,255,255,0.6);
+  padding: var(--sp-16) 0 var(--sp-10);
+  margin-top: var(--sp-16);
+}
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--sp-8);
+  margin-bottom: var(--sp-10);
+}
+@media (min-width: 700px) { .footer-grid { grid-template-columns: 2fr 1fr 1fr 1fr; } }
+.footer h5 {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gold-300);
+  opacity: var(--gold-opacity);
+  margin-bottom: var(--sp-4);
+}
+.footer ul { list-style: none; padding: 0; margin: 0; display: grid; gap: var(--sp-2); }
+.footer a:hover { color: #fff; }
+.footer .brandwm {
+  font-family: var(--display-family);
+  font-size: 28px; line-height: 1;
+  color: #fff;
+  margin-bottom: var(--sp-3);
+}
+.footer .brand-tag { color: rgba(255,255,255,0.6); max-width: 320px; font-size: 14px; }
+.footer-bottom {
+  border-top: 1px solid rgba(255,255,255,0.08);
+  padding-top: var(--sp-5);
+  display: flex; flex-wrap: wrap; gap: var(--sp-3);
+  justify-content: space-between;
+  font-size: 12px;
+  color: rgba(255,255,255,0.5);
+}
+
+/* ─────────── MODE / BANNER ─────────── */
+.banner {
+  background: var(--ink-800);
+  color: #fff;
+  padding: var(--sp-12) 0 var(--sp-10);
+  text-align: center;
+}
+.banner h1 {
+  font-family: var(--display-family);
+  font-weight: 500;
+  font-size: clamp(36px, 5vw, 56px);
+  line-height: 1.05;
+  letter-spacing: -0.015em;
+  margin: var(--sp-3) 0 var(--sp-3);
+  color: #fff;
+}
+.banner h1 em { color: var(--gold-200); font-style: italic; opacity: var(--gold-opacity); }
+.banner p { color: rgba(255,255,255,0.7); max-width: 580px; margin: 0 auto; }
+.banner .eyebrow { color: var(--gold-300); }
+
+/* back row */
+.back-row {
+  padding-top: var(--sp-4);
+  padding-bottom: var(--sp-2);
+}
+.back-btn {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 13px; font-weight: 500;
+  color: var(--fg-muted);
+  padding: 8px 0;
+}
+.back-btn:hover { color: var(--brand-live); }
+
+/* mode cards */
+.mode-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--sp-5);
+  max-width: 880px;
+  margin: 0 auto;
+  padding: var(--sp-12) 0;
+}
+@media (min-width: 700px) { .mode-grid { grid-template-columns: 1fr 1fr; } }
+.mode-card {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  padding: var(--sp-8);
+  text-align: left;
+  transition: transform var(--dur-base) var(--ease-out), box-shadow var(--dur-base), border-color var(--dur-base);
+  display: flex; flex-direction: column; gap: var(--sp-5);
+  cursor: pointer;
+}
+.mode-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); border-color: var(--gold-300); }
+.mode-card .mode-illu {
+  aspect-ratio: 4/3;
+  border-radius: var(--r-md);
+  background: var(--cream-100);
+  position: relative;
+  overflow: hidden;
+  display: grid; place-items: center;
+}
+.mode-card .mode-illu img { width: 50%; height: 50%; object-fit: contain; opacity: 0.9; }
+.mode-card h3 {
+  font-family: var(--display-family);
+  font-weight: 500; font-size: 32px; line-height: 1.05;
+  color: var(--ink-800);
+}
+.mode-card p { color: var(--fg-muted); font-size: 14px; line-height: 1.6; }
+.mode-card .meta-row {
+  display: flex; gap: var(--sp-2); flex-wrap: wrap;
+  font-size: 12px;
+  color: var(--ink-500);
+}
+.mode-card .meta-row span {
+  padding: 4px 10px;
+  background: var(--cream-100);
+  border-radius: var(--r-pill);
+}
+
+/* ─────────── OUTLET LIST ─────────── */
+.outlet-search {
+  position: sticky; top: var(--nav-h); z-index: 40;
+  background: var(--cream-100);
+  border-bottom: 1px solid var(--border);
+  padding: var(--sp-4) 0;
+}
+.search-input {
+  position: relative;
+}
+.search-input svg {
+  position: absolute; left: 16px; top: 50%; transform: translateY(-50%);
+  color: var(--fg-muted); pointer-events: none;
+}
+.search-input .input { padding-left: 48px; height: 52px; }
+
+.outlet-areas {
+  display: grid; gap: var(--sp-2); margin-top: var(--sp-3);
+  grid-template-columns: 1fr; max-width: 520px;
+}
+.area-pill {
+  padding: 6px 14px;
+  background: transparent;
+  border: 1px solid var(--ink-200);
+  border-radius: var(--r-pill);
+  font-size: 12px; font-weight: 500;
+  color: var(--ink-600);
+  transition: all var(--dur-fast);
+  white-space: nowrap;
+}
+.area-pill.active { background: var(--ink-800); color: #fff; border-color: var(--ink-800); }
+.area-row {
+  display: flex; gap: var(--sp-2); flex-wrap: wrap;
+  margin-top: var(--sp-3);
+}
+
+.outlet-list {
+  padding: var(--sp-6) 0 var(--sp-12);
+}
+.outlet-area-head {
+  margin: var(--sp-8) 0 var(--sp-3);
+  display: flex; align-items: baseline; gap: var(--sp-3);
+}
+.outlet-area-head:first-child { margin-top: 0; }
+.outlet-area-head h3 {
+  font-family: var(--display-family);
+  font-weight: 500; font-size: 24px; color: var(--ink-800);
+}
+.outlet-area-head .count { font-size: 12px; color: var(--fg-muted); letter-spacing: 0.06em; }
+
+.outlet-row {
+  display: grid;
+  grid-template-columns: 32px 1fr auto;
+  gap: var(--sp-4);
+  align-items: center;
+  padding: var(--sp-5) 0;
+  border-top: 1px solid var(--border);
+  text-align: left;
+  width: 100%;
+  cursor: pointer;
+  transition: background var(--dur-fast);
+}
+.outlet-row:hover { background: var(--cream-50); }
+.outlet-row .pin { color: var(--ink-300); display: grid; place-items: center; }
+.outlet-row.nearest .pin { color: var(--brand-live); }
+.outlet-row .info h4 {
+  font-size: 16px; font-weight: 600; color: var(--ink-800);
+  margin-bottom: 2px;
+}
+.outlet-row .info .meta {
+  font-size: 13px; color: var(--fg-muted);
+  display: flex; gap: 6px; flex-wrap: wrap;
+}
+.outlet-row .info .meta span:not(:last-child)::after { content: " · "; color: var(--ink-300); }
+.outlet-row .info .tags { display: flex; gap: 6px; margin-top: 6px; flex-wrap: wrap; }
+.outlet-row .arrow {
+  color: var(--ink-300);
+  transition: transform var(--dur-fast), color var(--dur-fast);
+}
+.outlet-row:hover .arrow { color: var(--brand-live); transform: translateX(2px); }
+
+/* ─────────── DELIVERY ADDRESS ─────────── */
+.delivery-search-bar {
+  position: sticky; top: var(--nav-h); z-index: 40;
+  padding: var(--sp-5) 0 var(--sp-4);
+  background: var(--ink-800);
+  color: #fff;
+}
+.delivery-search-bar .back-btn { color: rgba(255,255,255,0.7); }
+.delivery-search-bar .back-btn:hover { color: #fff; }
+.delivery-input-wrap {
+  position: relative;
+  display: flex; align-items: center;
+  background: #fff; border-radius: var(--r-md);
+  padding: 0 var(--sp-3) 0 var(--sp-4);
+  height: 56px;
+}
+.delivery-input-wrap svg { color: var(--ink-400); flex-shrink: 0; }
+.delivery-input-wrap input {
+  flex: 1; border: 0; background: transparent; outline: none;
+  padding: 0 var(--sp-3); height: 100%; font-size: 15px;
+  color: var(--ink-800);
+}
+.delivery-input-wrap input::placeholder { color: var(--ink-400); }
+.delivery-input-wrap .clr {
+  width: 32px; height: 32px; border-radius: var(--r-pill);
+  display: grid; place-items: center;
+  color: var(--ink-400);
+}
+.delivery-input-wrap .clr:hover { color: var(--ink-700); background: var(--cream-100); }
+
+.suggestion-list {
+  background: #fff;
+  border-radius: var(--r-md);
+  padding: var(--sp-2) 0;
+  margin-top: var(--sp-2);
+  box-shadow: var(--shadow-md);
+  max-height: 280px; overflow-y: auto;
+}
+.suggestion-item {
+  display: grid;
+  grid-template-columns: 28px 1fr;
+  gap: var(--sp-3);
+  align-items: center;
+  width: 100%;
+  text-align: left;
+  padding: var(--sp-3) var(--sp-4);
+  font-size: 14px; color: var(--ink-800);
+}
+.suggestion-item:hover { background: var(--cream-50); }
+.suggestion-item svg { color: var(--ink-400); }
+
+/* saved address chips */
+.saved-row { display: grid; gap: var(--sp-2); margin-top: var(--sp-4); }
+.saved-chip {
+  display: grid;
+  grid-template-columns: 36px 1fr auto;
+  gap: var(--sp-3);
+  align-items: center;
+  padding: var(--sp-3) var(--sp-4);
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  text-align: left;
+  width: 100%;
+}
+.saved-chip:hover { border-color: var(--brand-live); }
+.saved-chip .lbl-circ {
+  width: 36px; height: 36px;
+  border-radius: var(--r-pill);
+  background: var(--cream-100);
+  color: var(--brand-live);
+  display: grid; place-items: center;
+}
+.saved-chip h5 { font-size: 14px; font-weight: 600; color: var(--ink-800); }
+.saved-chip p { font-size: 12px; color: var(--fg-muted); margin-top: 2px; }
+
+/* delivery confirm panel */
+.delivery-confirm-panel {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  padding: var(--sp-6);
+  margin-top: var(--sp-6);
+}
+.matched-outlet {
+  margin: var(--sp-4) 0;
+  padding: var(--sp-4);
+  border-radius: var(--r-md);
+  background: var(--success-50);
+  border: 1px solid rgba(79,140,107,0.2);
+  display: grid;
+  grid-template-columns: 36px 1fr;
+  gap: var(--sp-3);
+  align-items: start;
+}
+.matched-outlet svg { color: var(--success-500); margin-top: 2px; }
+.matched-outlet h5 { font-size: 14px; font-weight: 600; color: var(--success-700); }
+.matched-outlet p { font-size: 13px; color: var(--ink-600); margin-top: 2px; }
+.matched-outlet .switch { color: var(--brand-live); font-size: 12px; font-weight: 600; margin-top: 6px; display: inline-block; }
+
+/* ─────────── MENU ─────────── */
+.menu-context {
+  position: sticky; top: var(--nav-h); z-index: 38;
+  background: rgba(255, 251, 247, 0.95);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  padding: var(--sp-3) 0;
+}
+.menu-context-row { display: flex; gap: var(--sp-2); flex-wrap: wrap; align-items: center; }
+.context-pill {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 6px 12px;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: var(--r-pill);
+  font-size: 12px; font-weight: 500;
+  color: var(--ink-700);
+}
+.context-pill svg { color: var(--brand-live); }
+.context-pill.changeable { cursor: pointer; }
+.context-pill.changeable:hover { border-color: var(--brand-live); color: var(--brand-live); }
+
+.menu-tabs {
+  position: sticky; top: calc(var(--nav-h) + 50px); z-index: 37;
+  background: var(--cream-50);
+  border-bottom: 1px solid var(--border);
+  padding: var(--sp-3) 0;
+}
+.menu-tabs-inner {
+  display: flex; gap: var(--sp-2);
+  overflow-x: auto;
+  scrollbar-width: none;
+  padding-bottom: 4px;
+}
+.menu-tabs-inner::-webkit-scrollbar { display: none; }
+.tab-btn {
+  flex-shrink: 0;
+  padding: 8px 16px;
+  border: 1px solid var(--ink-200);
+  border-radius: var(--r-pill);
+  background: #fff;
+  font-size: 13px; font-weight: 500;
+  color: var(--ink-600);
+  white-space: nowrap;
+  transition: all var(--dur-fast);
+}
+.tab-btn:hover { border-color: var(--ink-700); color: var(--ink-800); }
+.tab-btn.active { background: var(--ink-800); color: #fff; border-color: var(--ink-800); }
+
+.cat-section { padding-top: var(--sp-10); scroll-margin-top: 200px; }
+.cat-head {
+  display: flex; align-items: baseline; justify-content: space-between; gap: var(--sp-4);
+  margin-bottom: var(--sp-6);
+}
+.cat-head h2 {
+  font-family: var(--display-family);
+  font-weight: 500; font-size: clamp(28px, 3.5vw, 40px);
+  letter-spacing: -0.015em;
+  color: var(--ink-800);
+}
+.cat-head .gold-marker {
+  height: 1px;
+  flex: 1;
+  background: var(--gold-300);
+  opacity: var(--gold-opacity);
+}
+.cat-head .cnt { color: var(--fg-muted); font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; }
+
+.product-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--sp-5);
+}
+@media (min-width: 600px) { .product-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 900px) { .product-grid { grid-template-columns: repeat(3, 1fr); } }
+@media (min-width: 1200px) { .product-grid { grid-template-columns: repeat(4, 1fr); } }
+
+.product-card {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  display: flex; flex-direction: column;
+  transition: transform var(--dur-base) var(--ease-out), box-shadow var(--dur-base);
+  cursor: pointer;
+}
+.product-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
+.product-art {
+  position: relative;
+  aspect-ratio: 1;
+  background: var(--cream-50);
+  padding: 12%;
+  display: grid; place-items: center;
+}
+.product-art img {
+  width: 100%; height: 100%; object-fit: contain;
+  transition: transform var(--dur-slow) var(--ease-out);
+}
+.product-card:hover .product-art img { transform: scale(1.04); }
+.product-tag {
+  position: absolute; top: 12px; left: 12px;
+}
+.product-body {
+  padding: var(--sp-4) var(--sp-5) var(--sp-5);
+  display: flex; flex-direction: column; gap: var(--sp-2);
+  flex: 1;
+}
+.product-body h3 {
+  font-family: var(--display-family);
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 1.15;
+  letter-spacing: -0.005em;
+  color: var(--ink-800);
+}
+.product-body .meta { font-size: 12px; color: var(--fg-muted); line-height: 1.4; }
+.product-body .price-row {
+  display: flex; justify-content: space-between; align-items: center;
+  margin-top: auto;
+  padding-top: var(--sp-3);
+}
+.product-body .price {
+  font-family: var(--font-sans);
+  font-weight: 600; font-size: 16px;
+  color: var(--ink-800);
+  font-variant-numeric: tabular-nums;
+}
+.add-btn {
+  width: 36px; height: 36px;
+  border-radius: var(--r-pill);
+  background: var(--brand-live);
+  color: #fff;
+  display: grid; place-items: center;
+  transition: background var(--dur-fast), transform var(--dur-fast);
+}
+.add-btn:hover { background: var(--red-700); transform: scale(1.06); }
+
+.qty-stepper {
+  display: inline-flex;
+  align-items: center;
+  background: var(--cream-100);
+  border-radius: var(--r-pill);
+  padding: 4px;
+}
+.qty-stepper button {
+  width: 32px; height: 32px;
+  display: grid; place-items: center;
+  color: var(--brand-live);
+  border-radius: var(--r-pill);
+}
+.qty-stepper button:hover { background: rgba(255,255,255,0.7); }
+.qty-stepper .qty-num {
+  min-width: 24px; text-align: center;
+  font-weight: 600; font-size: 14px;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ─────────── VIEW CART FLOATING ─────────── */
+.view-cart {
+  position: fixed;
+  left: 50%; transform: translateX(-50%);
+  bottom: calc(20px + env(safe-area-inset-bottom));
+  z-index: var(--z-sticky);
+  width: calc(100% - 32px);
+  max-width: 540px;
+  display: flex; align-items: center; justify-content: space-between;
+  gap: var(--sp-4);
+  padding: 14px var(--sp-4) 14px var(--sp-5);
+  background: var(--ink-800);
+  color: #fff;
+  border-radius: var(--r-pill);
+  box-shadow: 0 16px 40px rgba(25,25,25,0.3);
+  text-align: left;
+  border: 1px solid var(--gold-400);
+  animation: viewCartIn .32s var(--ease-emphasis) both;
+}
+@keyframes viewCartIn { from { transform: translateX(-50%) translateY(20px); opacity: 0; } to { transform: translateX(-50%) translateY(0); opacity: 1; } }
+.view-cart .vc-meta {
+  display: flex; flex-direction: column; gap: 2px; min-width: 0;
+}
+.view-cart .vc-label { font-size: 11px; color: var(--gold-200); opacity: var(--gold-opacity); letter-spacing: 0.18em; text-transform: uppercase; }
+.view-cart .vc-text { font-size: 14px; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.view-cart .vc-cta {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 10px 16px;
+  border-radius: var(--r-pill);
+  background: #fff;
+  color: var(--ink-800);
+  font-size: 13px; font-weight: 600;
+  flex-shrink: 0;
+}
+
+/* ─────────── PRODUCT MODAL ─────────── */
+.modal-backdrop {
+  position: fixed; inset: 0; z-index: var(--z-modal);
+  background: rgba(25,25,25,0.4);
+  backdrop-filter: blur(8px);
+  display: flex; align-items: flex-end; justify-content: center;
+  animation: fadebd .26s ease both;
+  overflow: hidden;
+}
+@media (min-width: 700px) { .modal-backdrop { align-items: center; padding: var(--sp-5); } }
+@keyframes fadebd { from { opacity: 0; } to { opacity: 1; } }
+
+.product-modal {
+  width: 100%; max-width: 720px;
+  background: #fff;
+  border-top-left-radius: var(--r-xl);
+  border-top-right-radius: var(--r-xl);
+  max-height: 92vh;
+  display: flex; flex-direction: column;
+  animation: slideup .32s var(--ease-emphasis) both;
+}
+@media (min-width: 700px) { .product-modal { border-radius: var(--r-xl); max-height: 88vh; } }
+@keyframes slideup { from { transform: translateY(40px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+
+.modal-art {
+  background: var(--cream-50);
+  padding: var(--sp-8) var(--sp-8) var(--sp-3);
+  position: relative;
+  display: grid; place-items: center;
+  aspect-ratio: 16/9;
+}
+.modal-art img { width: 100%; height: 100%; object-fit: contain; max-width: 320px; }
+.modal-close {
+  position: absolute; top: 16px; right: 16px;
+  width: 36px; height: 36px;
+  border-radius: var(--r-pill);
+  background: rgba(255,255,255,0.9);
+  display: grid; place-items: center;
+  color: var(--ink-700);
+}
+.modal-close:hover { background: #fff; color: var(--ink-900); }
+
+.modal-body {
+  padding: var(--sp-6) var(--sp-8) 0;
+  flex: 1;
+  overflow-y: auto;
+}
+.modal-title-row { display: flex; align-items: flex-start; justify-content: space-between; gap: var(--sp-4); }
+.modal-body h2 {
+  font-family: var(--display-family);
+  font-weight: 500; font-size: clamp(28px, 3.5vw, 36px);
+  letter-spacing: -0.015em;
+  color: var(--ink-800);
+  line-height: 1.1;
+}
+.modal-body .price { font-family: var(--font-sans); font-weight: 600; font-size: 20px; }
+.modal-body .desc {
+  margin-top: var(--sp-3);
+  color: var(--fg-muted);
+  font-size: 14px; line-height: 1.6;
+}
+.modal-section { margin-top: var(--sp-6); }
+.modal-section h3 {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-500);
+  margin-bottom: var(--sp-3);
+}
+.option-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--sp-2);
+}
+.option-card {
+  padding: var(--sp-3) var(--sp-4);
+  background: #fff;
+  border: 1px solid var(--ink-200);
+  border-radius: var(--r-md);
+  display: flex; align-items: center; justify-content: space-between;
+  font-size: 14px;
+  text-align: left;
+  transition: border-color var(--dur-fast), background var(--dur-fast);
+}
+.option-card:hover { border-color: var(--ink-700); }
+.option-card.selected { border-color: var(--brand-live); background: rgba(158,11,15,0.04); color: var(--brand-live); }
+.option-card .opt-extra { color: var(--fg-muted); font-size: 12px; }
+.option-card.selected .opt-extra { color: var(--brand-live); }
+
+.modal-foot {
+  position: sticky; bottom: 0;
+  background: #fff;
+  border-top: 1px solid var(--border);
+  padding: var(--sp-4) var(--sp-8);
+  display: flex; align-items: center; gap: var(--sp-4);
+}
+.modal-foot .qty-modal {
+  display: flex; align-items: center; gap: 8px;
+  padding: 6px;
+  background: var(--cream-50);
+  border-radius: var(--r-pill);
+}
+.modal-foot .qty-modal button {
+  width: 36px; height: 36px;
+  border-radius: var(--r-pill);
+  background: #fff;
+  color: var(--brand-live);
+  display: grid; place-items: center;
+  border: 1px solid var(--border);
+}
+.modal-foot .qty-modal button:hover { border-color: var(--brand-live); }
+.modal-foot .qty-modal strong { min-width: 24px; text-align: center; font-variant-numeric: tabular-nums; }
+
+/* ─────────── CHECKOUT ─────────── */
+.checkout-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--sp-6);
+  align-items: start;
+  padding: var(--sp-8) 0 var(--sp-12);
+}
+@media (min-width: 900px) { .checkout-grid { grid-template-columns: 1.2fr 0.8fr; gap: var(--sp-8); } }
+
+.checkout-section {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  padding: var(--sp-6);
+  margin-bottom: var(--sp-5);
+}
+.checkout-section h3 {
+  font-family: var(--display-family);
+  font-weight: 500; font-size: 22px;
+  margin-bottom: var(--sp-4);
+  color: var(--ink-800);
+}
+
+.cart-item-row {
+  display: grid;
+  grid-template-columns: 64px 1fr auto;
+  gap: var(--sp-3);
+  align-items: center;
+  padding: var(--sp-3) 0;
+  border-top: 1px solid var(--border);
+}
+.cart-item-row:first-child { border-top: 0; padding-top: 0; }
+.cart-item-row .ci-art {
+  width: 64px; height: 64px;
+  background: var(--cream-50);
+  border-radius: var(--r-md);
+  padding: 8px;
+  display: grid; place-items: center;
+}
+.cart-item-row .ci-art img { width: 100%; height: 100%; object-fit: contain; }
+.cart-item-row h4 { font-size: 15px; font-weight: 600; color: var(--ink-800); }
+.cart-item-row .ci-meta { font-size: 12px; color: var(--fg-muted); margin-top: 2px; }
+.cart-item-row .ci-actions { display: flex; align-items: center; gap: var(--sp-2); }
+.cart-item-row .ci-price { font-weight: 600; font-variant-numeric: tabular-nums; }
+.cart-item-row .ci-remove { color: var(--ink-400); font-size: 12px; }
+.cart-item-row .ci-remove:hover { color: var(--brand-live); }
+
+.totals { padding-top: var(--sp-3); border-top: 1px solid var(--border); margin-top: var(--sp-2); }
+.totals-row { display: flex; justify-content: space-between; gap: var(--sp-4); padding: 6px 0; color: var(--fg-muted); font-size: 14px; }
+.totals-row.grand {
+  margin-top: var(--sp-3); padding-top: var(--sp-3);
+  border-top: 1px solid var(--border);
+  color: var(--ink-800);
+  font-family: var(--display-family);
+  font-weight: 500;
+  font-size: 28px;
+}
+.totals-row.discount { color: var(--success-700); }
+
+/* radio choices */
+.radio-grid { display: grid; grid-template-columns: 1fr; gap: var(--sp-2); }
+.radio-row {
+  padding: var(--sp-4);
+  background: #fff;
+  border: 1px solid var(--ink-200);
+  border-radius: var(--r-md);
+  display: grid;
+  grid-template-columns: 24px 1fr auto;
+  gap: var(--sp-3);
+  align-items: center;
+  cursor: pointer;
+  transition: border-color var(--dur-fast), background var(--dur-fast);
+}
+.radio-row:hover { border-color: var(--ink-700); }
+.radio-row.selected { border-color: var(--brand-live); background: rgba(158,11,15,0.03); }
+.radio-row .ring {
+  width: 20px; height: 20px;
+  border-radius: var(--r-pill);
+  border: 2px solid var(--ink-300);
+  display: grid; place-items: center;
+}
+.radio-row.selected .ring { border-color: var(--brand-live); }
+.radio-row.selected .ring::after {
+  content: ""; width: 10px; height: 10px;
+  background: var(--brand-live); border-radius: var(--r-pill);
+}
+.radio-row h5 { font-size: 14px; font-weight: 600; color: var(--ink-800); }
+.radio-row p { font-size: 12px; color: var(--fg-muted); margin-top: 2px; }
+
+/* ─────────── CONFIRMATION ─────────── */
+.confirm-wrap {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: var(--sp-12) 0 var(--sp-16);
+  text-align: center;
+}
+.checkmark-wrap {
+  width: 88px; height: 88px;
+  margin: 0 auto var(--sp-5);
+  border-radius: var(--r-pill);
+  background: var(--success-50);
+  display: grid; place-items: center;
+}
+.checkmark-wrap svg circle { stroke: var(--success-500); stroke-width: 3; fill: none; stroke-dasharray: 200; stroke-dashoffset: 200; animation: stroke 600ms ease forwards; }
+.checkmark-wrap svg path { stroke: var(--success-500); stroke-width: 4; fill: none; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 60; stroke-dashoffset: 60; animation: stroke 400ms 500ms ease forwards; }
+@keyframes stroke { to { stroke-dashoffset: 0; } }
+.confirm-wrap h1 {
+  font-family: var(--display-family); font-weight: 500;
+  font-size: clamp(36px, 5vw, 56px);
+  letter-spacing: -0.015em;
+  color: var(--ink-800);
+  margin-bottom: var(--sp-3);
+}
+.confirm-wrap .ref { color: var(--fg-muted); font-size: 14px; letter-spacing: 0.06em; }
+
+.confirm-summary {
+  margin-top: var(--sp-8);
+  padding: var(--sp-6);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  text-align: left;
+  background: #fff;
+}
+.confirm-actions { display: grid; gap: var(--sp-3); margin-top: var(--sp-6); grid-template-columns: 1fr; }
+@media (min-width: 600px) { .confirm-actions { grid-template-columns: 1fr 1fr; } }
+
+/* ─────────── ORDER TRACKING ─────────── */
+.tracking-card {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  margin: var(--sp-6) 0;
+}
+.tracking-head {
+  background: var(--ink-800);
+  color: #fff;
+  padding: var(--sp-6) var(--sp-6);
+  display: flex; flex-direction: column; gap: var(--sp-2);
+}
+.tracking-head .ref-row { display: flex; justify-content: space-between; gap: var(--sp-3); align-items: center; }
+.tracking-head h2 {
+  font-family: var(--display-family); font-weight: 500;
+  font-size: clamp(28px, 3.5vw, 38px); line-height: 1.05;
+  color: #fff;
+}
+.tracking-head h2 em { color: var(--gold-200); font-style: italic; opacity: var(--gold-opacity); }
+.tracking-head .eta { font-size: 14px; color: rgba(255,255,255,0.7); }
+.tracking-head .badge { background: rgba(255,255,255,0.12); color: var(--gold-200); border: 1px solid rgba(182,145,62,0.4); }
+
+.timeline { padding: var(--sp-6); }
+.timeline-row {
+  display: grid;
+  grid-template-columns: 36px 1fr;
+  gap: var(--sp-4);
+  padding: var(--sp-3) 0;
+  position: relative;
+}
+.timeline-row::before {
+  content: "";
+  position: absolute;
+  left: 17px; top: 36px; bottom: -12px;
+  width: 1px;
+  background: var(--border);
+}
+.timeline-row:last-child::before { display: none; }
+.timeline-dot {
+  width: 36px; height: 36px;
+  border-radius: var(--r-pill);
+  background: var(--cream-100);
+  display: grid; place-items: center;
+  color: var(--ink-300);
+  border: 2px solid var(--cream-100);
+  z-index: 1;
+}
+.timeline-row.done .timeline-dot { background: var(--success-500); color: #fff; border-color: var(--success-500); }
+.timeline-row.active .timeline-dot {
+  background: var(--brand-live); color: #fff; border-color: var(--brand-live);
+  animation: pulse 1.6s infinite;
+}
+@keyframes pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(158,11,15,0.4); }
+  50% { box-shadow: 0 0 0 10px rgba(158,11,15,0); }
+}
+.timeline-row h4 { font-size: 15px; font-weight: 600; color: var(--ink-800); }
+.timeline-row p { font-size: 13px; color: var(--fg-muted); margin-top: 2px; }
+.timeline-row.upcoming h4 { color: var(--ink-400); }
+
+/* ─────────── LOYALTY DASHBOARD ─────────── */
+.dash-hero {
+  position: relative;
+  border-radius: var(--r-xl);
+  padding: var(--sp-10);
+  background:
+    radial-gradient(80% 60% at 80% 0%, rgba(255,255,255,0.12), transparent 60%),
+    linear-gradient(135deg, var(--brand-live) 0%, var(--red-700) 70%, var(--ink-800) 100%);
+  color: #fff;
+  overflow: hidden;
+  border: 1px solid var(--gold-400);
+}
+.dash-hero::before {
+  content: "";
+  position: absolute; right: -20px; top: -20px;
+  width: 160px; height: 160px; border-radius: var(--r-pill);
+  background: rgba(182,145,62,0.15);
+  filter: blur(40px);
+}
+.dash-hero .eyebrow { color: var(--gold-200); }
+.dash-hero h1 {
+  font-family: var(--display-family); font-weight: 500;
+  font-size: clamp(40px, 5vw, 64px); line-height: 1;
+  letter-spacing: -0.02em;
+  margin-top: var(--sp-3);
+  font-variant-numeric: tabular-nums;
+}
+.dash-hero .pts-label { font-size: 14px; color: rgba(255,255,255,0.7); margin-top: 4px; }
+.dash-hero .progress { margin-top: var(--sp-6); }
+.dash-hero .progress-bar {
+  position: relative;
+  height: 6px;
+  background: rgba(255,255,255,0.16);
+  border-radius: var(--r-pill);
+  overflow: hidden;
+}
+.dash-hero .progress-fill {
+  position: absolute; left: 0; top: 0; bottom: 0;
+  background: linear-gradient(90deg, var(--gold-300), var(--gold-200));
+  border-radius: var(--r-pill);
+  transition: width var(--dur-slow) var(--ease-out);
+}
+.dash-hero .prog-row { display: flex; justify-content: space-between; margin-top: var(--sp-3); font-size: 12px; color: rgba(255,255,255,0.7); }
+.dash-hero .prog-row strong { color: #fff; font-weight: 600; }
+
+.dash-tier-row {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--sp-2);
+  margin-top: var(--sp-6);
+}
+@media (min-width: 700px) { .dash-tier-row { grid-template-columns: repeat(4, 1fr); } }
+.tier-cell {
+  padding: var(--sp-3);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: var(--r-md);
+  font-size: 12px;
+  background: rgba(0,0,0,0.16);
+}
+.tier-cell.cur {
+  border-color: var(--gold-300);
+  background: rgba(182,145,62,0.18);
+}
+.tier-cell strong { display: block; font-family: var(--display-family); font-weight: 500; font-size: 18px; color: #fff; line-height: 1; }
+.tier-cell span { display: block; color: rgba(255,255,255,0.6); margin-top: 4px; }
+.tier-cell.cur span { color: var(--gold-200); opacity: var(--gold-opacity); }
+
+.dash-section { margin-top: var(--sp-10); }
+.dash-section h3 {
+  font-family: var(--display-family); font-weight: 500;
+  font-size: 28px;
+  color: var(--ink-800);
+  margin-bottom: var(--sp-5);
+}
+
+.dash-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--sp-4);
+}
+@media (min-width: 700px) { .dash-grid { grid-template-columns: repeat(3, 1fr); } }
+.dash-card {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  padding: var(--sp-5);
+}
+.dash-card h4 { font-size: 12px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-500); margin-bottom: var(--sp-2); }
+.dash-card .big {
+  font-family: var(--display-family); font-weight: 500;
+  font-size: 32px; color: var(--ink-800); line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+.dash-card .sm { font-size: 12px; color: var(--fg-muted); margin-top: 6px; }
+
+.history-list {
+  background: #fff; border: 1px solid var(--border); border-radius: var(--r-lg);
+  overflow: hidden;
+}
+.history-row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: var(--sp-3);
+  padding: var(--sp-4) var(--sp-5);
+  border-top: 1px solid var(--border);
+}
+.history-row:first-child { border-top: 0; }
+.history-row h5 { font-size: 14px; font-weight: 600; color: var(--ink-800); }
+.history-row p { font-size: 12px; color: var(--fg-muted); margin-top: 2px; }
+.history-row .pts { text-align: right; font-weight: 600; font-variant-numeric: tabular-nums; }
+.history-row.earn .pts { color: var(--success-700); }
+.history-row.redeem .pts { color: var(--brand-live); }
+.history-row.earn .pts::before { content: "+"; }
+
+/* ─────────── TWEAKS — small overrides ─────────── */
+[data-tweaks-open="true"] .view-cart { display: none; }
+
+/* responsive utility */
+.row { display: flex; align-items: center; gap: var(--sp-3); }
+.row.between { justify-content: space-between; }
+.col { display: flex; flex-direction: column; gap: var(--sp-3); }
+.muted { color: var(--fg-muted); }
+.tabular { font-variant-numeric: tabular-nums; }
+  </style>
+  <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+</head>
+<body>
+  <div id="root"></div>
+
+  <script>
+/* La Patisserie Express — catalog & domain data */
+
+const ASSET = "ds/assets";
+
+const CATEGORIES = [
+  { id: "hot",        name: "Hot drinks",          img: `${ASSET}/categories/hot-drinks.png` },
+  { id: "cold",       name: "Cold drinks",         img: `${ASSET}/categories/cold-drinks.png` },
+  { id: "frappes",    name: "Frappes",             img: `${ASSET}/categories/frappes.png` },
+  { id: "breakfast",  name: "Breakfast",           img: `${ASSET}/categories/breakfast.png` },
+  { id: "sandwiches", name: "Sandwiches & wraps",  img: `${ASSET}/categories/sandwiches.png` },
+  { id: "burgers",    name: "Burgers",             img: `${ASSET}/categories/burgers.png` },
+  { id: "meals",      name: "Meals",               img: `${ASSET}/categories/meals.png` },
+  { id: "signature",  name: "Signature",           img: `${ASSET}/categories/signature.png` },
+];
+
+const PRODUCTS = [
+  // Hot
+  { id: "p-african-coffee", name: "African coffee",  category: "hot", meta: "Single-origin · medium roast", price: 8500, img: `${ASSET}/products/african-coffee.png`, tag: "Signature", desc: "A medium-roasted single-origin from the slopes of Mt. Elgon. Notes of cocoa, brown sugar, and a long, syrupy finish.", drink: true },
+  { id: "p-americano",      name: "Americano",       category: "hot", meta: "Double shot · 8oz", price: 7000, img: `${ASSET}/products/americano.png`, desc: "Two shots of espresso lengthened with hot water. Clean, dark, unpretentious.", drink: true },
+  { id: "p-african-tea",    name: "African tea",     category: "hot", meta: "Loose leaf · spiced", price: 6000, img: `${ASSET}/products/african-tea.png`, desc: "Black tea simmered with whole spices and a touch of milk. Traditional, comforting.", drink: true },
+  { id: "p-cappuccino",     name: "Cappuccino",      category: "hot", meta: "Espresso · steamed milk · foam", price: 12000, img: `${ASSET}/products/americano.png`, desc: "A classic espresso topped with velvety steamed milk and a dome of foam.", drink: true },
+  { id: "p-latte",          name: "Café latte",      category: "hot", meta: "Espresso · steamed milk", price: 13000, img: `${ASSET}/products/americano.png`, desc: "Smooth, milky, comforting. Our house blend pulled long and steamed silky.", drink: true },
+  { id: "p-mocha",          name: "Mocha",           category: "hot", meta: "Espresso · cocoa · milk", price: 14000, img: `${ASSET}/products/african-coffee.png`, desc: "Espresso with house cocoa, steamed milk, and a swirl of cream.", drink: true },
+
+  // Cold
+  { id: "p-iced-latte",     name: "Iced latte",      category: "cold", meta: "Double shot · cold milk · ice", price: 14000, img: `${ASSET}/products/americano.png`, desc: "Two shots of espresso poured over cold milk and ice.", drink: true },
+  { id: "p-iced-am",        name: "Iced americano",  category: "cold", meta: "Double shot · cold water · ice", price: 11000, img: `${ASSET}/products/americano.png`, desc: "Espresso lengthened with cold water and plenty of ice.", drink: true },
+  { id: "p-cold-brew",      name: "Cold brew",       category: "cold", meta: "Steeped 18hrs · low acid", price: 15000, img: `${ASSET}/products/african-coffee.png`, tag: "Signature", desc: "Coarse-ground beans steeped overnight. Smooth, low-acid, naturally sweet.", drink: true },
+
+  // Frappes
+  { id: "p-vanilla-frappe", name: "Vanilla frappe",  category: "frappes", meta: "Blended · vanilla bean", price: 17000, img: `${ASSET}/products/americano.png`, desc: "Vanilla bean blended with espresso, milk and ice. Topped with cream.", drink: true },
+  { id: "p-mocha-frappe",   name: "Mocha frappe",    category: "frappes", meta: "Blended · cocoa", price: 18000, img: `${ASSET}/products/african-coffee.png`, desc: "Cocoa, espresso, milk and ice — blended thick.", drink: true },
+
+  // Breakfast
+  { id: "p-steak-eggs",     name: "American steak & eggs", category: "breakfast", meta: "Sirloin · 2 eggs · toast", price: 38000, img: `${ASSET}/products/steak-eggs.png`, desc: "Pan-seared sirloin with two eggs your way and buttered sourdough toast." },
+  { id: "p-full-english",   name: "Full English breakfast", category: "breakfast", meta: "Eggs · sausage · beans · toast", price: 32000, img: `${ASSET}/products/steak-eggs.png`, desc: "Two eggs, beef sausage, baked beans, grilled tomato, and buttered toast." },
+  { id: "p-pancakes",       name: "Buttermilk pancakes",   category: "breakfast", meta: "Stack of 3 · maple syrup", price: 22000, img: `${ASSET}/products/pastries.jpg`, desc: "Three fluffy buttermilk pancakes with maple syrup and butter." },
+
+  // Sandwiches
+  { id: "p-club",           name: "Patisserie club",  category: "sandwiches", meta: "Chicken · bacon · egg · tomato", price: 26000, img: `${ASSET}/products/snacks.jpg`, desc: "Triple-decker with grilled chicken, smoked bacon, sliced egg, and lettuce." },
+  { id: "p-veggie-wrap",    name: "Roasted veggie wrap", category: "sandwiches", meta: "Hummus · roasted veg", price: 18000, img: `${ASSET}/products/snacks.jpg`, desc: "Hummus, roasted aubergine, peppers, and rocket in a warm wrap." },
+
+  // Burgers
+  { id: "p-classic-burger", name: "Classic beef burger", category: "burgers", meta: "Aged beef · cheddar · brioche", price: 32000, img: `${ASSET}/products/snacks.jpg`, desc: "Aged beef patty with mature cheddar, lettuce, tomato, and house sauce on a brioche bun." },
+  { id: "p-chicken-burger", name: "Crispy chicken burger", category: "burgers", meta: "Buttermilk chicken · slaw", price: 28000, img: `${ASSET}/products/snacks.jpg`, desc: "Buttermilk-fried chicken with cabbage slaw and pickles on a brioche bun." },
+
+  // Meals (BBQ)
+  { id: "p-bbq-wings",      name: "BBQ chicken wings",   category: "meals", meta: "Smoky · serves 1–2", price: 24000, img: `${ASSET}/products/bbq-chicken-wings.png`, tag: "New", desc: "Slow-smoked chicken wings glazed in our house BBQ sauce. Comes with a side of slaw." },
+  { id: "p-bbq-beef",       name: "BBQ beef sausage",    category: "meals", meta: "House blend · 200g", price: 18000, img: `${ASSET}/products/bbq-beef-sausage.png`, desc: "Coarse-ground beef sausage, slow-grilled until the casing snaps." },
+  { id: "p-bbq-chicken-s",  name: "BBQ chicken sausages", category: "meals", meta: "Pack of 4", price: 16000, img: `${ASSET}/products/bbq-chicken-sausages.png`, desc: "Lean chicken sausages with a smoky, peppery finish." },
+
+  // Signature
+  { id: "p-almond-cookies", name: "Almond cookies",       category: "signature", meta: "Pack of 6 · hand-shaped", price: 12000, img: `${ASSET}/products/almond-cookies.png`, tag: "Signature", desc: "Lightly toasted almond cookies, baked in small batches every morning. Crisp edges, soft centres." },
+];
+
+const OUTLETS = [
+  { id: "o-forest",   name: "Forest Mall, Lugogo",       area: "Kampala",  type: "Flagship",      hours: "7:00 — 22:00", distance: 1.2 },
+  { id: "o-kololo",   name: "Kololo Hill",                area: "Kampala",  type: "Standard",      hours: "7:00 — 21:00", distance: 2.4 },
+  { id: "o-nakasero", name: "Nakasero",                   area: "Kampala",  type: "Standard",      hours: "7:00 — 22:00", distance: 3.1 },
+  { id: "o-bugolobi", name: "Bugolobi",                   area: "Kampala",  type: "Standard",      hours: "7:00 — 22:00", distance: 3.8 },
+  { id: "o-muyenga",  name: "Muyenga",                    area: "Kampala",  type: "Standard",      hours: "7:00 — 21:00", distance: 4.6 },
+  { id: "o-kabalagala",name:"Kabalagala",                 area: "Kampala",  type: "Standard",      hours: "8:00 — 22:00", distance: 5.0 },
+  { id: "o-bukoto",   name: "TotalEnergies Bukoto",       area: "Kampala",  type: "TotalEnergies", hours: "24 hours",     distance: 2.0 },
+  { id: "o-ntinda",   name: "TotalEnergies Ntinda",       area: "Kampala",  type: "TotalEnergies", hours: "24 hours",     distance: 4.2 },
+  { id: "o-wampewo",  name: "TotalEnergies Wampewo",      area: "Kampala",  type: "TotalEnergies", hours: "24 hours",     distance: 5.5 },
+  { id: "o-kireka",   name: "TotalEnergies Kireka",       area: "Kampala",  type: "TotalEnergies", hours: "24 hours",     distance: 7.8 },
+  { id: "o-nakwero",  name: "TotalEnergies Nakwero",      area: "Wakiso",   type: "TotalEnergies", hours: "24 hours",     distance: 12.0 },
+  { id: "o-entebbe",  name: "TotalEnergies Entebbe",      area: "Entebbe",  type: "TotalEnergies", hours: "24 hours",     distance: 28.0 },
+  { id: "o-buliisa",  name: "TotalEnergies Buliisa",      area: "Buliisa",  type: "TotalEnergies", hours: "24 hours",     distance: 240.0 },
+  { id: "o-kigumba",  name: "TotalEnergies Kigumba",      area: "Kiryandongo", type: "TotalEnergies", hours: "24 hours",  distance: 220.0 },
+  { id: "o-ihk",      name: "IHK Hospital",               area: "Kampala",  type: "Hospital",      hours: "8:00 — 18:00", distance: 6.0 },
+  { id: "o-rosewell", name: "Rosewell Hospital",          area: "Kampala",  type: "Hospital",      hours: "8:00 — 18:00", distance: 9.0 },
+  { id: "o-isu",      name: "International School of Uganda", area: "Kampala", type: "School",     hours: "7:30 — 16:00", distance: 8.0 },
+  { id: "o-galaxy",   name: "Galaxy International School", area: "Kampala", type: "School",        hours: "7:30 — 16:00", distance: 10.0 },
+  { id: "o-lubowa",   name: "Lubowa Karting",              area: "Wakiso",   type: "Standard",      hours: "10:00 — 22:00", distance: 14.0 },
+  { id: "o-mukono",   name: "Mukono",                      area: "Mukono",   type: "Standard",      hours: "8:00 — 21:00", distance: 18.0 },
+];
+
+// Address autocomplete suggestions (fake)
+const ADDRESS_SUGGESTIONS = [
+  "Kololo, Acacia Avenue",
+  "Kololo, Prince Charles Drive",
+  "Naguru, Bukoto Street",
+  "Bugolobi, Luthuli Avenue",
+  "Muyenga, Tank Hill Road",
+  "Nakasero, Kyadondo Road",
+  "Ntinda, Stretcher Road",
+  "Bukoto, Kira Road",
+  "Kabalagala, Ggaba Road",
+  "Lugogo, Old Port Bell Road",
+  "Mbuya, Mbuya Hill",
+  "Kisementi, Cooper Road",
+];
+
+// Loyalty mock account — used when user is logged in
+const MOCK_ACCOUNT = {
+  name: "Akello Nantongo",
+  phone: "703 631 215",
+  joined: "March 2026",
+  points: 3240,
+  lifetimePoints: 8240,
+  redeemed: 5000,
+  history: [
+    { id: "h1", date: "May 4",  outlet: "Forest Mall, Lugogo", total: 24500, points: 1225, kind: "earn" },
+    { id: "h2", date: "Apr 28", outlet: "Kololo Hill",         total: 18000, points: 900,  kind: "earn" },
+    { id: "h3", date: "Apr 14", outlet: "Bugolobi",            total: 5000,  points: 5000, kind: "redeem" },
+    { id: "h4", date: "Apr 12", outlet: "TotalEnergies Bukoto", total: 12000, points: 600,  kind: "earn" },
+    { id: "h5", date: "Apr 5",  outlet: "Forest Mall, Lugogo", total: 22300, points: 1115, kind: "earn" },
+  ],
+};
+
+const LOYALTY_TIERS = [
+  { id: "guest",    name: "Guest",    min: 0,     mult: 0.05, perk: "5% back on every order" },
+  { id: "regular",  name: "Regular",  min: 5000,  mult: 0.06, perk: "6% back · early access to specials" },
+  { id: "patron",   name: "Patron",   min: 15000, mult: 0.07, perk: "7% back · birthday treat · priority pickup" },
+  { id: "tribe",    name: "Tribe",    min: 40000, mult: 0.08, perk: "8% back · monthly free pastry · concierge" },
+];
+
+window.LP_DATA = {
+  CATEGORIES, PRODUCTS, OUTLETS, ADDRESS_SUGGESTIONS, MOCK_ACCOUNT, LOYALTY_TIERS,
+  formatUGX: (n) => "UGX " + Number(n).toLocaleString(),
+};
+  </script>
+
+  <script type="text/babel">
+/* Tiny icon set — inline SVG, stroke-based, 1.75 stroke. */
+const Icon = ({ name, size = 20, ...rest }) => {
+  const props = {
+    width: size, height: size,
+    viewBox: "0 0 24 24",
+    fill: "none",
+    stroke: "currentColor",
+    strokeWidth: 1.75,
+    strokeLinecap: "round",
+    strokeLinejoin: "round",
+    ...rest,
+  };
+  switch (name) {
+    case "bag":
+      return (
+        <svg {...props}>
+          <path d="M6 7V5a4 4 0 0 1 8 0v2"/>
+          <path d="M3 7h14l-1 13a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2L3 7z" transform="translate(2 0)"/>
+        </svg>
+      );
+    case "user":
+      return (
+        <svg {...props}>
+          <circle cx="12" cy="8" r="4"/>
+          <path d="M4 21a8 8 0 0 1 16 0"/>
+        </svg>
+      );
+    case "search":
+      return (
+        <svg {...props}>
+          <circle cx="11" cy="11" r="7"/>
+          <path d="m21 21-4.35-4.35"/>
+        </svg>
+      );
+    case "menu":
+      return (
+        <svg {...props}>
+          <path d="M3 6h18M3 12h18M3 18h18"/>
+        </svg>
+      );
+    case "close":
+      return (
+        <svg {...props}>
+          <path d="M18 6 6 18M6 6l12 12"/>
+        </svg>
+      );
+    case "arrow-left":
+      return (
+        <svg {...props}>
+          <path d="m12 19-7-7 7-7"/>
+          <path d="M19 12H5"/>
+        </svg>
+      );
+    case "arrow-right":
+      return (
+        <svg {...props}>
+          <path d="M5 12h14"/>
+          <path d="m12 5 7 7-7 7"/>
+        </svg>
+      );
+    case "pin":
+      return (
+        <svg {...props}>
+          <path d="M12 21s-7-7.5-7-12a7 7 0 0 1 14 0c0 4.5-7 12-7 12z"/>
+          <circle cx="12" cy="9" r="2.5"/>
+        </svg>
+      );
+    case "store":
+      return (
+        <svg {...props}>
+          <path d="M3 9l1.5-5h15L21 9"/>
+          <path d="M3 9v11a1 1 0 0 0 1 1h16a1 1 0 0 0 1-1V9"/>
+          <path d="M3 9c0 1.5 1 3 3 3s3-1.5 3-3M9 9c0 1.5 1 3 3 3s3-1.5 3-3M15 9c0 1.5 1 3 3 3s3-1.5 3-3"/>
+        </svg>
+      );
+    case "scooter":
+      return (
+        <svg {...props}>
+          <circle cx="6" cy="17" r="3"/>
+          <circle cx="18" cy="17" r="3"/>
+          <path d="M9 17h6M14 9h3l1 5"/>
+          <path d="M9 17l3-9h3"/>
+        </svg>
+      );
+    case "clock":
+      return (
+        <svg {...props}>
+          <circle cx="12" cy="12" r="9"/>
+          <path d="M12 7v5l3 2"/>
+        </svg>
+      );
+    case "star":
+      return (
+        <svg {...props}>
+          <path d="M12 3l2.7 5.5 6.1.9-4.4 4.3 1 6-5.4-2.8L6.6 19.7l1-6L3.2 9.4l6.1-.9z"/>
+        </svg>
+      );
+    case "spark":
+      return (
+        <svg {...props}>
+          <path d="M12 2v6M12 16v6M2 12h6M16 12h6M5 5l4 4M15 15l4 4M19 5l-4 4M9 15l-4 4"/>
+        </svg>
+      );
+    case "check":
+      return (
+        <svg {...props}>
+          <path d="m20 6-11 11L4 12"/>
+        </svg>
+      );
+    case "check-circle":
+      return (
+        <svg {...props}>
+          <circle cx="12" cy="12" r="9"/>
+          <path d="m9 12 2 2 4-4"/>
+        </svg>
+      );
+    case "phone":
+      return (
+        <svg {...props}>
+          <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+        </svg>
+      );
+    case "card":
+      return (
+        <svg {...props}>
+          <rect x="3" y="6" width="18" height="13" rx="2"/>
+          <path d="M3 10h18M7 15h3"/>
+        </svg>
+      );
+    case "cash":
+      return (
+        <svg {...props}>
+          <rect x="3" y="6" width="18" height="12" rx="2"/>
+          <circle cx="12" cy="12" r="3"/>
+          <path d="M6 9v.01M18 15v.01"/>
+        </svg>
+      );
+    case "wallet":
+      return (
+        <svg {...props}>
+          <path d="M20 12V8a2 2 0 0 0-2-2H5a2 2 0 0 1-2-2 2 2 0 0 1 2-2h14"/>
+          <path d="M3 5v15a2 2 0 0 0 2 2h15a2 2 0 0 0 2-2v-3"/>
+          <circle cx="17" cy="14" r="1.5"/>
+        </svg>
+      );
+    case "home":
+      return (
+        <svg {...props}>
+          <path d="M3 12l9-9 9 9"/>
+          <path d="M5 10v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V10"/>
+          <path d="M10 21v-6h4v6"/>
+        </svg>
+      );
+    case "briefcase":
+      return (
+        <svg {...props}>
+          <rect x="3" y="7" width="18" height="13" rx="2"/>
+          <path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2"/>
+          <path d="M3 12h18"/>
+        </svg>
+      );
+    case "plus":
+      return <svg {...props}><path d="M12 5v14M5 12h14"/></svg>;
+    case "minus":
+      return <svg {...props}><path d="M5 12h14"/></svg>;
+    case "trash":
+      return <svg {...props}><path d="M3 6h18M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/></svg>;
+    case "info":
+      return <svg {...props}><circle cx="12" cy="12" r="9"/><path d="M12 8h.01M11 12h1v4h1"/></svg>;
+    case "gift":
+      return (
+        <svg {...props}>
+          <rect x="3" y="8" width="18" height="13" rx="1"/>
+          <path d="M12 8v13M3 12h18"/>
+          <path d="M12 8c-2-3-7-1-5 1 1 1 5 0 5 0zM12 8c2-3 7-1 5 1-1 1-5 0-5 0z"/>
+        </svg>
+      );
+    case "leaf":
+      return <svg {...props}><path d="M11 20A7 7 0 0 1 4 13V5l8 1c5 .5 8 4 8 9a7 7 0 0 1-9 5z"/><path d="M4 5l16 16"/></svg>;
+    case "x":
+      return <svg {...props}><path d="M18 6 6 18M6 6l12 12"/></svg>;
+    case "circle":
+      return <svg {...props}><circle cx="12" cy="12" r="4" fill="currentColor"/></svg>;
+    case "chevron-right":
+      return <svg {...props}><path d="m9 18 6-6-6-6"/></svg>;
+    case "chevron-down":
+      return <svg {...props}><path d="m6 9 6 6 6-6"/></svg>;
+    default:
+      return null;
+  }
+};
+
+window.Icon = Icon;
+
+/* Shared Nav, Footer, Toast */
+const { useState, useEffect, useRef, useMemo } = React;
+
+const Nav = ({ current, cartCount, onNav, onCart, onLoyalty, account, onAccount }) => {
+  return (
+    <nav className="nav" data-comment-anchor="nav">
+      <div className="container nav-inner">
+        <button className="nav-brand" onClick={() => onNav("landing")} aria-label="La Patisserie home">
+          <img src="ds/assets/logo.png" alt="La Patisserie Express" />
+          <div className="wm">
+            La&nbsp;Patisserie
+            <small>EST · KAMPALA</small>
+          </div>
+        </button>
+        <div className="nav-links">
+          <button className={current === "menu" || current === "mode" ? "active" : ""} onClick={() => onNav("mode")}>Order</button>
+          <button className={current === "loyalty-dash" ? "active" : ""} onClick={onLoyalty}>Loyalty</button>
+          <button onClick={() => onNav("outlet")}>Outlets</button>
+          <button onClick={() => onNav("landing")}>Our story</button>
+        </div>
+        <div className="nav-actions">
+          <button className="nav-icon-btn" aria-label="Search"><Icon name="search" /></button>
+          <button className="nav-icon-btn" aria-label="Account" onClick={onAccount}><Icon name="user" /></button>
+          <button className="nav-icon-btn" aria-label="Cart" onClick={onCart} data-active={cartCount > 0}>
+            <Icon name="bag" />
+            {cartCount > 0 && <span className="cart-badge">{cartCount}</span>}
+          </button>
+        </div>
+      </div>
+    </nav>
+  );
+};
+
+const Footer = () => (
+  <footer className="footer">
+    <div className="container">
+      <div className="footer-grid">
+        <div>
+          <div className="brandwm">La Patisserie</div>
+          <p className="brand-tag">Great food. Premium coffee. Twenty outlets across Kampala, Entebbe, and Mukono — and a delivery scooter never far away.</p>
+        </div>
+        <div>
+          <h5>Visit</h5>
+          <ul>
+            <li><a>Outlets</a></li>
+            <li><a>Catering</a></li>
+            <li><a>Wholesale</a></li>
+          </ul>
+        </div>
+        <div>
+          <h5>Order</h5>
+          <ul>
+            <li><a>Pickup</a></li>
+            <li><a>Delivery</a></li>
+            <li><a>Signature Collection</a></li>
+          </ul>
+        </div>
+        <div>
+          <h5>Patisserie tribe</h5>
+          <ul>
+            <li><a>Loyalty program</a></li>
+            <li><a>Refer a friend</a></li>
+            <li><a>Sign in</a></li>
+          </ul>
+        </div>
+      </div>
+      <div className="footer-bottom">
+        <span>© 2026 La Patisserie Express · Kampala, Uganda</span>
+        <span>Privacy · Terms · Accessibility</span>
+      </div>
+    </div>
+  </footer>
+);
+
+const Toast = ({ msg }) => (
+  <div className={"toast " + (msg ? "show" : "")}>{msg || ""}</div>
+);
+
+window.LP_Nav = Nav;
+window.LP_Footer = Footer;
+window.LP_Toast = Toast;
+
+/* ── ProductImg — renders image with category-coloured SVG fallback ── */
+const CAT_PALETTE = {
+  hot:        ['#F8DEDE', '#9E0B0F'],
+  cold:       ['#DCE8F5', '#2B5C8E'],
+  frappes:    ['#EDE0F5', '#7B4EA0'],
+  breakfast:  ['#FFF3DC', '#A06820'],
+  sandwiches: ['#DCF0E4', '#3A7A50'],
+  burgers:    ['#F5E8DC', '#8B4020'],
+  meals:      ['#EDE8DC', '#6B5030'],
+  signature:  ['#F5F0DC', '#8C6E2B'],
+};
+const ProductImg = ({ src, alt, name, category, style, ...rest }) => {
+  const [err, setErr] = useState(false);
+  const [bg, fg] = CAT_PALETTE[category] || ['#F2E4D3', '#5C5C5C'];
+  const initials = (name || alt || '?')
+    .split(' ').slice(0, 2).map(w => w[0]).join('').toUpperCase();
+  if (err) {
+    return (
+      <svg viewBox="0 0 100 100" style={{ width: '100%', height: '100%', display: 'block', ...style }}
+           xmlns="http://www.w3.org/2000/svg" aria-label={alt}>
+        <rect width="100" height="100" fill={bg}/>
+        <text x="50" y="60" textAnchor="middle" fontSize="38" fontWeight="600"
+              fill={fg} fontFamily="Georgia,serif">{initials}</text>
+      </svg>
+    );
+  }
+  return <img src={src} alt={alt} style={style} {...rest} onError={() => setErr(true)} />;
+};
+window.ProductImg = ProductImg;
+
+/* Loyalty signup modal + dashboard */
+
+const LoyaltyModal = ({ open, onClose, onSubmit, prefill }) => {
+  const [name, setName] = useState(prefill?.name || "");
+  const [phone, setPhone] = useState(prefill?.phone || "");
+  const [email, setEmail] = useState("");
+  const [errs, setErrs] = useState({});
+
+  useEffect(() => { if (open) setErrs({}); }, [open]);
+
+  const submit = (e) => {
+    e.preventDefault();
+    const err = {};
+    if (!name.trim() || name.trim().length < 2) err.name = "Please enter your full name.";
+    const cleanPhone = phone.replace(/\D/g, "");
+    if (cleanPhone.length !== 9) err.phone = "Enter 9 digits, without the leading zero.";
+    if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) err.email = "That email looks off.";
+    setErrs(err);
+    if (Object.keys(err).length === 0) onSubmit({ name: name.trim(), phone: cleanPhone, email: email.trim() });
+  };
+
+  if (!open) return null;
+
+  return (
+    <div className="modal-backdrop" onClick={onClose} data-comment-anchor="loyalty-modal">
+      <article
+        className="product-modal"
+        style={{ maxWidth: 540, borderRadius: "var(--r-xl)" }}
+        onClick={(e) => e.stopPropagation()}
+        role="dialog"
+        aria-modal="true"
+      >
+        <div style={{
+          padding: "var(--sp-8) var(--sp-8) var(--sp-3)",
+          borderBottom: "1px solid var(--border)",
+          display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: "var(--sp-4)"
+        }}>
+          <div>
+            <div className="eyebrow">The Patisserie Tribe</div>
+            <h2 className="serif" style={{
+              fontFamily: "var(--display-family)", fontWeight: 500,
+              fontSize: "clamp(26px, 4vw, 36px)", lineHeight: 1.1, marginTop: 8, color: "var(--ink-800)"
+            }}>
+              Join in <em style={{ fontStyle: "italic", color: "var(--brand-live)" }}>30 seconds</em>.
+            </h2>
+            <p className="muted" style={{ marginTop: 8, fontSize: 14 }}>
+              We just need your name and phone — start earning from your next order.
+            </p>
+          </div>
+          <button className="modal-close" onClick={onClose} style={{ position: "static" }} aria-label="Close">
+            <Icon name="close" size={18} />
+          </button>
+        </div>
+
+        <form className="modal-body" onSubmit={submit} style={{ paddingBottom: "var(--sp-6)" }} noValidate>
+          <div className="field">
+            <label className="lbl" htmlFor="loy-name">Full name</label>
+            <input
+              id="loy-name"
+              className={"input " + (errs.name ? "invalid" : "")}
+              placeholder="e.g. Akello Nantongo"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              autoComplete="name"
+              required
+            />
+            {errs.name && <div className="hint" style={{ color: "var(--error-500)" }}>{errs.name}</div>}
+          </div>
+
+          <div className="field">
+            <label className="lbl" htmlFor="loy-phone">Phone number</label>
+            <div className={"phone-wrap " + (errs.phone ? "invalid" : "")} style={errs.phone ? { borderColor: "var(--error-500)", background: "#FFF5F5" } : null}>
+              <span className="phone-prefix">🇺🇬 +256</span>
+              <input
+                id="loy-phone"
+                className="input"
+                inputMode="numeric"
+                maxLength={9}
+                placeholder="703 631 215"
+                value={phone}
+                onChange={(e) => setPhone(e.target.value.replace(/\D/g, "").slice(0, 9))}
+                autoComplete="tel"
+                required
+              />
+            </div>
+            <div className="hint" style={errs.phone ? { color: "var(--error-500)" } : null}>
+              {errs.phone || "Enter 9 digits, without the leading zero."}
+            </div>
+          </div>
+
+          <div className="field">
+            <label className="lbl" htmlFor="loy-email">Email <span className="muted" style={{ textTransform: "none", letterSpacing: 0, fontWeight: 500 }}>(optional)</span></label>
+            <input
+              id="loy-email"
+              className={"input " + (errs.email ? "invalid" : "")}
+              type="email"
+              placeholder="jane@example.com"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              autoComplete="email"
+            />
+            {errs.email && <div className="hint" style={{ color: "var(--error-500)" }}>{errs.email}</div>}
+          </div>
+
+          <button className="btn full lg" type="submit" style={{ marginTop: 8 }}>Create my account</button>
+          <p className="muted" style={{ fontSize: 12, textAlign: "center", marginTop: 14, lineHeight: 1.5 }}>
+            By joining, you agree to receive order updates by SMS. We'll never share your number.
+          </p>
+        </form>
+      </article>
+    </div>
+  );
+};
+
+/* ─── Loyalty Dashboard ─── */
+const LoyaltyDashboard = ({ account, onBack, onOrder }) => {
+  const tiers = window.LP_DATA.LOYALTY_TIERS;
+  const lifetime = account.lifetimePoints;
+  // current tier — last tier whose min ≤ lifetime
+  let curIdx = 0;
+  for (let i = 0; i < tiers.length; i++) if (lifetime >= tiers[i].min) curIdx = i;
+  const cur = tiers[curIdx];
+  const next = tiers[curIdx + 1];
+  const segMin = cur.min;
+  const segMax = next ? next.min : Math.max(lifetime, cur.min) * 1.2;
+  const pct = next ? Math.min(100, Math.max(0, ((lifetime - segMin) / (segMax - segMin)) * 100)) : 100;
+
+  const fmt = window.LP_DATA.formatUGX;
+
+  return (
+    <div className="page" data-screen-label="03 Loyalty Dashboard">
+      <div className="container back-row">
+        <button className="back-btn" onClick={onBack}><Icon name="arrow-left" size={16}/> Home</button>
+      </div>
+
+      <div className="container" style={{ paddingTop: "var(--sp-4)", paddingBottom: "var(--sp-12)" }}>
+        <div className="dash-hero">
+          <div className="eyebrow">Welcome back, {account.name.split(" ")[0]}</div>
+          <h1 className="tabular">{Number(account.points).toLocaleString()}</h1>
+          <div className="pts-label">points available · {fmt(Math.floor(account.points))} value</div>
+
+          <div className="progress">
+            <div className="progress-bar">
+              <div className="progress-fill" style={{ width: pct + "%" }}/>
+            </div>
+            <div className="prog-row">
+              <span><strong>{cur.name}</strong> · {cur.perk}</span>
+              {next
+                ? <span>{(next.min - lifetime).toLocaleString()} pts to <strong>{next.name}</strong></span>
+                : <span>Top tier achieved</span>}
+            </div>
+          </div>
+
+          <div className="dash-tier-row">
+            {tiers.map((t, i) => (
+              <div key={t.id} className={"tier-cell " + (i === curIdx ? "cur" : "")}>
+                <strong>{t.name}</strong>
+                <span>{t.min === 0 ? "Start" : `${t.min.toLocaleString()}+`} · {Math.round(t.mult * 100)}% back</span>
+              </div>
+            ))}
+          </div>
+
+          <div style={{ display: "flex", gap: "var(--sp-3)", marginTop: "var(--sp-6)", flexWrap: "wrap" }}>
+            <button className="btn gold" onClick={onOrder}>Redeem at checkout</button>
+            <button className="btn secondary" onClick={onOrder} style={{ color: "#fff", borderColor: "rgba(255,255,255,0.4)" }}>Place an order</button>
+          </div>
+        </div>
+
+        <div className="dash-section">
+          <h3 className="serif">Your stats</h3>
+          <div className="dash-grid">
+            <div className="dash-card">
+              <h4>Points balance</h4>
+              <div className="big tabular">{account.points.toLocaleString()}</div>
+              <div className="sm">≈ {fmt(Math.floor(account.points))} value</div>
+            </div>
+            <div className="dash-card">
+              <h4>Lifetime points</h4>
+              <div className="big tabular">{account.lifetimePoints.toLocaleString()}</div>
+              <div className="sm">Since joining {account.joined}</div>
+            </div>
+            <div className="dash-card">
+              <h4>Total redeemed</h4>
+              <div className="big tabular">{fmt(account.redeemed)}</div>
+              <div className="sm">Lifetime savings</div>
+            </div>
+          </div>
+        </div>
+
+        <div className="dash-section">
+          <div className="row between" style={{ marginBottom: "var(--sp-5)" }}>
+            <h3 className="serif" style={{ margin: 0 }}>Recent activity</h3>
+            <button className="btn ghost" type="button">See all →</button>
+          </div>
+          <div className="history-list">
+            {account.history.map(h => (
+              <div key={h.id} className={"history-row " + h.kind}>
+                <div>
+                  <h5>{h.kind === "redeem" ? "Redeemed UGX 5,000" : "Order at " + h.outlet}</h5>
+                  <p>{h.date} · {h.kind === "redeem" ? h.outlet : `Spent ${fmt(h.total)}`}</p>
+                </div>
+                <div className="pts">{h.points.toLocaleString()} pts</div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="dash-section">
+          <h3 className="serif">Perks at your tier</h3>
+          <div className="dash-grid">
+            <div className="dash-card">
+              <div className="badge gold" style={{ marginBottom: 12 }}>Active</div>
+              <h5 style={{ fontFamily: "var(--display-family)", fontWeight: 500, fontSize: 22, color: "var(--ink-800)" }}>5% back forever</h5>
+              <p className="muted" style={{ fontSize: 13, marginTop: 6 }}>Every order earns points, no expiry.</p>
+            </div>
+            <div className="dash-card">
+              <div className="badge gold" style={{ marginBottom: 12 }}>{curIdx >= 1 ? "Active" : "Patron tier"}</div>
+              <h5 style={{ fontFamily: "var(--display-family)", fontWeight: 500, fontSize: 22, color: "var(--ink-800)" }}>Birthday treat</h5>
+              <p className="muted" style={{ fontSize: 13, marginTop: 6 }}>A complimentary pastry on us — every year.</p>
+            </div>
+            <div className="dash-card">
+              <div className="badge gold" style={{ marginBottom: 12 }}>{curIdx >= 2 ? "Active" : "Tribe tier"}</div>
+              <h5 style={{ fontFamily: "var(--display-family)", fontWeight: 500, fontSize: 22, color: "var(--ink-800)" }}>Priority pickup</h5>
+              <p className="muted" style={{ fontSize: 13, marginTop: 6 }}>Skip ahead in the queue at any outlet.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+window.LP_LoyaltyModal = LoyaltyModal;
+window.LP_LoyaltyDashboard = LoyaltyDashboard;
+
+/* Landing page — hero (3 variants), favourites strip, loyalty (3 variants) */
+
+const HeroFullBleed = ({ onOrder, onLoyalty }) => (
+  <section className="hero" data-comment-anchor="hero">
+    <div className="hero-photo">
+      <img src="ds/assets/hero-coffee.jpg" alt="" />
+    </div>
+    <div className="container">
+      <div className="hero-inner">
+        <div className="hero-eyebrow">Est · Kampala · 2018</div>
+        <h1>Great food.<br/><em>Seriously good</em> coffee.</h1>
+        <p className="lead-h">Handcrafted drinks, pastries baked at dawn, and hearty meals — ready for pickup or delivery from twenty outlets across town.</p>
+        <div className="hero-ctas">
+          <button className="btn lg" onClick={onOrder}>Start your order</button>
+          <button className="btn secondary lg" onClick={onLoyalty}>Join the tribe</button>
+        </div>
+      </div>
+    </div>
+  </section>
+);
+
+const HeroEditorial = ({ onOrder, onLoyalty }) => (
+  <section className="hero editorial" data-comment-anchor="hero">
+    <div className="container">
+      <div className="hero-inner">
+        <div className="editorial-grid">
+          <div>
+            <div className="hero-eyebrow">A Patisserie · Express</div>
+            <h1>Great food.<br/><em>Seriously good</em><br/>coffee.</h1>
+            <p className="lead-h">A Parisian patisserie with a Kampala soul. Single-origin coffee, pastries baked at dawn, and dishes that earn the table they're set on.</p>
+            <div className="hero-ctas">
+              <button className="btn lg" onClick={onOrder}>Start your order</button>
+              <button className="btn secondary lg" onClick={onLoyalty}>Join the tribe</button>
+            </div>
+          </div>
+          <div className="ed-stack">
+            <img src="ds/assets/hero-coffee.jpg" alt="" />
+            <img src="ds/assets/products/almond-cookies.png" alt="" style={{ background: "var(--cream-100)", padding: "18%" }} />
+            <img src="ds/assets/products/african-coffee.png" alt="" style={{ background: "var(--cream-100)", padding: "18%" }} />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+);
+
+const HeroSplit = ({ onOrder, onLoyalty }) => (
+  <section className="hero split" data-comment-anchor="hero">
+    <div className="hero-split-grid">
+      <div className="hero-side-text">
+        <div className="hero-eyebrow" style={{ color: "var(--gold-300)" }}>The Patisserie · Kampala</div>
+        <h1 style={{ color: "#fff" }}>Great food.<br/><em style={{ color: "var(--gold-200)" }}>Seriously good</em><br/>coffee.</h1>
+        <p className="lead-h" style={{ color: "rgba(255,255,255,0.72)" }}>Twenty outlets, one obsession. Order ahead for pickup in five minutes — or have it brought to your door.</p>
+        <div className="hero-ctas">
+          <button className="btn lg" onClick={onOrder}>Start your order</button>
+          <button className="btn secondary lg" onClick={onLoyalty} style={{ color: "#fff", borderColor: "rgba(255,255,255,0.4)" }}>Join the tribe</button>
+        </div>
+      </div>
+      <div
+        className="hero-side-img"
+        style={{ backgroundImage: "url(ds/assets/hero-coffee.jpg)" }}
+        aria-hidden="true"
+      />
+    </div>
+  </section>
+);
+
+const TrustBar = () => (
+  <div className="trust-bar">
+    <div className="container">
+      <div className="trust-bar-inner">
+        <div className="trust-item"><span className="gold-tick">·</span><strong>5–10 min</strong> pickup</div>
+        <div className="trust-item"><span className="gold-tick">·</span><strong>30–45 min</strong> delivery</div>
+        <div className="trust-item"><span className="gold-tick">·</span>Earn <strong>5%</strong> back</div>
+        <div className="trust-item"><span className="gold-tick">·</span><strong>20+</strong> outlets</div>
+      </div>
+    </div>
+  </div>
+);
+
+const FavouritesStrip = ({ products, onOrder }) => {
+  const FAVS = ["p-cappuccino", "p-iced-latte", "p-full-english", "p-classic-burger", "p-almond-cookies", "p-bbq-wings"];
+  const items = FAVS.map(id => products.find(p => p.id === id)).filter(Boolean);
+  return (
+    <section className="section">
+      <div className="container">
+        <div className="section-head" style={{ alignItems: "flex-start", textAlign: "left", marginBottom: 32 }}>
+          <div className="row between" style={{ width: "100%", flexWrap: "wrap", gap: 16 }}>
+            <div>
+              <div className="eyebrow">Customer favourites</div>
+              <h2 className="serif" style={{ marginTop: 8, fontSize: "clamp(28px, 3.5vw, 40px)", lineHeight: 1.1, fontFamily: "var(--display-family)", fontWeight: 500 }}>
+                What everyone's <em style={{ fontStyle: "italic", color: "var(--brand-live)" }}>ordering today</em>
+              </h2>
+            </div>
+            <button className="btn secondary" onClick={onOrder}>See full menu →</button>
+          </div>
+        </div>
+        <div className="fav-grid">
+          {items.map(p => (
+            <button key={p.id} className="fav-item" onClick={onOrder} type="button">
+              <span className="fav-art"><ProductImg src={p.img} alt={p.name} name={p.name} category={p.category} style={{ width: '100%', height: '100%', objectFit: 'contain' }} /></span>
+              <h4>{p.name}</h4>
+              <div className="price-mini">{window.LP_DATA.formatUGX(p.price)}</div>
+            </button>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
+
+/* ─── LOYALTY VARIANTS ─── */
+const LoyaltyBenefitRow = ({ children }) => (
+  <li className="loy-benefit-row">
+    <Icon name="check" size={20} />
+    <span>{children}</span>
+  </li>
+);
+
+const LoyaltyContent = ({ onSignup, account, onDash }) => (
+  <>
+    <div className="loy-head">
+      <div className="eyebrow">The Patisserie Tribe · Loyalty</div>
+      <h3 className="serif">Earn <em style={{ fontStyle: "italic", color: "var(--brand-live)" }}>5% back</em> on every order.</h3>
+      <p>Every shilling you spend earns points. Hit 5,000 points to redeem UGX 5,000 off — and unlock priority pickup and birthday treats as you climb tiers.</p>
+    </div>
+    <div className="loy-body">
+      <ul className="loy-benefits">
+        <LoyaltyBenefitRow><b>Sign up free</b> — name and phone number, that's all.</LoyaltyBenefitRow>
+        <LoyaltyBenefitRow>Every purchase earns <b>5% back</b> as points.</LoyaltyBenefitRow>
+        <LoyaltyBenefitRow>Reach 5,000 → <b>redeem UGX 5,000</b> off any order.</LoyaltyBenefitRow>
+        <LoyaltyBenefitRow><b>Climb tiers</b> for priority pickup, birthday treats and more.</LoyaltyBenefitRow>
+      </ul>
+      <div>
+        <div className="loy-step-row">
+          <div className="loy-step">
+            <strong>UGX 10K</strong>
+            <span>You spend</span>
+          </div>
+          <div className="loy-arrow">→</div>
+          <div className="loy-step">
+            <strong>500 pts</strong>
+            <span>You earn</span>
+          </div>
+        </div>
+        <div className="loy-redeem">
+          <strong>5,000 pts</strong>
+          <span>= UGX 5,000 off your bill</span>
+        </div>
+        <div className="loy-actions">
+          {account
+            ? <button className="btn full lg" onClick={onDash}>View my points</button>
+            : <button className="btn full lg" onClick={onSignup}>Join the tribe — it's free</button>}
+        </div>
+      </div>
+    </div>
+  </>
+);
+
+const LoyaltySection = ({ variant = "light", onSignup, account, onDash }) => (
+  <section className="loyalty-section surface-cream">
+    <div className="container">
+      <div className={"loyalty-card " + variant} id="loyalty-section">
+        <LoyaltyContent onSignup={onSignup} account={account} onDash={onDash} />
+      </div>
+    </div>
+  </section>
+);
+
+/* About strip */
+const AboutStrip = () => (
+  <section className="section warm">
+    <div className="container">
+      <div style={{ maxWidth: 720, margin: "0 auto", textAlign: "center" }}>
+        <div className="eyebrow">More than just coffee</div>
+        <h2 className="serif" style={{ marginTop: 12, fontFamily: "var(--display-family)", fontWeight: 500, fontSize: "clamp(32px, 4vw, 48px)", letterSpacing: "-0.015em", lineHeight: 1.08 }}>
+          Premium coffee, fresh food, pastries baked&nbsp;at&nbsp;dawn.
+        </h2>
+        <hr className="gold-rule" style={{ width: 60, margin: "32px auto", height: 1 }} />
+        <p className="muted" style={{ fontSize: 16, lineHeight: 1.7, maxWidth: 540, margin: "0 auto" }}>
+          La Patisserie Express began as a small bakery in Kampala. Today, twenty outlets later, the obsession is still the same — quietly excellent food, served warmly.
+        </p>
+      </div>
+    </div>
+  </section>
+);
+
+const Landing = ({ products, onOrder, onLoyaltySignup, account, onDash, heroVariant, loyaltyVariant }) => {
+  const Hero = heroVariant === "editorial" ? HeroEditorial
+            : heroVariant === "split"     ? HeroSplit
+            : HeroFullBleed;
+  return (
+    <div className="page" data-screen-label="01 Landing">
+      <Hero onOrder={onOrder} onLoyalty={() => {
+        const el = document.getElementById("loyalty-section");
+        if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+      }} />
+      <TrustBar />
+      <FavouritesStrip products={products} onOrder={onOrder} />
+      <AboutStrip />
+      <LoyaltySection variant={loyaltyVariant} onSignup={onLoyaltySignup} account={account} onDash={onDash} />
+    </div>
+  );
+};
+
+window.LP_Landing = Landing;
+
+/* Mode choice + Outlets picker + Delivery address */
+
+const ModeChoice = ({ onBack, onPick }) => (
+  <div className="page" data-screen-label="04 Mode Choice">
+    <div className="container back-row">
+      <button className="back-btn" onClick={onBack}><Icon name="arrow-left" size={16}/> Home</button>
+    </div>
+    <section className="banner">
+      <div className="container">
+        <div className="eyebrow">Step 1 of 3 · Pickup or Delivery</div>
+        <h1>How would you<br/><em>like it?</em></h1>
+        <p>Pickup is fastest. Delivery brings it to your door — wherever your door happens to be.</p>
+      </div>
+    </section>
+    <div className="container">
+      <div className="mode-grid">
+        <button className="mode-card" onClick={() => onPick("pickup")} type="button">
+          <div className="mode-illu" aria-hidden="true">
+            <Icon name="store" size={64} style={{ color: "var(--brand-live)" }} />
+          </div>
+          <div>
+            <div className="eyebrow">Express · 5–10 min</div>
+            <h3 style={{ marginTop: 8 }}>Pickup</h3>
+            <p style={{ marginTop: 12 }}>Order ahead and skip the queue at your favourite outlet. Walk in, grab and go.</p>
+            <div className="meta-row" style={{ marginTop: 16 }}>
+              <span>Free</span>
+              <span>20+ outlets</span>
+              <span>Pay on collection</span>
+            </div>
+          </div>
+          <div className="row between" style={{ marginTop: 8 }}>
+            <span className="muted">Choose an outlet next</span>
+            <Icon name="arrow-right" size={20} />
+          </div>
+        </button>
+
+        <button className="mode-card" onClick={() => onPick("delivery")} type="button">
+          <div className="mode-illu" aria-hidden="true">
+            <Icon name="scooter" size={64} style={{ color: "var(--brand-live)" }} />
+          </div>
+          <div>
+            <div className="eyebrow">Door-to-door · 30–45 min</div>
+            <h3 style={{ marginTop: 8 }}>Delivery</h3>
+            <p style={{ marginTop: 12 }}>Hot, fresh, and brought to your door by a Patisserie scooter. We match you to the closest outlet.</p>
+            <div className="meta-row" style={{ marginTop: 16 }}>
+              <span>UGX 5,000 fee</span>
+              <span>Kampala area</span>
+              <span>Track live</span>
+            </div>
+          </div>
+          <div className="row between" style={{ marginTop: 8 }}>
+            <span className="muted">Enter address next</span>
+            <Icon name="arrow-right" size={20} />
+          </div>
+        </button>
+      </div>
+    </div>
+  </div>
+);
+
+/* ─── OUTLET PICKER ─── */
+const OutletPicker = ({ outlets, onBack, onPick }) => {
+  const [q, setQ] = useState("");
+  const [area, setArea] = useState("All");
+
+  const areas = useMemo(() => ["All", ...Array.from(new Set(outlets.map(o => o.area)))], [outlets]);
+
+  const filtered = useMemo(() => {
+    return outlets
+      .filter(o => area === "All" || o.area === area)
+      .filter(o => !q || (o.name + " " + o.area).toLowerCase().includes(q.toLowerCase()))
+      .sort((a, b) => a.distance - b.distance);
+  }, [outlets, q, area]);
+
+  // group by area
+  const grouped = useMemo(() => {
+    const out = {};
+    filtered.forEach(o => {
+      if (!out[o.area]) out[o.area] = [];
+      out[o.area].push(o);
+    });
+    return out;
+  }, [filtered]);
+
+  return (
+    <div className="page" data-screen-label="05 Outlet Picker">
+      <div className="container back-row">
+        <button className="back-btn" onClick={onBack}><Icon name="arrow-left" size={16}/> Back</button>
+      </div>
+      <section className="banner" style={{ paddingTop: "var(--sp-8)", paddingBottom: "var(--sp-8)" }}>
+        <div className="container">
+          <div className="eyebrow">Step 2 of 3 · Pickup outlet</div>
+          <h1>Choose your <em>outlet</em></h1>
+          <p>Twenty across Kampala, Entebbe, and Mukono. Sorted by closest to you.</p>
+        </div>
+      </section>
+
+      <div className="outlet-search">
+        <div className="container">
+          <div className="search-input">
+            <Icon name="search" size={18}/>
+            <input
+              className="input"
+              placeholder="Search outlets…"
+              value={q}
+              onChange={(e) => setQ(e.target.value)}
+            />
+          </div>
+          <div className="area-row">
+            {areas.map(a => (
+              <button key={a} className={"area-pill " + (area === a ? "active" : "")} onClick={() => setArea(a)} style={{ background: area === a ? "var(--brand-live)" : "transparent", borderColor: area === a ? "var(--brand-live)" : "var(--ink-200)", color: area === a ? "#fff" : "var(--ink-600)" }}>{a}</button>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      <div className="container outlet-list">
+        {Object.keys(grouped).length === 0 && (
+          <div style={{ padding: 60, textAlign: "center", color: "var(--fg-muted)" }}>
+            <Icon name="search" size={32}/>
+            <p style={{ marginTop: 12 }}>No outlets match — try a broader filter.</p>
+          </div>
+        )}
+        {Object.entries(grouped).map(([areaName, list]) => (
+          <div key={areaName}>
+            <div className="outlet-area-head">
+              <h3>{areaName}</h3>
+              <span className="count">{list.length} OUTLET{list.length === 1 ? "" : "S"}</span>
+              <hr className="gold-rule" style={{ flex: 1, height: 1, margin: 0, background: "var(--gold-300)", border: 0 }}/>
+            </div>
+            {list.map((o, i) => (
+              <button
+                key={o.id}
+                type="button"
+                className={"outlet-row " + (i === 0 && areaName === Object.keys(grouped)[0] ? "nearest" : "")}
+                onClick={() => onPick(o)}
+              >
+                <span className="pin"><Icon name="pin" size={20}/></span>
+                <div className="info">
+                  <h4>{o.name}</h4>
+                  <div className="meta">
+                    <span>{o.distance} km away</span>
+                    <span>{o.hours}</span>
+                    <span>{o.type}</span>
+                  </div>
+                  <div className="tags">
+                    {i === 0 && areaName === Object.keys(grouped)[0] && <span className="badge success">Nearest</span>}
+                    {o.type === "Flagship" && <span className="badge gold">Flagship</span>}
+                    {o.hours === "24 hours" && <span className="badge">24 hrs</span>}
+                  </div>
+                </div>
+                <span className="arrow"><Icon name="chevron-right" size={20}/></span>
+              </button>
+            ))}
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
+
+/* ─── DELIVERY ADDRESS ─── */
+
+// Infer zone from free-text address
+const inferZone = (addr) => {
+  const zones = [
+    "Kololo","Nakasero","Ntinda","Bugolobi","Muyenga","Lugogo",
+    "Wandegeya","Bukoto","Kabalagala","Mukono","Entebbe",
+    "Mbuya","Kisementi","Kira","Naguru","Lubowa","Kireka",
+  ];
+  return zones.find(z => addr.toLowerCase().includes(z.toLowerCase())) || "";
+};
+
+// Zone → ordered outlet IDs (nearest first within that zone)
+const ZONE_OUTLETS = {
+  Kololo:    ["o-kololo","o-forest","o-wampewo"],
+  Nakasero:  ["o-nakasero","o-kololo","o-ihk"],
+  Ntinda:    ["o-ntinda","o-bukoto","o-forest"],
+  Bugolobi:  ["o-bugolobi","o-ntinda","o-forest"],
+  Muyenga:   ["o-muyenga","o-kabalagala","o-ihk"],
+  Lugogo:    ["o-forest","o-ntinda","o-bukoto"],
+  Wandegeya: ["o-forest","o-kololo","o-nakasero"],
+  Bukoto:    ["o-bukoto","o-ntinda","o-kololo"],
+  Kabalagala:["o-kabalagala","o-muyenga","o-ihk"],
+  Mukono:    ["o-mukono","o-kireka","o-nakwero"],
+  Entebbe:   ["o-entebbe","o-lubowa","o-isu"],
+  Lubowa:    ["o-lubowa","o-entebbe","o-isu"],
+  Kireka:    ["o-kireka","o-ntinda","o-bukoto"],
+  Mbuya:     ["o-bugolobi","o-ntinda","o-forest"],
+  Kisementi: ["o-bukoto","o-kololo","o-ntinda"],
+  Kira:      ["o-bukoto","o-ntinda","o-forest"],
+  Naguru:    ["o-bukoto","o-ntinda","o-bugolobi"],
+};
+
+const DeliveryAddress = ({ outlets, onBack, onConfirm }) => {
+  const [q, setQ] = useState("");
+  const [selectedOutlet, setSelectedOutlet] = useState(null);
+  const [details, setDetails] = useState({ apt: "", instructions: "" });
+
+  const zone = inferZone(q);
+  const nearestIds = zone ? (ZONE_OUTLETS[zone] || []) : [];
+  const nearestSet = new Set(nearestIds);
+
+  const sortedOutlets = useMemo(() => {
+    return outlets
+      .map(o => ({ ...o, isNearest: nearestSet.has(o.id) }))
+      .sort((a, b) => {
+        if (a.isNearest !== b.isNearest) return Number(b.isNearest) - Number(a.isNearest);
+        if (a.isNearest && b.isNearest) return nearestIds.indexOf(a.id) - nearestIds.indexOf(b.id);
+        return a.distance - b.distance;
+      });
+  }, [outlets, zone]);
+
+  const estMins = (km) => Math.round(10 + km * 1.8);
+
+  return (
+    <div className="page" data-screen-label="06 Delivery Address">
+      {/* Sticky dark search bar */}
+      <div className="delivery-search-bar">
+        <div className="container">
+          <button
+            className="back-btn"
+            onClick={selectedOutlet ? () => setSelectedOutlet(null) : onBack}
+            style={{ color: "rgba(255,255,255,0.7)", marginBottom: 12 }}
+          >
+            <Icon name="arrow-left" size={16}/> {selectedOutlet ? "Back to outlets" : "Back"}
+          </button>
+          <div className="eyebrow" style={{ color: "var(--gold-300)", marginBottom: 12 }}>
+            {selectedOutlet ? "Confirm delivery details" : "Step 2 of 3 · Delivery address"}
+          </div>
+          <div className="delivery-input-wrap">
+            <Icon name="pin" size={20}/>
+            <input
+              type="text"
+              placeholder="Enter your neighbourhood or street…"
+              value={q}
+              onChange={(e) => { setQ(e.target.value); setSelectedOutlet(null); }}
+              autoFocus
+            />
+            {q && (
+              <button className="clr" onClick={() => { setQ(""); setSelectedOutlet(null); }} aria-label="Clear">
+                <Icon name="close" size={16}/>
+              </button>
+            )}
+          </div>
+        </div>
+      </div>
+
+      {/* Stage 1 — outlet list */}
+      {!selectedOutlet && (
+        <div>
+          {!q && (
+            <p style={{ padding: "20px 20px 8px", fontSize: 13, color: "var(--fg-muted)", textAlign: "center" }}>
+              Type your area above — nearest outlets float to the top.
+            </p>
+          )}
+          {sortedOutlets.map(o => (
+            <button
+              key={o.id}
+              className={`outlet-row${o.isNearest ? " nearest" : ""}`}
+              type="button"
+              onClick={() => setSelectedOutlet(o)}
+              style={{ width: "100%", textAlign: "left", background: "none", border: "none", borderBottom: "1px solid var(--border)" }}
+            >
+              <span className="pin">
+                <svg width="18" height="22" viewBox="0 0 24 28" fill={o.isNearest ? "var(--brand)" : "#ccc"} aria-hidden="true">
+                  <path d="M12 0C7.58 0 4 3.58 4 8c0 5.25 8 16 8 16s8-10.75 8-16c0-4.42-3.58-8-8-8zm0 11a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/>
+                </svg>
+              </span>
+              <span className="info">
+                <span className="info" style={{ display: "block" }}>
+                  <strong style={{ fontSize: 15, fontWeight: 600, color: "var(--ink-800)" }}>{o.name}</strong>
+                </span>
+                <span className="meta">
+                  <span>~{estMins(o.distance)} min delivery</span>
+                  <span>{o.distance} km</span>
+                  <span>{o.hours}</span>
+                </span>
+                <span className="tags">
+                  {o.isNearest && (
+                    <span style={{
+                      display: "inline-block", padding: "2px 8px", borderRadius: 999,
+                      fontSize: 11, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.05em",
+                      background: "#EAF7EE", color: "#356048"
+                    }}>Nearest</span>
+                  )}
+                  <span style={{
+                    display: "inline-block", padding: "2px 8px", borderRadius: 999,
+                    fontSize: 11, fontWeight: 600, border: "1px solid var(--border)", color: "var(--fg-muted)"
+                  }}>{o.type}</span>
+                </span>
+              </span>
+              <span className="arrow">
+                <Icon name="chevron-right" size={16}/>
+              </span>
+            </button>
+          ))}
+        </div>
+      )}
+
+      {/* Stage 2 — confirm details */}
+      {selectedOutlet && (
+        <div className="container" style={{ paddingTop: "var(--sp-6)", paddingBottom: "var(--sp-16)" }}>
+          <div className="delivery-confirm-panel">
+            <div className="matched-outlet">
+              <Icon name="check-circle" size={20}/>
+              <div>
+                <h5>{selectedOutlet.name}</h5>
+                <p>{selectedOutlet.distance} km · ~{estMins(selectedOutlet.distance)} min delivery · UGX 5,000 fee</p>
+              </div>
+            </div>
+
+            {q && (
+              <div style={{ marginBottom: 16 }}>
+                <div className="eyebrow" style={{ marginBottom: 4 }}>Delivering to</div>
+                <p style={{ fontSize: 15, fontWeight: 600, color: "var(--ink-800)", margin: 0 }}>{q}</p>
+              </div>
+            )}
+
+            <div className="field">
+              <label className="lbl">Apartment / unit / floor</label>
+              <input
+                className="input"
+                placeholder="e.g. Apt 4B, 3rd floor"
+                value={details.apt}
+                onChange={(e) => setDetails({ ...details, apt: e.target.value })}
+              />
+            </div>
+
+            <div className="field">
+              <label className="lbl">
+                Delivery instructions{" "}
+                <span className="muted" style={{ textTransform: "none", letterSpacing: 0, fontWeight: 500 }}>(optional)</span>
+              </label>
+              <textarea
+                className="input"
+                rows={3}
+                style={{ minHeight: 80, padding: 14, lineHeight: 1.5, resize: "vertical" }}
+                placeholder="e.g. Gate code 1234. Leave with security."
+                value={details.instructions}
+                onChange={(e) => setDetails({ ...details, instructions: e.target.value })}
+              />
+            </div>
+
+            <button
+              className="btn full lg"
+              disabled={!q.trim()}
+              onClick={() => onConfirm({ address: q, outlet: selectedOutlet, ...details })}
+            >
+              Continue to menu
+            </button>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};
+
+window.LP_ModeChoice = ModeChoice;
+window.LP_OutletPicker = OutletPicker;
+window.LP_DeliveryAddress = DeliveryAddress;
+
+/* Menu browsing + Product detail modal */
+
+const MODIFIER_GROUPS = {
+  drink: [
+    { id: "size", title: "Size", required: true, options: [
+      { id: "8", label: "8 oz",  extra: 0 },
+      { id: "12", label: "12 oz", extra: 2000 },
+      { id: "16", label: "16 oz", extra: 4000 },
+    ]},
+    { id: "milk", title: "Milk", required: false, options: [
+      { id: "whole",  label: "Whole milk", extra: 0 },
+      { id: "skim",   label: "Skim",       extra: 0 },
+      { id: "oat",    label: "Oat",        extra: 1500 },
+      { id: "almond", label: "Almond",     extra: 1500 },
+    ]},
+    { id: "extras", title: "Extras", required: false, options: [
+      { id: "shot",   label: "Extra shot", extra: 2500 },
+      { id: "syrup",  label: "Vanilla syrup", extra: 1000 },
+      { id: "cream",  label: "Whipped cream", extra: 1000 },
+    ]},
+  ],
+  food: [
+    { id: "doneness", title: "How would you like it?", required: false, options: [
+      { id: "regular", label: "As listed", extra: 0 },
+      { id: "well",    label: "Well done", extra: 0 },
+      { id: "spicy",   label: "Extra spicy", extra: 0 },
+    ]},
+    { id: "side", title: "Add a side", required: false, options: [
+      { id: "fries", label: "House fries", extra: 5000 },
+      { id: "salad", label: "Side salad",  extra: 6000 },
+      { id: "soup",  label: "Soup of day", extra: 7000 },
+    ]},
+  ],
+};
+
+const Menu = ({ context, onBack, onChangeContext, cart, onAddCart, onOpenCart }) => {
+  const { CATEGORIES, PRODUCTS, formatUGX } = window.LP_DATA;
+  const [activeCat, setActiveCat] = useState(CATEGORIES[0].id);
+  const [openProduct, setOpenProduct] = useState(null);
+  const sectionRefs = useRef({});
+
+  // Quick-add: builds default selections (required groups → first option),
+  // adds to cart immediately, then opens cart view.
+  const quickAdd = (p, e) => {
+    e.stopPropagation();
+    const groups = p.drink ? MODIFIER_GROUPS.drink : MODIFIER_GROUPS.food;
+    let extra = 0;
+    const labels = [];
+    groups.forEach(g => {
+      if (g.required) {
+        const opt = g.options[0];
+        extra += opt.extra;
+        labels.push(opt.label);
+      }
+    });
+    onAddCart({
+      productId: p.id,
+      name: p.name,
+      img: p.img,
+      meta: p.meta,
+      qty: 1,
+      unitPrice: p.price + extra,
+      modifiers: labels.join(" · "),
+    });
+    onOpenCart();
+  };
+
+  // intersection observer to auto-highlight tab on scroll
+  useEffect(() => {
+    const obs = new IntersectionObserver((entries) => {
+      const visible = entries.filter(e => e.isIntersecting).sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+      if (visible) setActiveCat(visible.target.dataset.cat);
+    }, { rootMargin: "-30% 0px -55% 0px", threshold: [0, 0.2, 0.5, 1] });
+    Object.values(sectionRefs.current).forEach(el => el && obs.observe(el));
+    return () => obs.disconnect();
+  }, []);
+
+  const scrollToCat = (id) => {
+    const el = sectionRefs.current[id];
+    if (el) {
+      const top = el.getBoundingClientRect().top + window.scrollY - 200;
+      window.scrollTo({ top, behavior: "smooth" });
+    }
+  };
+
+  const cartCount = cart.reduce((s, i) => s + i.qty, 0);
+  const cartTotal = cart.reduce((s, i) => s + i.unitPrice * i.qty, 0);
+
+  return (
+    <div className="page" data-screen-label="07 Menu">
+      <div className="menu-context">
+        <div className="container menu-context-row">
+          <button className="back-btn" onClick={onBack} style={{ padding: "6px 0" }}><Icon name="arrow-left" size={14}/> Back</button>
+          <span className="context-pill">
+            <Icon name={context.mode === "delivery" ? "scooter" : "store"} size={14}/>
+            {context.mode === "delivery" ? "Delivery to " : "Pickup from "}
+            <strong style={{ color: "var(--ink-800)", marginLeft: 4 }}>
+              {context.mode === "delivery" ? (context.address || "—") : (context.outlet?.name || "—")}
+            </strong>
+          </span>
+          <button className="context-pill changeable" onClick={onChangeContext}>
+            Change
+          </button>
+        </div>
+      </div>
+
+      <div className="menu-tabs">
+        <div className="container">
+          <div className="menu-tabs-inner">
+            {CATEGORIES.map(c => (
+              <button key={c.id}
+                className={"tab-btn " + (activeCat === c.id ? "active" : "")}
+                onClick={() => scrollToCat(c.id)}
+              >{c.name}</button>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      <div className="container" style={{ paddingBottom: 140 }}>
+        {CATEGORIES.map(cat => {
+          const items = PRODUCTS.filter(p => p.category === cat.id);
+          if (items.length === 0) return null;
+          return (
+            <section key={cat.id} className="cat-section"
+              ref={el => sectionRefs.current[cat.id] = el}
+              data-cat={cat.id}
+              id={"cat-" + cat.id}>
+              <div className="cat-head">
+                <h2 className="serif">{cat.name}</h2>
+                <span className="gold-marker"/>
+                <span className="cnt">{items.length} ITEMS</span>
+              </div>
+              <div className="product-grid">
+                {items.map(p => {
+                  const inCart = cart.find(i => i.productId === p.id && !i.modifiers);
+                  return (
+                    <article key={p.id} className="product-card" onClick={() => setOpenProduct(p)}>
+                      <div className="product-art">
+                        <ProductImg src={p.img} alt={p.name} name={p.name} category={p.category} style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
+                        {p.tag && (
+                          <div className="product-tag">
+                            <span className={"badge " + (p.tag === "New" ? "brand" : "gold")}>{p.tag}</span>
+                          </div>
+                        )}
+                      </div>
+                      <div className="product-body">
+                        <h3>{p.name}</h3>
+                        <p className="meta">{p.meta}</p>
+                        <div className="price-row">
+                          <span className="price">{formatUGX(p.price)}</span>
+                          <button className="add-btn" onClick={(e) => quickAdd(p, e)} aria-label={"Add " + p.name}>
+                            <Icon name="plus" size={18}/>
+                          </button>
+                        </div>
+                      </div>
+                    </article>
+                  );
+                })}
+              </div>
+            </section>
+          );
+        })}
+      </div>
+
+      {cartCount > 0 && (
+        <button className="view-cart" onClick={onOpenCart}>
+          <div className="vc-meta">
+            <span className="vc-label">Your basket</span>
+            <span className="vc-text">{cartCount} item{cartCount > 1 ? "s" : ""} · {formatUGX(cartTotal)}</span>
+          </div>
+          <span className="vc-cta">View cart <Icon name="arrow-right" size={14}/></span>
+        </button>
+      )}
+
+      {openProduct && (
+        <ProductModal
+          product={openProduct}
+          onClose={() => setOpenProduct(null)}
+          onAdd={(item, goCart) => { onAddCart(item); setOpenProduct(null); if (goCart) onOpenCart(); }}
+        />
+      )}
+    </div>
+  );
+};
+
+const ProductModal = ({ product, onClose, onAdd }) => {
+  const fmt = window.LP_DATA.formatUGX;
+  const groups = product.drink ? MODIFIER_GROUPS.drink : MODIFIER_GROUPS.food;
+
+  // Initial selection: first option of each required group
+  const initSel = {};
+  groups.forEach(g => { if (g.required) initSel[g.id] = g.options[0].id; });
+  const [sel, setSel] = useState(initSel);
+  const [qty, setQty] = useState(1);
+
+  const extras = useMemo(() => {
+    let total = 0;
+    groups.forEach(g => {
+      const optId = sel[g.id];
+      if (optId) {
+        const opt = g.options.find(o => o.id === optId);
+        if (opt) total += opt.extra;
+      }
+    });
+    return total;
+  }, [sel, groups]);
+
+  const unitPrice = product.price + extras;
+  const totalPrice = unitPrice * qty;
+
+  const submit = (goCart) => {
+    onAdd({
+      productId: product.id,
+      name: product.name,
+      img: product.img,
+      meta: product.meta,
+      qty,
+      unitPrice,
+      modifiers: Object.entries(sel).map(([gid, oid]) => {
+        const g = groups.find(x => x.id === gid);
+        return g.options.find(o => o.id === oid)?.label;
+      }).filter(Boolean).join(" · "),
+    }, goCart);
+  };
+
+  return (
+    <div className="modal-backdrop" onClick={onClose} data-comment-anchor="product-modal">
+      <article className="product-modal" onClick={(e) => e.stopPropagation()} role="dialog" aria-modal="true">
+        <div className="modal-art">
+          <ProductImg src={product.img} alt={product.name} name={product.name} category={product.category} style={{ width: '100%', height: '100%', objectFit: 'contain', maxWidth: 320 }} />
+          <button className="modal-close" onClick={onClose} aria-label="Close">
+            <Icon name="close" size={18}/>
+          </button>
+        </div>
+        <div className="modal-body">
+          <div className="modal-title-row">
+            <div>
+              {product.tag && <div className="eyebrow" style={{ marginBottom: 4 }}>{product.tag}</div>}
+              <h2 className="serif">{product.name}</h2>
+              <p style={{ fontSize: 13, color: "var(--fg-muted)", marginTop: 4 }}>{product.meta}</p>
+            </div>
+            <div className="price">{fmt(product.price)}</div>
+          </div>
+          <p className="desc">{product.desc}</p>
+
+          {groups.map(g => (
+            <div key={g.id} className="modal-section">
+              <h3>{g.title}{g.required && <span style={{ color: "var(--brand-live)", marginLeft: 6 }}>*</span>}</h3>
+              <div className="option-grid">
+                {g.options.map(o => (
+                  <button
+                    key={o.id}
+                    className={"option-card " + (sel[g.id] === o.id ? "selected" : "")}
+                    type="button"
+                    onClick={() => setSel(s => ({ ...s, [g.id]: s[g.id] === o.id ? (g.required ? o.id : null) : o.id }))}
+                  >
+                    <span>{o.label}</span>
+                    {o.extra > 0 && <span className="opt-extra">+{fmt(o.extra)}</span>}
+                  </button>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+        <div className="modal-foot">
+          <div className="qty-modal">
+            <button onClick={() => setQty(q => Math.max(1, q - 1))} aria-label="Less"><Icon name="minus" size={14}/></button>
+            <strong>{qty}</strong>
+            <button onClick={() => setQty(q => q + 1)} aria-label="More"><Icon name="plus" size={14}/></button>
+          </div>
+          <button className="btn full" onClick={() => submit(true)}>Add to cart · {fmt(totalPrice)}</button>
+        </div>
+      </article>
+    </div>
+  );
+};
+
+window.LP_Menu = Menu;
+
+/* Cart, Payment, Confirmation, Tracking */
+
+const PAYMENT_METHODS = [
+  { id: "mtn",   label: "MTN Mobile Money", desc: "Pay with your registered MTN line", icon: "phone" },
+  { id: "airtel",label: "Airtel Money",     desc: "Pay with your registered Airtel line", icon: "phone" },
+  { id: "card",  label: "Visa / Mastercard", desc: "Stripe-secured card payment", icon: "card" },
+  { id: "cash",  label: "Cash on collection", desc: "Pay at pickup — cash or card",  icon: "wallet" },
+];
+
+const Checkout = ({ context, cart, account, onBack, onUpdateQty, onRemove, onConfirm, redeemPts, setRedeemPts }) => {
+  const fmt = window.LP_DATA.formatUGX;
+  const [pay, setPay] = useState("mtn");
+  const [phone, setPhone] = useState(account?.phone || "");
+
+  const subtotal = cart.reduce((s, i) => s + i.unitPrice * i.qty, 0);
+  const deliveryFee = context.mode === "delivery" ? 5000 : 0;
+  const maxRedeem = account ? Math.min(account.points, subtotal) : 0;
+  const discount = redeemPts;
+  const total = Math.max(0, subtotal + deliveryFee - discount);
+  const tier = account ? window.LP_DATA.LOYALTY_TIERS.slice().reverse().find(t => account.lifetimePoints >= t.min) : window.LP_DATA.LOYALTY_TIERS[0];
+  const earn = Math.floor(subtotal * tier.mult);
+
+  const place = () => {
+    onConfirm({
+      ref: "LP-" + Math.random().toString(36).slice(2, 7).toUpperCase(),
+      total, subtotal, deliveryFee, discount, earn, pay, phone,
+    });
+  };
+
+  if (cart.length === 0) {
+    return (
+      <div className="page" data-screen-label="08 Cart Empty">
+        <div className="container" style={{ textAlign: "center", padding: "120px 0" }}>
+          <Icon name="bag" size={48} style={{ color: "var(--ink-300)" }}/>
+          <h2 className="serif" style={{ fontFamily: "var(--display-family)", fontWeight: 500, fontSize: 32, marginTop: 16, color: "var(--ink-800)" }}>Your basket is empty</h2>
+          <p className="muted" style={{ marginTop: 8 }}>Browse the menu to add something delicious.</p>
+          <button className="btn" style={{ marginTop: 24 }} onClick={onBack}>Browse menu</button>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="page" data-screen-label="08 Checkout">
+      <section className="banner" style={{ paddingBottom: "var(--sp-6)" }}>
+        <div className="container">
+          <div className="eyebrow">Step 3 of 3</div>
+          <h1>Review &amp; <em>checkout</em></h1>
+        </div>
+      </section>
+
+      <div className="container">
+        <div className="back-row" style={{ paddingTop: "var(--sp-4)" }}>
+          <button className="back-btn" onClick={onBack}><Icon name="arrow-left" size={14}/> Continue shopping</button>
+        </div>
+        <div className="checkout-grid">
+          <div>
+            <div className="checkout-section">
+              <h3>Your order</h3>
+              <div>
+                {cart.map((i, idx) => (
+                  <div key={idx} className="cart-item-row">
+                    <div className="ci-art"><ProductImg src={i.img} alt={i.name} name={i.name} category={window.LP_DATA.PRODUCTS.find(p => p.id === i.productId)?.category} style={{ width: '100%', height: '100%', objectFit: 'contain' }} /></div>
+                    <div>
+                      <h4>{i.name}</h4>
+                      <p className="ci-meta">{i.modifiers || i.meta}</p>
+                      <div className="ci-actions" style={{ marginTop: 8 }}>
+                        <div className="qty-stepper">
+                          <button onClick={() => onUpdateQty(idx, i.qty - 1)}><Icon name="minus" size={12}/></button>
+                          <span className="qty-num">{i.qty}</span>
+                          <button onClick={() => onUpdateQty(idx, i.qty + 1)}><Icon name="plus" size={12}/></button>
+                        </div>
+                        <button className="ci-remove" onClick={() => onRemove(idx)}>Remove</button>
+                      </div>
+                    </div>
+                    <div className="ci-price tabular">{fmt(i.unitPrice * i.qty)}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="checkout-section">
+              <h3>{context.mode === "delivery" ? "Delivery to" : "Pickup at"}</h3>
+              <p style={{ fontSize: 15, color: "var(--ink-800)", fontWeight: 500 }}>
+                {context.mode === "delivery" ? context.address : context.outlet?.name}
+              </p>
+              <p className="muted" style={{ fontSize: 13, marginTop: 4 }}>
+                {context.mode === "delivery"
+                  ? `${context.outlet?.name} · ETA 30–45 min`
+                  : `${context.outlet?.area} · ${context.outlet?.hours}`}
+              </p>
+            </div>
+
+            <div className="checkout-section">
+              <h3>Payment method</h3>
+              <div className="radio-grid">
+                {PAYMENT_METHODS.map(m => (
+                  <button key={m.id}
+                    className={"radio-row " + (pay === m.id ? "selected" : "")}
+                    onClick={() => setPay(m.id)}
+                    type="button"
+                  >
+                    <span className="ring"/>
+                    <div>
+                      <h5>{m.label}</h5>
+                      <p>{m.desc}</p>
+                    </div>
+                    <Icon name={m.icon} size={20} style={{ color: "var(--ink-400)" }}/>
+                  </button>
+                ))}
+              </div>
+              {(pay === "mtn" || pay === "airtel") && (
+                <div className="field" style={{ marginTop: 16 }}>
+                  <label className="lbl">Mobile money number</label>
+                  <div className="phone-wrap">
+                    <span className="phone-prefix">🇺🇬 +256</span>
+                    <input className="input" inputMode="numeric" maxLength={9} value={phone}
+                      onChange={(e) => setPhone(e.target.value.replace(/\D/g, "").slice(0, 9))}
+                      placeholder="703 631 215"/>
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>
+
+          <div>
+            <div className="checkout-section" style={{ position: "sticky", top: "calc(var(--nav-h) + 16px)" }}>
+              <h3>Summary</h3>
+
+              {account && account.points > 0 && (
+                <div style={{ padding: 16, background: "var(--cream-100)", borderRadius: "var(--r-md)", marginBottom: 16, border: "1px solid var(--gold-200)" }}>
+                  <div className="row between">
+                    <div>
+                      <div className="eyebrow" style={{ marginBottom: 4 }}>Patisserie Tribe</div>
+                      <h5 style={{ fontSize: 14, fontWeight: 600, color: "var(--ink-800)" }}>Redeem points</h5>
+                      <p className="muted" style={{ fontSize: 12, marginTop: 2 }}>Available: {account.points.toLocaleString()} pts (1 pt = UGX 1)</p>
+                    </div>
+                  </div>
+                  <input type="range" min={0} max={maxRedeem} step={500} value={redeemPts}
+                    onChange={(e) => setRedeemPts(Number(e.target.value))}
+                    style={{ width: "100%", marginTop: 12, accentColor: "var(--brand-live)" }}/>
+                  <div className="row between" style={{ fontSize: 12, marginTop: 4, color: "var(--fg-muted)" }}>
+                    <span>0 pts</span>
+                    <strong style={{ color: "var(--brand-live)" }}>−{fmt(redeemPts)}</strong>
+                    <span>{maxRedeem.toLocaleString()} pts</span>
+                  </div>
+                </div>
+              )}
+
+              <div className="totals">
+                <div className="totals-row"><span>Subtotal</span><span className="tabular">{fmt(subtotal)}</span></div>
+                {deliveryFee > 0 && <div className="totals-row"><span>Delivery</span><span className="tabular">{fmt(deliveryFee)}</span></div>}
+                {discount > 0 && <div className="totals-row discount"><span>Points redeemed</span><span className="tabular">−{fmt(discount)}</span></div>}
+                <div className="totals-row grand"><span>Total</span><span className="tabular">{fmt(total)}</span></div>
+              </div>
+
+              <button className="btn full lg" onClick={place} style={{ marginTop: 16 }}>
+                Place order · {fmt(total)}
+              </button>
+
+              {account && earn > 0 && (
+                <p style={{ fontSize: 12, textAlign: "center", marginTop: 12, color: "var(--gold-500)", letterSpacing: "0.04em" }}>
+                  ✦ You'll earn {earn.toLocaleString()} points on this order
+                </p>
+              )}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const Confirmation = ({ order, context, onTrack, onHome }) => {
+  const fmt = window.LP_DATA.formatUGX;
+  return (
+    <div className="page" data-screen-label="09 Confirmation">
+      <div className="container">
+        <div className="confirm-wrap">
+          <div className="checkmark-wrap">
+            <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+              <circle cx="24" cy="24" r="22"/>
+              <path d="M14 24 L21 31 L34 17"/>
+            </svg>
+          </div>
+          <div className="eyebrow">Order placed</div>
+          <h1 style={{ marginTop: 8 }}>Thank you<em style={{ fontStyle: "italic", color: "var(--brand-live)" }}>.</em></h1>
+          <p className="ref">Confirmation: {order.ref}</p>
+
+          <div className="confirm-summary">
+            <div className="row between" style={{ paddingBottom: 12, borderBottom: "1px solid var(--border)" }}>
+              <div>
+                <div className="eyebrow">{context.mode === "delivery" ? "Delivering to" : "Pickup at"}</div>
+                <h4 style={{ fontSize: 16, fontWeight: 600, marginTop: 4, color: "var(--ink-800)" }}>
+                  {context.mode === "delivery" ? context.address : context.outlet?.name}
+                </h4>
+              </div>
+              <span className="badge gold">{context.mode === "delivery" ? "30–45 MIN" : "5–10 MIN"}</span>
+            </div>
+            <div style={{ paddingTop: 16 }}>
+              {(order.items || []).map((i, idx) => (
+                <div key={idx} className="row between" style={{ padding: "8px 0", fontSize: 14 }}>
+                  <span>{i.qty} × {i.name}</span>
+                  <span className="tabular">{fmt(i.unitPrice * i.qty)}</span>
+                </div>
+              ))}
+            </div>
+            <div className="totals" style={{ marginTop: 0 }}>
+              <div className="totals-row grand"><span>Total paid</span><span className="tabular">{fmt(order.total)}</span></div>
+              {order.earn > 0 && (
+                <p style={{ fontSize: 13, textAlign: "right", marginTop: 8, color: "var(--gold-500)" }}>
+                  +{order.earn.toLocaleString()} points earned ✦
+                </p>
+              )}
+            </div>
+          </div>
+
+          <div className="confirm-actions">
+            <button className="btn full lg" onClick={onTrack}>Track order</button>
+            <button className="btn secondary full lg" onClick={onHome}>Back to home</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const TRACK_STAGES = {
+  pickup: [
+    { key: "received",  title: "Order received",   desc: "We've got it. Sending it to the kitchen." },
+    { key: "preparing", title: "Preparing",        desc: "Your barista is working on it now." },
+    { key: "ready",     title: "Ready for pickup", desc: "Walk in and skip the queue. Show your reference." },
+    { key: "collected", title: "Collected",        desc: "Enjoy. We hope to see you again soon." },
+  ],
+  delivery: [
+    { key: "received",   title: "Order received",  desc: "Confirmed and routed to the nearest kitchen." },
+    { key: "preparing",  title: "Preparing",       desc: "Hot off the grill. Just for you." },
+    { key: "dispatched", title: "On the way",      desc: "A scooter is on its way. ETA 30 min." },
+    { key: "delivered",  title: "Delivered",       desc: "Bon appétit." },
+  ],
+};
+
+const Tracking = ({ order, context, onHome }) => {
+  const stages = TRACK_STAGES[context.mode || "pickup"];
+  const [idx, setIdx] = useState(0);
+  useEffect(() => {
+    const t = setInterval(() => setIdx(i => Math.min(i + 1, stages.length - 1)), 4500);
+    return () => clearInterval(t);
+  }, [stages.length]);
+
+  return (
+    <div className="page" data-screen-label="10 Tracking">
+      <div className="container" style={{ paddingTop: "var(--sp-6)", paddingBottom: "var(--sp-12)" }}>
+        <button className="back-btn" onClick={onHome}><Icon name="arrow-left" size={14}/> Home</button>
+
+        <div className="tracking-card">
+          <div className="tracking-head">
+            <div className="ref-row">
+              <div>
+                <div className="eyebrow" style={{ color: "var(--gold-300)" }}>Order {order.ref}</div>
+                <h2 className="serif" style={{ marginTop: 6 }}>
+                  {idx === stages.length - 1 ? "All done." : (context.mode === "delivery" ? <>On its <em>way</em>.</> : <>Almost <em>ready</em>.</>)}
+                </h2>
+                <p className="eta">
+                  {idx === stages.length - 1 ? "Order complete" : (context.mode === "delivery" ? "ETA 30–45 minutes" : "Ready in 5–10 minutes")}
+                </p>
+              </div>
+              <span className="badge">{stages[idx].title.toUpperCase()}</span>
+            </div>
+          </div>
+          <div className="timeline">
+            {stages.map((s, i) => (
+              <div key={s.key} className={"timeline-row " + (i < idx ? "done" : i === idx ? "active" : "upcoming")}>
+                <div className="timeline-dot">
+                  {i < idx
+                    ? <Icon name="check" size={16}/>
+                    : i === idx
+                      ? <Icon name={context.mode === "delivery" && s.key === "dispatched" ? "scooter" : "clock"} size={16}/>
+                      : <Icon name="circle" size={10}/>}
+                </div>
+                <div>
+                  <h4>{s.title}</h4>
+                  <p>{s.desc}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="card" style={{ marginTop: 20 }}>
+          <div className="row between">
+            <div>
+              <div className="eyebrow">Need a hand?</div>
+              <h5 style={{ fontSize: 15, fontWeight: 600, marginTop: 4, color: "var(--ink-800)" }}>
+                Call your outlet — {context.outlet?.name}
+              </h5>
+            </div>
+            <button className="btn secondary"><Icon name="phone" size={14}/> Call</button>
+          </div>
+        </div>
+
+        <button className="btn dark full lg" style={{ marginTop: 24 }} onClick={onHome}>Done</button>
+      </div>
+    </div>
+  );
+};
+
+window.LP_Checkout = Checkout;
+window.LP_Confirmation = Confirmation;
+window.LP_Tracking = Tracking;
+
+
+// tweaks-panel.jsx
+// Reusable Tweaks shell + form-control helpers.
+//
+// Owns the host protocol (listens for __activate_edit_mode / __deactivate_edit_mode,
+// posts __edit_mode_available / __edit_mode_set_keys / __edit_mode_dismissed) so
+// individual prototypes don't re-roll it. Ships a consistent set of controls so you
+// don't hand-draw <input type="range">, segmented radios, steppers, etc.
+//
+// Usage (in an HTML file that loads React + Babel):
+//
+//   const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
+//     "primaryColor": "#D97757",
+//     "palette": ["#D97757", "#29261b", "#f6f4ef"],
+//     "fontSize": 16,
+//     "density": "regular",
+//     "dark": false
+//   }/*EDITMODE-END*/;
+//
+//   function App() {
+//     const [t, setTweak] = useTweaks(TWEAK_DEFAULTS);
+//     return (
+//       <div style={{ fontSize: t.fontSize, color: t.primaryColor }}>
+//         Hello
+//         <TweaksPanel>
+//           <TweakSection label="Typography" />
+//           <TweakSlider label="Font size" value={t.fontSize} min={10} max={32} unit="px"
+//                        onChange={(v) => setTweak('fontSize', v)} />
+//           <TweakRadio  label="Density" value={t.density}
+//                        options={['compact', 'regular', 'comfy']}
+//                        onChange={(v) => setTweak('density', v)} />
+//           <TweakSection label="Theme" />
+//           <TweakColor  label="Primary" value={t.primaryColor}
+//                        options={['#D97757', '#2A6FDB', '#1F8A5B', '#7A5AE0']}
+//                        onChange={(v) => setTweak('primaryColor', v)} />
+//           <TweakColor  label="Palette" value={t.palette}
+//                        options={[['#D97757', '#29261b', '#f6f4ef'],
+//                                  ['#475569', '#0f172a', '#f1f5f9']]}
+//                        onChange={(v) => setTweak('palette', v)} />
+//           <TweakToggle label="Dark mode" value={t.dark}
+//                        onChange={(v) => setTweak('dark', v)} />
+//         </TweaksPanel>
+//       </div>
+//     );
+//   }
+//
+// ─────────────────────────────────────────────────────────────────────────────
+
+const __TWEAKS_STYLE = `
+  .twk-panel{position:fixed;right:16px;bottom:16px;z-index:2147483646;width:280px;
+    max-height:calc(100vh - 32px);display:flex;flex-direction:column;
+    transform:scale(var(--dc-inv-zoom,1));transform-origin:bottom right;
+    background:rgba(250,249,247,.78);color:#29261b;
+    -webkit-backdrop-filter:blur(24px) saturate(160%);backdrop-filter:blur(24px) saturate(160%);
+    border:.5px solid rgba(255,255,255,.6);border-radius:14px;
+    box-shadow:0 1px 0 rgba(255,255,255,.5) inset,0 12px 40px rgba(0,0,0,.18);
+    font:11.5px/1.4 ui-sans-serif,system-ui,-apple-system,sans-serif;overflow:hidden}
+  .twk-hd{display:flex;align-items:center;justify-content:space-between;
+    padding:10px 8px 10px 14px;cursor:move;user-select:none}
+  .twk-hd b{font-size:12px;font-weight:600;letter-spacing:.01em}
+  .twk-x{appearance:none;border:0;background:transparent;color:rgba(41,38,27,.55);
+    width:22px;height:22px;border-radius:6px;cursor:default;font-size:13px;line-height:1}
+  .twk-x:hover{background:rgba(0,0,0,.06);color:#29261b}
+  .twk-body{padding:2px 14px 14px;display:flex;flex-direction:column;gap:10px;
+    overflow-y:auto;overflow-x:hidden;min-height:0;
+    scrollbar-width:thin;scrollbar-color:rgba(0,0,0,.15) transparent}
+  .twk-body::-webkit-scrollbar{width:8px}
+  .twk-body::-webkit-scrollbar-track{background:transparent;margin:2px}
+  .twk-body::-webkit-scrollbar-thumb{background:rgba(0,0,0,.15);border-radius:4px;
+    border:2px solid transparent;background-clip:content-box}
+  .twk-body::-webkit-scrollbar-thumb:hover{background:rgba(0,0,0,.25);
+    border:2px solid transparent;background-clip:content-box}
+  .twk-row{display:flex;flex-direction:column;gap:5px}
+  .twk-row-h{flex-direction:row;align-items:center;justify-content:space-between;gap:10px}
+  .twk-lbl{display:flex;justify-content:space-between;align-items:baseline;
+    color:rgba(41,38,27,.72)}
+  .twk-lbl>span:first-child{font-weight:500}
+  .twk-val{color:rgba(41,38,27,.5);font-variant-numeric:tabular-nums}
+
+  .twk-sect{font-size:10px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;
+    color:rgba(41,38,27,.45);padding:10px 0 0}
+  .twk-sect:first-child{padding-top:0}
+
+  .twk-field{appearance:none;width:100%;height:26px;padding:0 8px;
+    border:.5px solid rgba(0,0,0,.1);border-radius:7px;
+    background:rgba(255,255,255,.6);color:inherit;font:inherit;outline:none}
+  .twk-field:focus{border-color:rgba(0,0,0,.25);background:rgba(255,255,255,.85)}
+  select.twk-field{padding-right:22px;
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'><path fill='rgba(0,0,0,.5)' d='M0 0h10L5 6z'/></svg>");
+    background-repeat:no-repeat;background-position:right 8px center}
+
+  .twk-slider{appearance:none;-webkit-appearance:none;width:100%;height:4px;margin:6px 0;
+    border-radius:999px;background:rgba(0,0,0,.12);outline:none}
+  .twk-slider::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;
+    width:14px;height:14px;border-radius:50%;background:#fff;
+    border:.5px solid rgba(0,0,0,.12);box-shadow:0 1px 3px rgba(0,0,0,.2);cursor:default}
+  .twk-slider::-moz-range-thumb{width:14px;height:14px;border-radius:50%;
+    background:#fff;border:.5px solid rgba(0,0,0,.12);box-shadow:0 1px 3px rgba(0,0,0,.2);cursor:default}
+
+  .twk-seg{position:relative;display:flex;padding:2px;border-radius:8px;
+    background:rgba(0,0,0,.06);user-select:none}
+  .twk-seg-thumb{position:absolute;top:2px;bottom:2px;border-radius:6px;
+    background:rgba(255,255,255,.9);box-shadow:0 1px 2px rgba(0,0,0,.12);
+    transition:left .15s cubic-bezier(.3,.7,.4,1),width .15s}
+  .twk-seg.dragging .twk-seg-thumb{transition:none}
+  .twk-seg button{appearance:none;position:relative;z-index:1;flex:1;border:0;
+    background:transparent;color:inherit;font:inherit;font-weight:500;min-height:22px;
+    border-radius:6px;cursor:default;padding:4px 6px;line-height:1.2;
+    overflow-wrap:anywhere}
+
+  .twk-toggle{position:relative;width:32px;height:18px;border:0;border-radius:999px;
+    background:rgba(0,0,0,.15);transition:background .15s;cursor:default;padding:0}
+  .twk-toggle[data-on="1"]{background:#34c759}
+  .twk-toggle i{position:absolute;top:2px;left:2px;width:14px;height:14px;border-radius:50%;
+    background:#fff;box-shadow:0 1px 2px rgba(0,0,0,.25);transition:transform .15s}
+  .twk-toggle[data-on="1"] i{transform:translateX(14px)}
+
+  .twk-num{display:flex;align-items:center;height:26px;padding:0 0 0 8px;
+    border:.5px solid rgba(0,0,0,.1);border-radius:7px;background:rgba(255,255,255,.6)}
+  .twk-num-lbl{font-weight:500;color:rgba(41,38,27,.6);cursor:ew-resize;
+    user-select:none;padding-right:8px}
+  .twk-num input{flex:1;min-width:0;height:100%;border:0;background:transparent;
+    font:inherit;font-variant-numeric:tabular-nums;text-align:right;padding:0 8px 0 0;
+    outline:none;color:inherit;-moz-appearance:textfield}
+  .twk-num input::-webkit-inner-spin-button,.twk-num input::-webkit-outer-spin-button{
+    -webkit-appearance:none;margin:0}
+  .twk-num-unit{padding-right:8px;color:rgba(41,38,27,.45)}
+
+  .twk-btn{appearance:none;height:26px;padding:0 12px;border:0;border-radius:7px;
+    background:rgba(0,0,0,.78);color:#fff;font:inherit;font-weight:500;cursor:default}
+  .twk-btn:hover{background:rgba(0,0,0,.88)}
+  .twk-btn.secondary{background:rgba(0,0,0,.06);color:inherit}
+  .twk-btn.secondary:hover{background:rgba(0,0,0,.1)}
+
+  .twk-swatch{appearance:none;-webkit-appearance:none;width:56px;height:22px;
+    border:.5px solid rgba(0,0,0,.1);border-radius:6px;padding:0;cursor:default;
+    background:transparent;flex-shrink:0}
+  .twk-swatch::-webkit-color-swatch-wrapper{padding:0}
+  .twk-swatch::-webkit-color-swatch{border:0;border-radius:5.5px}
+  .twk-swatch::-moz-color-swatch{border:0;border-radius:5.5px}
+
+  .twk-chips{display:flex;gap:6px}
+  .twk-chip{position:relative;appearance:none;flex:1;min-width:0;height:46px;
+    padding:0;border:0;border-radius:6px;overflow:hidden;cursor:default;
+    box-shadow:0 0 0 .5px rgba(0,0,0,.12),0 1px 2px rgba(0,0,0,.06);
+    transition:transform .12s cubic-bezier(.3,.7,.4,1),box-shadow .12s}
+  .twk-chip:hover{transform:translateY(-1px);
+    box-shadow:0 0 0 .5px rgba(0,0,0,.18),0 4px 10px rgba(0,0,0,.12)}
+  .twk-chip[data-on="1"]{box-shadow:0 0 0 1.5px rgba(0,0,0,.85),
+    0 2px 6px rgba(0,0,0,.15)}
+  .twk-chip>span{position:absolute;top:0;bottom:0;right:0;width:34%;
+    display:flex;flex-direction:column;box-shadow:-1px 0 0 rgba(0,0,0,.1)}
+  .twk-chip>span>i{flex:1;box-shadow:0 -1px 0 rgba(0,0,0,.1)}
+  .twk-chip>span>i:first-child{box-shadow:none}
+  .twk-chip svg{position:absolute;top:6px;left:6px;width:13px;height:13px;
+    filter:drop-shadow(0 1px 1px rgba(0,0,0,.3))}
+`;
+
+// ── useTweaks ───────────────────────────────────────────────────────────────
+// Single source of truth for tweak values. setTweak persists via the host
+// (__edit_mode_set_keys → host rewrites the EDITMODE block on disk).
+function useTweaks(defaults) {
+  const [values, setValues] = React.useState(defaults);
+  // Accepts either setTweak('key', value) or setTweak({ key: value, ... }) so a
+  // useState-style call doesn't write a "[object Object]" key into the persisted
+  // JSON block.
+  const setTweak = React.useCallback((keyOrEdits, val) => {
+    const edits = typeof keyOrEdits === 'object' && keyOrEdits !== null
+      ? keyOrEdits : { [keyOrEdits]: val };
+    setValues((prev) => ({ ...prev, ...edits }));
+    window.parent.postMessage({ type: '__edit_mode_set_keys', edits }, '*');
+    // Same-window signal so in-page listeners (deck-stage rail thumbnails)
+    // can react — the parent message only reaches the host, not peers.
+    window.dispatchEvent(new CustomEvent('tweakchange', { detail: edits }));
+  }, []);
+  return [values, setTweak];
+}
+
+// ── TweaksPanel ─────────────────────────────────────────────────────────────
+// Floating shell. Registers the protocol listener BEFORE announcing
+// availability — if the announce ran first, the host's activate could land
+// before our handler exists and the toolbar toggle would silently no-op.
+// The close button posts __edit_mode_dismissed so the host's toolbar toggle
+// flips off in lockstep; the host echoes __deactivate_edit_mode back which
+// is what actually hides the panel.
+function TweaksPanel({ title = 'Tweaks', noDeckControls = false, children }) {
+  const [open, setOpen] = React.useState(false);
+  const dragRef = React.useRef(null);
+  // Auto-inject a rail toggle when a <deck-stage> is on the page. The
+  // toggle drives the deck's per-viewer _railVisible via window message;
+  // state is mirrored from the same localStorage key the deck reads so
+  // the control reflects reality across reloads. The mechanism is the
+  // message — authors who want custom placement can post it directly
+  // and pass noDeckControls to suppress this one.
+  const hasDeckStage = React.useMemo(
+    () => typeof document !== 'undefined' && !!document.querySelector('deck-stage'),
+    [],
+  );
+  // Hide the toggle until the host has actually enabled the rail (the
+  // __omelette_rail_enabled window message, posted only when the
+  // omelette_deck_rail_enabled flag is on for this user). The initial read
+  // covers TweaksPanel mounting after the message already arrived; the
+  // listener covers the common case of mounting first.
+  const [railEnabled, setRailEnabled] = React.useState(
+    () => hasDeckStage && !!document.querySelector('deck-stage')?._railEnabled,
+  );
+  React.useEffect(() => {
+    if (!hasDeckStage || railEnabled) return undefined;
+    const onMsg = (e) => {
+      if (e.data && e.data.type === '__omelette_rail_enabled') setRailEnabled(true);
+    };
+    window.addEventListener('message', onMsg);
+    return () => window.removeEventListener('message', onMsg);
+  }, [hasDeckStage, railEnabled]);
+  const [railVisible, setRailVisible] = React.useState(() => {
+    try { return localStorage.getItem('deck-stage.railVisible') !== '0'; } catch (e) { return true; }
+  });
+  const toggleRail = (on) => {
+    setRailVisible(on);
+    window.postMessage({ type: '__deck_rail_visible', on }, '*');
+  };
+  const offsetRef = React.useRef({ x: 16, y: 16 });
+  const PAD = 16;
+
+  const clampToViewport = React.useCallback(() => {
+    const panel = dragRef.current;
+    if (!panel) return;
+    const w = panel.offsetWidth, h = panel.offsetHeight;
+    const maxRight = Math.max(PAD, window.innerWidth - w - PAD);
+    const maxBottom = Math.max(PAD, window.innerHeight - h - PAD);
+    offsetRef.current = {
+      x: Math.min(maxRight, Math.max(PAD, offsetRef.current.x)),
+      y: Math.min(maxBottom, Math.max(PAD, offsetRef.current.y)),
+    };
+    panel.style.right = offsetRef.current.x + 'px';
+    panel.style.bottom = offsetRef.current.y + 'px';
+  }, []);
+
+  React.useEffect(() => {
+    if (!open) return;
+    clampToViewport();
+    if (typeof ResizeObserver === 'undefined') {
+      window.addEventListener('resize', clampToViewport);
+      return () => window.removeEventListener('resize', clampToViewport);
+    }
+    const ro = new ResizeObserver(clampToViewport);
+    ro.observe(document.documentElement);
+    return () => ro.disconnect();
+  }, [open, clampToViewport]);
+
+  React.useEffect(() => {
+    const onMsg = (e) => {
+      const t = e?.data?.type;
+      if (t === '__activate_edit_mode') setOpen(true);
+      else if (t === '__deactivate_edit_mode') setOpen(false);
+    };
+    window.addEventListener('message', onMsg);
+    window.parent.postMessage({ type: '__edit_mode_available' }, '*');
+    return () => window.removeEventListener('message', onMsg);
+  }, []);
+
+  const dismiss = () => {
+    setOpen(false);
+    window.parent.postMessage({ type: '__edit_mode_dismissed' }, '*');
+  };
+
+  const onDragStart = (e) => {
+    const panel = dragRef.current;
+    if (!panel) return;
+    const r = panel.getBoundingClientRect();
+    const sx = e.clientX, sy = e.clientY;
+    const startRight = window.innerWidth - r.right;
+    const startBottom = window.innerHeight - r.bottom;
+    const move = (ev) => {
+      offsetRef.current = {
+        x: startRight - (ev.clientX - sx),
+        y: startBottom - (ev.clientY - sy),
+      };
+      clampToViewport();
+    };
+    const up = () => {
+      window.removeEventListener('mousemove', move);
+      window.removeEventListener('mouseup', up);
+    };
+    window.addEventListener('mousemove', move);
+    window.addEventListener('mouseup', up);
+  };
+
+  if (!open) return null;
+  return (
+    <>
+      <style>{__TWEAKS_STYLE}</style>
+      <div ref={dragRef} className="twk-panel" data-noncommentable=""
+           style={{ right: offsetRef.current.x, bottom: offsetRef.current.y }}>
+        <div className="twk-hd" onMouseDown={onDragStart}>
+          <b>{title}</b>
+          <button className="twk-x" aria-label="Close tweaks"
+                  onMouseDown={(e) => e.stopPropagation()}
+                  onClick={dismiss}>✕</button>
+        </div>
+        <div className="twk-body">
+          {children}
+          {hasDeckStage && railEnabled && !noDeckControls && (
+            <TweakSection label="Deck">
+              <TweakToggle label="Thumbnail rail" value={railVisible} onChange={toggleRail} />
+            </TweakSection>
+          )}
+        </div>
+      </div>
+    </>
+  );
+}
+
+// ── Layout helpers ──────────────────────────────────────────────────────────
+
+function TweakSection({ label, children }) {
+  return (
+    <>
+      <div className="twk-sect">{label}</div>
+      {children}
+    </>
+  );
+}
+
+function TweakRow({ label, value, children, inline = false }) {
+  return (
+    <div className={inline ? 'twk-row twk-row-h' : 'twk-row'}>
+      <div className="twk-lbl">
+        <span>{label}</span>
+        {value != null && <span className="twk-val">{value}</span>}
+      </div>
+      {children}
+    </div>
+  );
+}
+
+// ── Controls ────────────────────────────────────────────────────────────────
+
+function TweakSlider({ label, value, min = 0, max = 100, step = 1, unit = '', onChange }) {
+  return (
+    <TweakRow label={label} value={`${value}${unit}`}>
+      <input type="range" className="twk-slider" min={min} max={max} step={step}
+             value={value} onChange={(e) => onChange(Number(e.target.value))} />
+    </TweakRow>
+  );
+}
+
+function TweakToggle({ label, value, onChange }) {
+  return (
+    <div className="twk-row twk-row-h">
+      <div className="twk-lbl"><span>{label}</span></div>
+      <button type="button" className="twk-toggle" data-on={value ? '1' : '0'}
+              role="switch" aria-checked={!!value}
+              onClick={() => onChange(!value)}><i /></button>
+    </div>
+  );
+}
+
+function TweakRadio({ label, value, options, onChange }) {
+  const trackRef = React.useRef(null);
+  const [dragging, setDragging] = React.useState(false);
+  // The active value is read by pointer-move handlers attached for the lifetime
+  // of a drag — ref it so a stale closure doesn't fire onChange for every move.
+  const valueRef = React.useRef(value);
+  valueRef.current = value;
+
+  // Segments wrap mid-word once per-segment width runs out. The track is
+  // ~248px (280 panel − 28 body pad − 4 seg pad), each button loses 12px
+  // to its own padding, and 11.5px system-ui averages ~6.3px/char — so 2
+  // options fit ~16 chars each, 3 fit ~10. Past that (or >3 options), fall
+  // back to a dropdown rather than wrap.
+  const labelLen = (o) => String(typeof o === 'object' ? o.label : o).length;
+  const maxLen = options.reduce((m, o) => Math.max(m, labelLen(o)), 0);
+  const fitsAsSegments = maxLen <= ({ 2: 16, 3: 10 }[options.length] ?? 0);
+  if (!fitsAsSegments) {
+    // <select> emits strings — map back to the original option value so the
+    // fallback stays type-preserving (numbers, booleans) like the segment path.
+    const resolve = (s) => {
+      const m = options.find((o) => String(typeof o === 'object' ? o.value : o) === s);
+      return m === undefined ? s : typeof m === 'object' ? m.value : m;
+    };
+    return <TweakSelect label={label} value={value} options={options}
+                        onChange={(s) => onChange(resolve(s))} />;
+  }
+  const opts = options.map((o) => (typeof o === 'object' ? o : { value: o, label: o }));
+  const idx = Math.max(0, opts.findIndex((o) => o.value === value));
+  const n = opts.length;
+
+  const segAt = (clientX) => {
+    const r = trackRef.current.getBoundingClientRect();
+    const inner = r.width - 4;
+    const i = Math.floor(((clientX - r.left - 2) / inner) * n);
+    return opts[Math.max(0, Math.min(n - 1, i))].value;
+  };
+
+  const onPointerDown = (e) => {
+    setDragging(true);
+    const v0 = segAt(e.clientX);
+    if (v0 !== valueRef.current) onChange(v0);
+    const move = (ev) => {
+      if (!trackRef.current) return;
+      const v = segAt(ev.clientX);
+      if (v !== valueRef.current) onChange(v);
+    };
+    const up = () => {
+      setDragging(false);
+      window.removeEventListener('pointermove', move);
+      window.removeEventListener('pointerup', up);
+    };
+    window.addEventListener('pointermove', move);
+    window.addEventListener('pointerup', up);
+  };
+
+  return (
+    <TweakRow label={label}>
+      <div ref={trackRef} role="radiogroup" onPointerDown={onPointerDown}
+           className={dragging ? 'twk-seg dragging' : 'twk-seg'}>
+        <div className="twk-seg-thumb"
+             style={{ left: `calc(2px + ${idx} * (100% - 4px) / ${n})`,
+                      width: `calc((100% - 4px) / ${n})` }} />
+        {opts.map((o) => (
+          <button key={o.value} type="button" role="radio" aria-checked={o.value === value}>
+            {o.label}
+          </button>
+        ))}
+      </div>
+    </TweakRow>
+  );
+}
+
+function TweakSelect({ label, value, options, onChange }) {
+  return (
+    <TweakRow label={label}>
+      <select className="twk-field" value={value} onChange={(e) => onChange(e.target.value)}>
+        {options.map((o) => {
+          const v = typeof o === 'object' ? o.value : o;
+          const l = typeof o === 'object' ? o.label : o;
+          return <option key={v} value={v}>{l}</option>;
+        })}
+      </select>
+    </TweakRow>
+  );
+}
+
+function TweakText({ label, value, placeholder, onChange }) {
+  return (
+    <TweakRow label={label}>
+      <input className="twk-field" type="text" value={value} placeholder={placeholder}
+             onChange={(e) => onChange(e.target.value)} />
+    </TweakRow>
+  );
+}
+
+function TweakNumber({ label, value, min, max, step = 1, unit = '', onChange }) {
+  const clamp = (n) => {
+    if (min != null && n < min) return min;
+    if (max != null && n > max) return max;
+    return n;
+  };
+  const startRef = React.useRef({ x: 0, val: 0 });
+  const onScrubStart = (e) => {
+    e.preventDefault();
+    startRef.current = { x: e.clientX, val: value };
+    const decimals = (String(step).split('.')[1] || '').length;
+    const move = (ev) => {
+      const dx = ev.clientX - startRef.current.x;
+      const raw = startRef.current.val + dx * step;
+      const snapped = Math.round(raw / step) * step;
+      onChange(clamp(Number(snapped.toFixed(decimals))));
+    };
+    const up = () => {
+      window.removeEventListener('pointermove', move);
+      window.removeEventListener('pointerup', up);
+    };
+    window.addEventListener('pointermove', move);
+    window.addEventListener('pointerup', up);
+  };
+  return (
+    <div className="twk-num">
+      <span className="twk-num-lbl" onPointerDown={onScrubStart}>{label}</span>
+      <input type="number" value={value} min={min} max={max} step={step}
+             onChange={(e) => onChange(clamp(Number(e.target.value)))} />
+      {unit && <span className="twk-num-unit">{unit}</span>}
+    </div>
+  );
+}
+
+// Relative-luminance contrast pick — checkmarks drawn over a swatch need to
+// read on both #111 and #fafafa without per-option configuration. Hex input
+// only (#rgb / #rrggbb); named or rgb()/hsl() colors fall through to "light".
+function __twkIsLight(hex) {
+  const h = String(hex).replace('#', '');
+  const x = h.length === 3 ? h.replace(/./g, (c) => c + c) : h.padEnd(6, '0');
+  const n = parseInt(x.slice(0, 6), 16);
+  if (Number.isNaN(n)) return true;
+  const r = (n >> 16) & 255, g = (n >> 8) & 255, b = n & 255;
+  return r * 299 + g * 587 + b * 114 > 148000;
+}
+
+const __TwkCheck = ({ light }) => (
+  <svg viewBox="0 0 14 14" aria-hidden="true">
+    <path d="M3 7.2 5.8 10 11 4.2" fill="none" strokeWidth="2.2"
+          strokeLinecap="round" strokeLinejoin="round"
+          stroke={light ? 'rgba(0,0,0,.78)' : '#fff'} />
+  </svg>
+);
+
+// TweakColor — curated color/palette picker. Each option is either a single
+// hex string or an array of 1-5 hex strings; the card adapts — a lone color
+// renders solid, a palette renders colors[0] as the hero (left ~2/3) with the
+// rest stacked in a sharp column on the right. onChange emits the
+// option in the shape it was passed (string stays string, array stays array).
+// Without options it falls back to the native color input for back-compat.
+function TweakColor({ label, value, options, onChange }) {
+  if (!options || !options.length) {
+    return (
+      <div className="twk-row twk-row-h">
+        <div className="twk-lbl"><span>{label}</span></div>
+        <input type="color" className="twk-swatch" value={value}
+               onChange={(e) => onChange(e.target.value)} />
+      </div>
+    );
+  }
+  // Native <input type=color> emits lowercase hex per the HTML spec, so
+  // compare case-insensitively. String() guards JSON.stringify(undefined),
+  // which returns the primitive undefined (no .toLowerCase).
+  const key = (o) => String(JSON.stringify(o)).toLowerCase();
+  const cur = key(value);
+  return (
+    <TweakRow label={label}>
+      <div className="twk-chips" role="radiogroup">
+        {options.map((o, i) => {
+          const colors = Array.isArray(o) ? o : [o];
+          const [hero, ...rest] = colors;
+          const sup = rest.slice(0, 4);
+          const on = key(o) === cur;
+          return (
+            <button key={i} type="button" className="twk-chip" role="radio"
+                    aria-checked={on} data-on={on ? '1' : '0'}
+                    aria-label={colors.join(', ')} title={colors.join(' · ')}
+                    style={{ background: hero }}
+                    onClick={() => onChange(o)}>
+              {sup.length > 0 && (
+                <span>
+                  {sup.map((c, j) => <i key={j} style={{ background: c }} />)}
+                </span>
+              )}
+              {on && <__TwkCheck light={__twkIsLight(hero)} />}
+            </button>
+          );
+        })}
+      </div>
+    </TweakRow>
+  );
+}
+
+function TweakButton({ label, onClick, secondary = false }) {
+  return (
+    <button type="button" className={secondary ? 'twk-btn secondary' : 'twk-btn'}
+            onClick={onClick}>{label}</button>
+  );
+}
+
+Object.assign(window, {
+  useTweaks, TweaksPanel, TweakSection, TweakRow,
+  TweakSlider, TweakToggle, TweakRadio, TweakSelect,
+  TweakText, TweakNumber, TweakColor, TweakButton,
+});
+
+/* App — top-level state machine, Tweaks panel, and routing. */
+
+const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
+  "displayFamily": "serif",
+  "brand": "#9E0B0F",
+  "density": "regular",
+  "heroVariant": "fullbleed",
+  "loyaltyVariant": "light",
+  "gold": true
+}/*EDITMODE-END*/;
+
+const HERO_OPTIONS = [
+  { label: "Full-bleed photo", value: "fullbleed" },
+  { label: "Editorial cream",  value: "editorial" },
+  { label: "Split / dark",     value: "split" },
+];
+const LOY_OPTIONS = [
+  { label: "Light", value: "light" },
+  { label: "Dark",  value: "dark" },
+  { label: "Gold",  value: "gold" },
+];
+const BRAND_PALETTES = [
+  ["#9E0B0F", "#7A0709"], // by-the-book deep red
+  ["#C8102E", "#9E0B0F"], // brighter scarlet
+  ["#5B0E12", "#3F0A0D"], // mahogany
+  ["#1F2937", "#0F172A"], // ink
+];
+
+function App() {
+  const [t, setTweak] = useTweaks(TWEAK_DEFAULTS);
+
+  // route + state
+  const [route, setRoute] = useState({ name: "landing" });
+  const go = (name, params = {}) => { setRoute({ name, ...params }); window.scrollTo({ top: 0, behavior: "smooth" }); };
+
+  const [account, setAccount] = useState(null); // null until signup
+  const [showSignup, setShowSignup] = useState(false);
+
+  const [context, setContext] = useState({ mode: null, outlet: null, address: null });
+  const [cart, setCart] = useState([]);
+  const [redeemPts, setRedeemPts] = useState(0);
+  const [order, setOrder] = useState(null);
+  const [toast, setToast] = useState("");
+
+  const showToast = (msg) => {
+    setToast(msg);
+    setTimeout(() => setToast(""), 2400);
+  };
+
+  // apply tweaks to <html>
+  useEffect(() => {
+    const root = document.documentElement;
+    root.dataset.density = t.density;
+    root.dataset.display = t.displayFamily;
+    root.dataset.gold = t.gold ? "on" : "off";
+    const dark = (() => {
+      // derive a darker shade
+      const m = t.brand.match(/^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i);
+      if (!m) return t.brand;
+      const r = Math.max(0, parseInt(m[1], 16) - 30);
+      const g = Math.max(0, parseInt(m[2], 16) - 6);
+      const b = Math.max(0, parseInt(m[3], 16) - 6);
+      return "#" + [r, g, b].map(n => n.toString(16).padStart(2, "0")).join("");
+    })();
+    root.style.setProperty("--brand-live", t.brand);
+    root.style.setProperty("--red-700", dark);
+  }, [t]);
+
+  // cart helpers
+  const cartCount = cart.reduce((s, i) => s + i.qty, 0);
+  const addToCart = (item) => {
+    setCart(c => {
+      const idx = c.findIndex(
+        i => i.productId === item.productId && i.modifiers === item.modifiers
+      );
+      if (idx >= 0) {
+        return c.map((it, i) => i === idx ? { ...it, qty: it.qty + item.qty } : it);
+      }
+      return [...c, item];
+    });
+    showToast(`Added ${item.name} to cart`);
+  };
+  const updateQty = (idx, qty) => {
+    if (qty <= 0) return setCart(c => c.filter((_, i) => i !== idx));
+    setCart(c => c.map((it, i) => i === idx ? { ...it, qty } : it));
+  };
+  const removeItem = (idx) => setCart(c => c.filter((_, i) => i !== idx));
+
+  // flow handlers
+  const handlePickMode = (mode) => {
+    setContext(ctx => ({ ...ctx, mode }));
+    if (mode === "pickup") go("outlet");
+    else go("delivery-address");
+  };
+  const handlePickOutlet = (o) => {
+    setContext(ctx => ({ ...ctx, outlet: o }));
+    go("menu");
+  };
+  const handleConfirmAddress = ({ address, outlet, apt, instructions }) => {
+    setContext(ctx => ({ ...ctx, address, outlet, apt, instructions }));
+    go("menu");
+  };
+  const handlePlaceOrder = (orderInfo) => {
+    const snapshot = [...cart];
+    setOrder({ ...orderInfo, items: snapshot });
+    if (account) {
+      setAccount(a => ({
+        ...a,
+        points: a.points - orderInfo.discount + orderInfo.earn,
+        lifetimePoints: a.lifetimePoints + orderInfo.earn,
+        redeemed: a.redeemed + orderInfo.discount,
+      }));
+    }
+    setCart([]);
+    setRedeemPts(0);
+    go("confirm");
+  };
+  const handleSignup = (form) => {
+    const mock = window.LP_DATA.MOCK_ACCOUNT;
+    setAccount({ ...mock, name: form.name, phone: form.phone });
+    setShowSignup(false);
+    showToast("Welcome to the Tribe ✦");
+  };
+
+  // route render
+  let content;
+  switch (route.name) {
+    case "landing":
+      content = <LP_Landing
+        products={window.LP_DATA.PRODUCTS}
+        onOrder={() => go("mode")}
+        onLoyaltySignup={() => setShowSignup(true)}
+        account={account}
+        onDash={() => {
+          const el = document.getElementById("loyalty-section");
+          if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+        }}
+        heroVariant={t.heroVariant}
+        loyaltyVariant={t.loyaltyVariant}
+      />;
+      break;
+    case "mode":
+      content = <LP_ModeChoice onBack={() => go("landing")} onPick={handlePickMode} />;
+      break;
+    case "outlet":
+      content = <LP_OutletPicker outlets={window.LP_DATA.OUTLETS} onBack={() => go(context.mode ? "mode" : "landing")} onPick={handlePickOutlet} />;
+      break;
+    case "delivery-address":
+      content = <LP_DeliveryAddress outlets={window.LP_DATA.OUTLETS} onBack={() => go("mode")} onConfirm={handleConfirmAddress} />;
+      break;
+    case "menu":
+      content = <LP_Menu
+        context={context}
+        cart={cart}
+        onBack={() => go("landing")}
+        onChangeContext={() => go("mode")}
+        onAddCart={addToCart}
+        onOpenCart={() => go("checkout")}
+      />;
+      break;
+    case "checkout":
+      content = <LP_Checkout
+        context={context} cart={cart} account={account}
+        onBack={() => go("menu")}
+        onUpdateQty={updateQty} onRemove={removeItem}
+        onConfirm={handlePlaceOrder}
+        redeemPts={redeemPts} setRedeemPts={setRedeemPts}
+      />;
+      break;
+    case "confirm":
+      content = <LP_Confirmation
+        order={order}
+        context={context}
+        onTrack={() => go("track")}
+        onHome={() => go("landing")}
+      />;
+      break;
+    case "track":
+      content = <LP_Tracking order={order} context={context} onHome={() => go("landing")} />;
+      break;
+    default:
+      content = <div style={{ padding: 40 }}>Page not found</div>;
+  }
+
+  return (
+    <>
+      <LP_Nav
+        current={route.name}
+        cartCount={cartCount}
+        onNav={(n) => go(n)}
+        onCart={() => go("checkout")}
+        onLoyalty={() => {
+          if (route.name === "landing") {
+            const el = document.getElementById("loyalty-section");
+            if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+          } else {
+            go("landing");
+            setTimeout(() => {
+              const el = document.getElementById("loyalty-section");
+              if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+            }, 350);
+          }
+        }}
+        account={account}
+        onAccount={() => setShowSignup(true)}
+      />
+      {content}
+      <LP_Footer />
+      <LP_Toast msg={toast} />
+
+      <LP_LoyaltyModal
+        open={showSignup}
+        onClose={() => setShowSignup(false)}
+        onSubmit={handleSignup}
+      />
+
+      <TweaksPanel title="Tweaks · La Patisserie">
+        <TweakSection label="Hero & loyalty" />
+        <TweakRadio
+          label="Hero"
+          value={t.heroVariant}
+          options={HERO_OPTIONS}
+          onChange={(v) => setTweak("heroVariant", v)}
+        />
+        <TweakRadio
+          label="Loyalty card"
+          value={t.loyaltyVariant}
+          options={LOY_OPTIONS}
+          onChange={(v) => setTweak("loyaltyVariant", v)}
+        />
+
+        <TweakSection label="Brand" />
+        <TweakColor
+          label="Red intensity"
+          value={t.brand}
+          options={["#9E0B0F", "#C8102E", "#5B0E12", "#1F2937"]}
+          onChange={(v) => setTweak("brand", v)}
+        />
+        <TweakToggle
+          label="Gold accents"
+          value={t.gold}
+          onChange={(v) => setTweak("gold", v)}
+        />
+
+        <TweakSection label="Type & layout" />
+        <TweakRadio
+          label="Display family"
+          value={t.displayFamily}
+          options={[{ label: "Serif", value: "serif" }, { label: "Sans", value: "sans" }]}
+          onChange={(v) => setTweak("displayFamily", v)}
+        />
+        <TweakRadio
+          label="Density"
+          value={t.density}
+          options={[{ label: "Compact", value: "compact" }, { label: "Regular", value: "regular" }, { label: "Editorial", value: "editorial" }]}
+          onChange={(v) => setTweak("density", v)}
+        />
+
+        <TweakSection label="Quick jump" />
+        <TweakButton label="Hero"        onClick={() => go("landing")} />
+        <TweakButton label="Loyalty"     onClick={() => setShowSignup(true)} />
+        <TweakButton label="Outlet pick" onClick={() => { setContext(c => ({ ...c, mode: "pickup" })); go("outlet"); }} />
+        <TweakButton label="Delivery"    onClick={() => { setContext(c => ({ ...c, mode: "delivery" })); go("delivery-address"); }} />
+        <TweakButton label="Menu"        onClick={() => { if (!context.outlet) setContext(c => ({ ...c, mode: "pickup", outlet: window.LP_DATA.OUTLETS[0] })); go("menu"); }} />
+        <TweakButton label="Tracking"    onClick={() => { setOrder({ ref: "LP-DEMO1", total: 24500, earn: 1225, discount: 0 }); setContext(c => ({ ...c.outlet ? c : { ...c, mode: "pickup", outlet: window.LP_DATA.OUTLETS[0] } })); go("track"); }} />
+      </TweaksPanel>
+    </>
+  );
+}
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
+root.render(<App />);
+
+  </script>
+</body>
+</html>
